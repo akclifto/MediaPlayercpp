@@ -52,60 +52,60 @@ using namespace std;
  * @file    MediaClientGui.cpp
  * @date    January, 2020
  **/
-class MediaClientGui : public Fl_Window {
+class MediaClientGui : public Fl_Window
+{
 protected:
-
-   Fl_Box * box;
-   Fl_PNG_Image * png;
+   Fl_Box *box;
+   Fl_PNG_Image *png;
 
    /**
     * tree is the Fl_Tree object that occupies the left side of the window.
     * this tree control provides the ability to add and remove items and to
     * manipulate and query the tree when an exception occurs.
     */
-   Fl_Tree * tree;
+   Fl_Tree *tree;
 
    /**
     * episodeInput is the Fl_Input object labelled Episode
     * Its to display the SeriesSeasons's Episode tile.
     */
-   Fl_Input * episodeInput;
+   Fl_Input *episodeInput;
 
    /**
     * seriesSeasonInput is the Fl_Input object labelled SeriesSeason
     * Its to display the SeriesSeasons's tile.
     */
-   Fl_Input * seriesSeasonInput;
+   Fl_Input *seriesSeasonInput;
 
    /**
     * genreInput is the Fl_Input object labelled Genre.
     * It provides for the display of the SeariesSeason's genre.
     */
-   Fl_Input * genreInput;
+   Fl_Input *genreInput;
 
    /**
     * summaryMLI is the Fl_Multiline_Input object in the lower right panel.
     * It provides for the display of a SeriesSeasons's summary.
     */
-   Fl_Multiline_Input * summaryMLI;
+   Fl_Multiline_Input *summaryMLI;
 
    /**
     * ratingInput is the Fl_Input object labelled IMDB Rating.
     * It provides for the display of the IMDB rating for the SeriesSeason.
     */
-   Fl_Input * ratingInput;
+   Fl_Input *ratingInput;
 
    /**
     * seasonSrchInput is the Fl_Input object labelled 'Which Season?' in the left panel.
     * It provides entry for Season OMDb search.
     */
-   Fl_Input * seasonSrchInput;
+   Fl_Input *seasonSrchInput;
 
    /**
     * seriesSrchInput is the Fl_Input object labelled 'Which Series?'.
     * It provides entry for Series OMDb search.
     */
-   Fl_Input * seriesSrchInput;
+   Fl_Input *seriesSrchInput;
 
    /**
     * searchButt is the Fl_Button object labelled Search.
@@ -113,7 +113,7 @@ protected:
     * information, the searchButt is clicked to initiate a OMDb SeriesSeason
     * search. The results of the search are parsed and displayed in the tree.
     */
-   Fl_Button * searchButt;
+   Fl_Button *searchButt;
 
    /**
     * menubar is the Fl_Menu_bar object with menus: File and Series-Season
@@ -122,7 +122,8 @@ protected:
 
 public:
    //MediaClientGui(const char * name = "Ser321") : Fl_Window(635,350,name) {
-   MediaClientGui(const char * name = "Ser321") : Fl_Window(980,500,name) {
+   MediaClientGui(const char *name = "Ser321") : Fl_Window(980, 500, name)
+   {
       begin();
 
       menubar = new Fl_Menu_Bar(0, 0, this->w(), 25);
@@ -143,11 +144,11 @@ public:
       seriesSrchInput->label("Which Series?");
       seriesSrchInput->value("IT Crowd");
 
-      searchButt = new Fl_Button(230, 80, 90, 25,"Search");
+      searchButt = new Fl_Button(230, 80, 90, 25, "Search");
 
       // create a tree control at position x=10, y=10. Its 150 pixels wide
       // and window height less 20 pixels high. Add some sample tree nodes.
-      tree = new Fl_Tree(10, 120, 325, this->h()-135);
+      tree = new Fl_Tree(10, 120, 325, this->h() - 135);
       tree->add("Flintstones/Fred");
       tree->add("Flintstones/Wilma");
       tree->close("/Flintstones");
@@ -180,11 +181,11 @@ public:
       ratingInput->value("");
       ratingInput->readonly(1);
 
-      box = new Fl_Box(350,180,320-20,320-20);
+      box = new Fl_Box(350, 180, 320 - 20, 320 - 20);
       png = new Fl_PNG_Image("default.png");
       box->image(png);
 
-      summaryMLI = new Fl_Multiline_Input(665,180,300,300,0);
+      summaryMLI = new Fl_Multiline_Input(665, 180, 300, 300, 0);
       summaryMLI->wrap(1);
       summaryMLI->readonly(1);
 

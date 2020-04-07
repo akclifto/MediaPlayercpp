@@ -30,27 +30,28 @@ using namespace std;
  *         Software Engineering, ASU
  * @version April 2020
  */
-class SeriesSeason {
+class SeriesSeason
+{
+
 protected:
 public:
+    string title;
+    string seriesSeason;
+    string rating;
+    string genre;
+    string imageURL;
+    vector<Episode> episodeList;
 
-   string title;
-   string seriesSeason;
-   string rating;
-   string genre;
-   string imageURL;
-   vector<Episode> episodeList;
-
-   SeriesSeason();
-   SeriesSeason(string aTitle, string aSeriesSeason,
-       string aRating, string aGenre, string anImageURL);
-   SeriesSeason(const Json::Value& jsonObj);
-   SeriesSeason(string jsonString);
-   ~SeriesSeason();
-   string toJsonString();
-   Json::Value toJson();
-   void fromJson(Json::Value json);
-   void setValues(string aTitle, string aSeriesSeason,
-       string aRating, string aGenre, string anImageURL);
-   void print();
+    SeriesSeason();
+    SeriesSeason(string aTitle, string aSeriesSeason,
+                 string aRating, string aGenre, string anImageURL);
+    SeriesSeason(const Json::Value &jsonObj);
+    SeriesSeason(string jsonString);
+    ~SeriesSeason();
+    string toJsonString();
+    Json::Value toJson();
+    void fromJson(Json::Value json);
+    void setValues(string aTitle, string aSeriesSeason,
+                   string aRating, string aGenre, string anImageURL);
+    void print();
 };

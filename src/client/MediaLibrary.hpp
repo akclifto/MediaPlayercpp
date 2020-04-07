@@ -32,7 +32,8 @@ using namespace std;
  *         Software Engineering, ASU
  * @version April 2020
  */
-class MediaLibrary {
+class MediaLibrary
+{
 protected:
    std::map<std::string, SeriesSeason> media;
 

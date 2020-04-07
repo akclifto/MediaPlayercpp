@@ -29,7 +29,8 @@ using namespace std;
  *         Software Engineering, ASU
  * @version April 2020
  */
-SeriesSeason::SeriesSeason(){
+SeriesSeason::SeriesSeason()
+{
    title = "";
    seriesSeason = "";
    rating = "";
@@ -39,7 +40,8 @@ SeriesSeason::SeriesSeason(){
 }
 
 SeriesSeason::SeriesSeason(string aTitle, string aSeriesSeason,
-    string aRating, string aGenre, string anImageURL) {
+                           string aRating, string aGenre, string anImageURL)
+{
    title = aTitle;
    seriesSeason = aSeriesSeason;
    rating = aRating;
@@ -48,55 +50,81 @@ SeriesSeason::SeriesSeason(string aTitle, string aSeriesSeason,
    episodeList;
 }
 
-SeriesSeason::SeriesSeason(const Json::Value& jsonObj){
-   
+SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
+{
+
    Json::Value::Members mbr = jsonObj.getMemberNames();
-   for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
+   for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++)
+   {
       //cout << *i << " " << endl;
       Json::Value jsonM = jsonObj[*i];
-      if(*i=="title"){
+      if (*i == "title")
+      {
          title = jsonM.asString();
-      }else if(*i=="seriesSeason"){
+      }
+      else if (*i == "seriesSeason")
+      {
          seriesSeason = jsonM.asString();
-      }else if(*i=="rating"){
+      }
+      else if (*i == "rating")
+      {
          rating = jsonM.asString();
-      }else if(*i=="genre"){
+      }
+      else if (*i == "genre")
+      {
          genre = jsonM.asString();
-      }else if(*i=="imageURL"){
+      }
+      else if (*i == "imageURL")
+      {
          imageURL = jsonM.asString();
       }
    }
 }
 
-SeriesSeason::SeriesSeason(string jsonString){
+SeriesSeason::SeriesSeason(string jsonString)
+{
    Json::Reader reader;
    Json::Value root;
-   bool parseSuccess = reader.parse(jsonString,root,false);
-   if(parseSuccess){
+   bool parseSuccess = reader.parse(jsonString, root, false);
+   if (parseSuccess)
+   {
       //cout << "successful parse" << endl;
       Json::Value::Members mbr = root.getMemberNames();
-      for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
+      for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++)
+      {
          //cout << *i << " " << endl;
          Json::Value jsonM = root[*i];
-         if(*i=="title"){
+         if (*i == "title")
+         {
             title = jsonM.asString();
-         }else if(*i=="seriesSeason"){
+         }
+         else if (*i == "seriesSeason")
+         {
             seriesSeason = jsonM.asString();
-         }else if(*i=="rating"){
+         }
+         else if (*i == "rating")
+         {
             rating = jsonM.asString();
-         }else if(*i=="genre"){
+         }
+         else if (*i == "genre")
+         {
             genre = jsonM.asString();
-         }else if(*i=="imageURL"){
+         }
+         else if (*i == "imageURL")
+         {
             imageURL = jsonM.asString();
          }
       }
-   }else{
+   }
+   else
+   {
       cout << "SeriesSeason constructor parse error with input: " << jsonString
            << endl;
    }
 }
 
-SeriesSeason::~SeriesSeason() {
+SeriesSeason::~SeriesSeason()
+{
    title = "";
    seriesSeason = "";
    rating = "";
@@ -104,7 +132,8 @@ SeriesSeason::~SeriesSeason() {
    imageURL = "";
 }
 
-string SeriesSeason::toJsonString(){
+string SeriesSeason::toJsonString()
+{
    string ret = "{}";
    Json::Value jsonLib;
    jsonLib["title"] = title;
@@ -116,7 +145,8 @@ string SeriesSeason::toJsonString(){
    return ret;
 }
 
-Json::Value SeriesSeason::toJson(){
+Json::Value SeriesSeason::toJson()
+{
    //string ret = "{}";
    Json::Value jsonLib;
    jsonLib["title"] = title;
@@ -128,7 +158,8 @@ Json::Value SeriesSeason::toJson(){
 }
 
 void SeriesSeason::setValues(string aTitle, string aSeriesSeason,
-    string aRating, string aGenre, string anImageURL) {
+                             string aRating, string aGenre, string anImageURL)
+{
    title = aTitle;
    seriesSeason = aSeriesSeason;
    rating = aRating;
@@ -136,7 +167,8 @@ void SeriesSeason::setValues(string aTitle, string aSeriesSeason,
    imageURL = anImageURL;
 }
 
-void SeriesSeason::print(){
+void SeriesSeason::print()
+{
    cout << "media " << title << " series-season " << seriesSeason << " rating " << rating
         << " genre " << genre << " image-URL " << imageURL << "\n";
 }

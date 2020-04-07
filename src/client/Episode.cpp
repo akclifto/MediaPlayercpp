@@ -30,49 +30,113 @@ using namespace std;
  * @version April 2020
  */
 
-Episode::Episode(){
+Episode::Episode()
+{
     name = "";
-    epRating = "";
+    imdbRating = "";
 }
 
-Episode::Episode(string name, string epRating) {
+Episode::Episode(string name, string imdbRating)
+{
 
     name = name;
-    epRating = epRating;
+    imdbRating = imdbRating;
 }
 
-Episode::Episode(const Json::Value& jsonObj){
+Episode::Episode(const Json::Value &jsonObj)
+{
 
-   Json::Value::Members mbr = jsonObj.getMemberNames();
-   for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
-      //cout << *i << " " << endl;
-      Json::Value jsonM = jsonObj[*i];
-      if(*i=="name"){
-         name = jsonM.asString();
-      }else if(*i=="epRating"){
-         epRating = jsonM.asString();
-      }
-   }
-}
-
-Episode::Episode(string jsonString){
-   Json::Reader reader;
-   Json::Value root;
-   bool parseSuccess = reader.parse(jsonString,root,false);
-   if(parseSuccess){
-      //cout << "successful parse" << endl;
-      Json::Value::Members mbr = root.getMemberNames();
-      for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
-         //cout << *i << " " << endl;
-         Json::Value jsonM = root[*i];
-         if(*i=="name"){
+    Json::Value::Members mbr = jsonObj.getMemberNames();
+    for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++)
+    {
+        //cout << *i << " " << endl;
+        Json::Value jsonM = jsonObj[*i];
+        if (*i == "name")
+        {
             name = jsonM.asString();
-         }else if(*i=="epRating"){
-            epRating = jsonM.asString();
-         }
-      }
-   }else{
-      cout << "Episode constructor parse error with input: " << jsonString
-           << endl;
-   }
+        }
+        else if (*i == "imdbRating")
+        {
+            imdbRating = jsonM.asString();
+        }
+    }
+}
+
+Episode::Episode(string jsonString)
+{
+    Json::Reader reader;
+    Json::Value root;
+    bool parseSuccess = reader.parse(jsonString, root, false);
+    if (parseSuccess)
+    {
+        //cout << "successful parse" << endl;
+        Json::Value::Members mbr = root.getMemberNames();
+        for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++)
+        {
+            //cout << *i << " " << endl;
+            Json::Value jsonM = root[*i];
+            if (*i == "name")
+            {
+                name = jsonM.asString();
+            }
+            else if (*i == "imdbRating")
+            {
+                imdbRating = jsonM.asString();
+            }
+        }
+    }
+    else
+    {
+        cout << "Episode constructor parse error with input: " << jsonString
+             << endl;
+    }
+}
+
+Episode::~Episode()
+{
+    name = "";
+    imdbRating = "";
+}
+
+string Episode::getEpRating()
+{
+    return imdbRating;
+}
+
+string Episode::getName()
+{
+    return name;
+}
+
+string Episode::toJsonString()
+{
+    string ret = "{}";
+    Json::Value jsonLib;
+    jsonLib["name"] = name;
+    jsonLib["imdbRating"] = imdbRating;
+    ret = jsonLib.toStyledString();
+    return ret;
+}
+
+Json::Value Episode::toJson()
+{
+
+    //string ret = "{}";
+    Json::Value jsonLib;
+    jsonLib["name"] = name;
+    jsonLib["imdbRating"] = imdbRating;
+
+    return jsonLib;
+}
+
+void Episode::fromjson(Json::Value json)
+{
+
+    //TODO
+}
+
+void Episode::print()
+{
+
+    cout << "name " << name << " imdbRating " << imdbRating << "\n";
 }

@@ -23,7 +23,8 @@
 using namespace std;
 
 std::string cmd;
-void run(){
+void run()
+{
    system(cmd.c_str());
 }
 
@@ -52,24 +53,25 @@ void run(){
  *         Software Engineering, ASU
  * @version April 2020
  */
-class MediaClient : public MediaClientGui {
+class MediaClient : public MediaClientGui
+{
 
 public:
-
    std::string userId;
    std::string omdbkey;
 
-   std::thread * playThread;
-   MediaLibrary * library;
+   std::thread *playThread;
+   MediaLibrary *library;
 
-/** ClickedX is one of the callbacks for GUI controls.
+   /** ClickedX is one of the callbacks for GUI controls.
     * Callbacks need to be static functions. But, static functions
     * cannot directly access instance data. This program uses "userdata"
     * to get around that by passing the instance to the callback
     * function. The callback then accesses whatever GUI control object
     * that it needs for implementing its functionality.
     */
-   static void ClickedX(Fl_Widget * w, void * userdata) {
+   static void ClickedX(Fl_Widget *w, void *userdata)
+   {
       std::cout << "You clicked Exit" << std::endl;
       exit(1);
    }
@@ -77,22 +79,26 @@ public:
    /**
     * Static search button callback method.
     */
-   static void SearchCallbackS(Fl_Widget*w, void*data) {
-      MediaClient *o = (MediaClient*)data;
-      cout << "Search Clicked. You asked for a OMDb search of Season: " <<
-         o->seasonSrchInput->value() << " Series: " <<
-         o->seriesSrchInput->value() << endl;
-      try{
+   static void SearchCallbackS(Fl_Widget *w, void *data)
+   {
+      MediaClient *o = (MediaClient *)data;
+      cout << "Search Clicked. You asked for a OMDb search of Season: " << o->seasonSrchInput->value() << " Series: " << o->seriesSrchInput->value() << endl;
+      try
+      {
          std::string url = "https://www.omdbapi.com/?r=json&apikey=";
          url = url + o->omdbkey;
 
          //Spaces must be converted to %20
          string query = o->seriesSrchInput->value();
          string urlEncodedQuery = "";
-         for (int i = 0; i < query.length(); i++) {
-            if (query.at(i) == ' ') {
+         for (int i = 0; i < query.length(); i++)
+         {
+            if (query.at(i) == ' ')
+            {
                urlEncodedQuery += "%20";
-            } else {
+            }
+            else
+            {
                urlEncodedQuery += query.at(i);
             }
          }
@@ -110,17 +116,21 @@ public:
          myRequest.perform();
          std::string aString = os.str();
          std::cout << aString << std::endl;
-      }catch ( curlpp::LogicError & e ) {
+      }
+      catch (curlpp::LogicError &e)
+      {
          std::cout << e.what() << std::endl;
       }
-      catch ( curlpp::RuntimeError & e ) {
+      catch (curlpp::RuntimeError &e)
+      {
          std::cout << e.what() << std::endl;
       }
    }
 
    // Static menu callback method
-   static void TreeCallbackS(Fl_Widget*w, void*data) {
-      MediaClient *o = (MediaClient*)data;
+   static void TreeCallbackS(Fl_Widget *w, void *data)
+   {
+      MediaClient *o = (MediaClient *)data;
       o->TreeCallback(); //call the instance callback method
    }
 
@@ -128,33 +138,54 @@ public:
     * TreeCallback is a callback for tree selections, deselections, expand or
     * collapse.
     */
-   void TreeCallback() {
+   void TreeCallback()
+   {
       // Find item that was clicked
-      Fl_Tree_Item *item = (Fl_Tree_Item*)tree->item_clicked();
+      Fl_Tree_Item *item = (Fl_Tree_Item *)tree->item_clicked();
       cout << "Tree callback. Item selected: ";
-      if ( item ) {
+      if (item)
+      {
          cout << item->label();
-      } else {
+      }
+      else
+      {
          cout << "none";
       }
       cout << endl;
       std::string aStr("unknown");
       std::string aTitle(item->label());
-      switch ( tree->callback_reason() ) {  // reason callback was invoked
-      case       FL_TREE_REASON_NONE: {aStr = "none"; break;}
-      case     FL_TREE_REASON_OPENED: {aStr = "opened";break;}
-      case     FL_TREE_REASON_CLOSED: {aStr = "closed"; break;}
-      case   FL_TREE_REASON_SELECTED: {
+      switch (tree->callback_reason())
+      { // reason callback was invoked
+      case FL_TREE_REASON_NONE:
+      {
+         aStr = "none";
+         break;
+      }
+      case FL_TREE_REASON_OPENED:
+      {
+         aStr = "opened";
+         break;
+      }
+      case FL_TREE_REASON_CLOSED:
+      {
+         aStr = "closed";
+         break;
+      }
+      case FL_TREE_REASON_SELECTED:
+      {
          aStr = "selected";
          SeriesSeason md;
-         if(library){
+         if (library)
+         {
             cout << "trying to get: " << item->label() << endl;
             md = library->get(aTitle);
-         }else{
+         }
+         else
+         {
             cout << "library entry not found" << endl;
             break;
          }
-         cout << "media: "<< md.title << " " << md.seriesSeason << " "
+         cout << "media: " << md.title << " " << md.seriesSeason << " "
               << md.rating << " " << md.genre << " " << md.imageURL
               << endl;
          episodeInput->value(md.title.c_str());
@@ -163,40 +194,61 @@ public:
          genreInput->value(md.genre.c_str());
          break;
       }
-      case FL_TREE_REASON_DESELECTED: {aStr = "deselected"; break;}
-      default: {break;}
+      case FL_TREE_REASON_DESELECTED:
+      {
+         aStr = "deselected";
+         break;
+      }
+      default:
+      {
+         break;
+      }
       }
       cout << "Callback reason: " << aStr.c_str() << endl;
    }
 
    // Static menu callback method
-   static void Menu_ClickedS(Fl_Widget*w, void*data) {
-      MediaClient *o = (MediaClient*)data;
+   static void Menu_ClickedS(Fl_Widget *w, void *data)
+   {
+      MediaClient *o = (MediaClient *)data;
       o->Menu_Clicked(); //call the instance callback method
    }
 
    // Menu selection instance method that has ccess to instance vars.
-   void Menu_Clicked() {
+   void Menu_Clicked()
+   {
       char picked[80];
-      menubar->item_pathname(picked, sizeof(picked)-1);
+      menubar->item_pathname(picked, sizeof(picked) - 1);
       string selectPath(picked);
       cout << "Selected Menu Path: " << selectPath << endl;
       // Handle menu selections
-      if(selectPath.compare("File/Save")==0){
+      if (selectPath.compare("File/Save") == 0)
+      {
          bool restSave = library->toJsonFile("series.json");
          cout << "Save not implemented" << endl;
-      }else if(selectPath.compare("File/Restore")==0){
+      }
+      else if (selectPath.compare("File/Restore") == 0)
+      {
          cout << "Restore not implemented" << endl;
-      }else if(selectPath.compare("File/Tree Refresh")==0){
+      }
+      else if (selectPath.compare("File/Tree Refresh") == 0)
+      {
          buildTree();
-      }else if(selectPath.compare("File/Exit")==0){
-         if(playThread && playThread->joinable()){
+      }
+      else if (selectPath.compare("File/Exit") == 0)
+      {
+         if (playThread && playThread->joinable())
+         {
             playThread->join();
          }
          exit(0);
-      }else if(selectPath.compare("Series-Season/Add")==0){
+      }
+      else if (selectPath.compare("Series-Season/Add") == 0)
+      {
          cout << "Add not implemented" << endl;
-      }else if(selectPath.compare("Series-Season/Remove")==0){
+      }
+      else if (selectPath.compare("Series-Season/Remove") == 0)
+      {
          cout << "Remove not implemented" << endl;
       }
    }
@@ -205,16 +257,19 @@ public:
     * a static method to remove spaces, tabs, new lines and returns from the
     * begining or end of a string.
     */
-   static std::string& trimMe (std::string& str) {
+   static std::string &trimMe(std::string &str)
+   {
       // right trim
-      while (str.length() > 0 && (str[str.length()-1] == ' '  ||
-                                  str[str.length()-1] == '\t' ||
-                                  str[str.length()-1] == '\n' ||
-                                  str[str.length()-1] == '\r')){
-         str.erase(str.length ()-1, 1);
+      while (str.length() > 0 && (str[str.length() - 1] == ' ' ||
+                                  str[str.length() - 1] == '\t' ||
+                                  str[str.length() - 1] == '\n' ||
+                                  str[str.length() - 1] == '\r'))
+      {
+         str.erase(str.length() - 1, 1);
       }
       // left trim
-      while (str.length () > 0 && (str[0] == ' ' || str[0] == '\t')){
+      while (str.length() > 0 && (str[0] == ' ' || str[0] == '\t'))
+      {
          str.erase(0, 1);
       }
       return str;
@@ -224,24 +279,29 @@ public:
     * a method to execute a command line command and to return
     * the resulting string.
     */
-   std::string exec(const char* cmd) {
-      FILE* pipe = popen(cmd, "r");
-      if (!pipe) return "ERROR";
+   std::string exec(const char *cmd)
+   {
+      FILE *pipe = popen(cmd, "r");
+      if (!pipe)
+         return "ERROR";
       char buffer[128];
       std::string result = "";
-      while(!feof(pipe)) {
-         if(fgets(buffer, 128, pipe) != NULL)
+      while (!feof(pipe))
+      {
+         if (fgets(buffer, 128, pipe) != NULL)
             result += buffer;
       }
       pclose(pipe);
       return result;
    }
 
-   void buildTree(){
+   void buildTree()
+   {
       vector<string> result = library->getTitles();
       cout << "server has titles";
       tree->clear();
-      for(int i=0; i<result.size(); i++){
+      for (int i = 0; i < result.size(); i++)
+      {
          cout << " " << result[i];
          SeriesSeason md = library->get(result[i]);
          cout << md.title << " " << md.seriesSeason << " " << md.rating
@@ -251,10 +311,11 @@ public:
       tree->redraw();
    }
 
-   MediaClient(const char * name = "Tim", const char * key = "myKey") : MediaClientGui(name) {
-      searchButt->callback(SearchCallbackS, (void*)this);
-      menubar->callback(Menu_ClickedS, (void*)this);
-      tree->callback(TreeCallbackS, (void*)this);
+   MediaClient(const char *name = "Tim", const char *key = "myKey") : MediaClientGui(name)
+   {
+      searchButt->callback(SearchCallbackS, (void *)this);
+      menubar->callback(Menu_ClickedS, (void *)this);
+      tree->callback(TreeCallbackS, (void *)this);
       callback(ClickedX);
       omdbkey = key;
       userId = "Tim.Lindquist";
@@ -263,10 +324,11 @@ public:
    }
 };
 
-int main(int argc, char * argv[]) {
-   std::string developer = (argc>1)?argv[1]:"Tim.Lindquist";
-   std::string omdbkey = (argc>2)?argv[2]:"omdbkey";
+int main(int argc, char *argv[])
+{
+   std::string developer = (argc > 1) ? argv[1] : "Tim.Lindquist";
+   std::string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
    std::string windowTitle = developer + "'s SeriesSeason Browser";
-   MediaClient cm(windowTitle.c_str(),omdbkey.c_str());
+   MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
    return (Fl::run());
 }
