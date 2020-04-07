@@ -28,62 +28,30 @@ void run(){
 }
 
 /**
- * Copyright (c) 2020 Tim Lindquist,
- * Software Engineering,
- * Arizona State University at the Polytechnic campus
- * <p/>
- * This program is free software; you can redistribute it and/or
- * modify it under the terms of the GNU General Public License
- * as published by the Free Software Foundation version 2
- * of the License.
- * <p/>
- * This program is distributed in the hope that it will be useful,
- * but without any warranty or fitness for a particular purpose.
- * <p/>
- * Please review the GNU General Public License at:
- * http://www.gnu.org/licenses/gpl-2.0.html
- * see also: https://www.gnu.org/licenses/gpl-faq.html
- * so you are aware of the terms and your rights with regard to this software.
- * Or, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301,USA
- * <p/>
- * Purpose: C++ FLTK client UI for Music management.
- * This class extends the Gui component class MediaClientGui and demonstrates
- * sample control functions that respond to button clicks and menu item selects.
- * This software is meant to run on Linux and MacOS using g++.
- * Students may use this source code as the basis for their solution to
- * the programming projects in Ser321 to create a distributed series-season browser.
- * <p/>
- * This example depends on the library curlpp to download a file or make
- * a URL request. This should be used in problem solutions to search
- * OMDb for series, season and episode information. Download the library from:
- *   http://www.curlpp.org/
- * Extract the archive and from a terminal change to the directory created.
- * Execute the following commands looking for errors. Note the following steps
- * require that libcurl first be installed, if its not already present.
- *   cmake ./
- *   make
- *   sudo make install
- *   sudo ldconfig
- * To see the make options available do: make help
- * you may want to note the files that are installed by make install since there
- * does not appear to be any "uninstall" target in the makefile.
- *
- * To use this library, the compile and link must reference the appropriate
- * libraries:
- * g++ -std=c++14 SeriesSeasonBrowser.cpp -o exampleCurlPP -lstdc++ -ljsoncpp -lcurlpp -lcurl
- * If the includes and libraries are not installed in a location known to g++, then
- * the command will need -I and -L options which point g++ to the include and
- * library files respectively.
- *
- * <p/>
- * Ser321 Principles of Distributed Software Systems
+ * Copyright 2020 Tim Lindquist, Adam Clifton 
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * <p>
+ * Purpose: MediaClient is the controller for the MediaClientGUI to search and 
+ * manage the media library through the gui application. 
+ * <p>
  * see http://pooh.poly.asu.edu/Ser321
- * @author Tim Lindquist (Tim.Lindquist@asu.edu) CIDSE - Software Engineering,
- *                       IAFSE, ASU at the Polytechnic campus
- * @file    samplemain.cpp
- * @date    January, 2020
- **/
+ * @author Tim Lindquist Tim.Lindquist@asu.edu
+ *         Software Engineering, CIDSE, IAFSE, ASU Poly
+ * @author Adam Clifton akclifto@asu.edu
+ *         Software Engineering, ASU
+ * @version April 2020
+ */
 class MediaClient : public MediaClientGui {
 
 public:

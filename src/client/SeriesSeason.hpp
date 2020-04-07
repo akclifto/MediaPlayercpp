@@ -1,6 +1,7 @@
 #include <string>
 #include <cmath>
 #include <json/json.h>
+#include "Episode.hpp"
 
 using namespace std;
 
@@ -38,6 +39,7 @@ public:
    string rating;
    string genre;
    string imageURL;
+   vector<Episode> episodeList;
 
    SeriesSeason();
    SeriesSeason(string aTitle, string aSeriesSeason,

@@ -1,9 +1,11 @@
-#include "SeriesSeason.hpp"
 #include <iostream>
 #include <stdlib.h>
+#include "SeriesSeason.hpp"
+
+using namespace std;
 
 /**
- * Copyright 2020 Tim Lindquist,
+ * Copyright 2020 Tim Lindquist, Adam Clifton
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,7 +25,9 @@
  * see http://pooh.poly.asu.edu/Ser321
  * @author Tim Lindquist Tim.Lindquist@asu.edu
  *         Software Engineering, CIDSE, IAFSE, ASU Poly
- * @version January 2020
+ * @author Adam Clifton akclifto@asu.edu
+ *         Software Engineering, ASU
+ * @version April 2020
  */
 SeriesSeason::SeriesSeason(){
    title = "";
@@ -31,6 +35,7 @@ SeriesSeason::SeriesSeason(){
    rating = "";
    genre = "";
    imageURL = "";
+   episodeList;
 }
 
 SeriesSeason::SeriesSeason(string aTitle, string aSeriesSeason,
@@ -40,9 +45,11 @@ SeriesSeason::SeriesSeason(string aTitle, string aSeriesSeason,
    rating = aRating;
    genre = aGenre;
    imageURL = anImageURL;
+   episodeList;
 }
 
 SeriesSeason::SeriesSeason(const Json::Value& jsonObj){
+   
    Json::Value::Members mbr = jsonObj.getMemberNames();
    for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
       //cout << *i << " " << endl;

@@ -60,7 +60,7 @@
           </includepath>
           <libset dir="/usr/lib" libs="stdc++,fltk,fltk_images,curl,jsoncpp,pthread"/>
           <libset dir="/usr/local/lib" libs="curlpp"/>
-          <fileset dir="${src.cpp.dir}/client/" includes="MediaClientGui.cpp,SeriesSeason.cpp, MediaLibrary.cpp,samplemain.cpp"/>
+          <fileset dir="${src.cpp.dir}/client/" includes="MediaClient.cpp,MediaClientGui.cpp,MediaLibrary.cpp,SeriesSeason.cpp,Episode.cpp"/>
       </cc>
    </target>
 
