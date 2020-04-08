@@ -186,7 +186,7 @@ public:
             break;
          }
          cout << "media: " << md.getTitle() << " " << md.getSeriesSeason() << " "
-              << md.getImdbRating() << " " << md.getGenre() << " " << md.getImageURL()
+              << md.getImdbRating() << " " << md.getGenre() << " " << md.getPoster()
               << endl;
          episodeInput->value(md.getTitle().c_str());
          seriesSeasonInput->value(md.getSeriesSeason().c_str());
@@ -326,9 +326,22 @@ public:
 
 int main(int argc, char *argv[])
 {
-   std::string developer = (argc > 1) ? argv[1] : "Tim.Lindquist";
-   std::string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
-   std::string windowTitle = developer + "'s SeriesSeason Browser";
-   MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
-   return (Fl::run());
+
+   SeriesSeason s1("sereies1", "12", "10/10", "action", "link", "plotdetails");
+   SeriesSeason s2("sereies2", "10", "05/10", "comedy", "website", "some plotdetails");
+   Episode eps1("eps1", "5.0", "Epi plot");
+   Episode eps12("eps12", "5.0", "Epi plot second");
+   Episode eps2("seriers 2 ep1", "3.0", "Epi ploting");
+   s1.addEpisode(eps1);
+   s1.addEpisode(eps12);
+   s2.addEpisode(eps2);
+   s1.print();
+   s2.print();
+
+
+   // std::string developer = (argc > 1) ? argv[1] : "Tim.Lindquist";
+   // std::string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
+   // std::string windowTitle = developer + "'s SeriesSeason Browser";
+   // MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
+   // return (Fl::run());
 }

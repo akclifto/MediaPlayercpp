@@ -40,7 +40,7 @@ protected:
     string genre;
     string poster;
     string plotSummary;
-    vector<Episode> episodeList;
+    map<string, Episode> episodeList;
 
 public:
     /*All Constructors and Destructor*/
@@ -58,7 +58,7 @@ public:
     string getGenre();
     string getPoster();
     string getSummary();
-    vector<Episode> getEpisodeList();
+    map<string, Episode> getEpisodeList();
 
     /**
      * Method to get episode from the episodeList by name.
@@ -72,14 +72,14 @@ public:
      * @param name : name of the episode to add to the list. 
      * @return void 
      **/
-    void addEpisode(string name);
+    void addEpisode(Episode name);
 
     /**
      * Method to remove episode from the episodeList for a series.
      * @param name : name of the episode to remove
-     * @return void.\ 
+     * @return true if removed successfully, false otherwise. 
      **/
-    void removeEpisode(string name);
+    bool removeEpisode(string name);
 
     /**
      * Method to display String data in JSON file format for write output.

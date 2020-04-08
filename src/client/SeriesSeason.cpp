@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <algorithm>
 #include "SeriesSeason.hpp"
 
 using namespace std;
@@ -83,6 +84,7 @@ SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
       {
          plotSummary = jsonM.asString();
       }
+      //TODO add episode array
    }
 }
 
@@ -168,25 +170,37 @@ string SeriesSeason::getSummary()
 {
    return plotSummary;
 }
-vector<Episode> SeriesSeason::getEpisodeList()
+map<string, Episode> SeriesSeason::getEpisodeList()
 {
    return episodeList;
 }
 
 Episode SeriesSeason::getEpisode(string name)
 {
-   //TODO
+
+      map<string, Episode>::iterator iter = episodeList.find(name);
+      if(iter == episodeList.end()){
+         return Episode();
+      } else {
+         return iter->second;
+      }
 }
 
-void SeriesSeason::addEpisode(string name)
+void SeriesSeason::addEpisode(Episode epi)
 {
-   //TODO
+   this->episodeList.insert(pair<string, Episode>(epi.getName(), epi));
 }
 
-void SeriesSeason::removeEpisode(string name)
+bool SeriesSeason::removeEpisode(string name)
 {
 
-   //TODO
+   int removed = episodeList.erase(name);
+   if(removed == 0) {
+      return false;
+   } else {
+      return true;
+   }
+   
 }
 
 string SeriesSeason::toJsonString()
@@ -234,4 +248,9 @@ void SeriesSeason::print()
         << " imdbRating " << imdbRating << " genre " << genre
         << " image-URL " << poster
         << " Summary " << plotSummary << "\n";
+        
+   for(auto epi : episodeList){
+
+      epi.second.print();
+   }
 }

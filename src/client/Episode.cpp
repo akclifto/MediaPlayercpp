@@ -152,5 +152,6 @@ void Episode::print()
 {
 
     cout << "name " << name << " imdbRating " << imdbRating 
-         << "epSummary " << epSummary << "\n";
+         << " epSummary " << epSummary << "\n";
+         
 }
