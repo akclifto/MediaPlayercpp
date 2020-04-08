@@ -38,15 +38,15 @@ protected:
     string seriesSeason;
     string imdbRating;
     string genre;
-    string imageURL;
-    string summary;
+    string poster;
+    string plotSummary;
     vector<Episode> episodeList;
-public:
 
+public:
     /*All Constructors and Destructor*/
     SeriesSeason();
     SeriesSeason(string aTitle, string aSeriesSeason,
-                 string aImdbRating, string aGenre, string anImageURL);
+                 string aImdbRating, string aGenre, string poster, string plotSummary);
     SeriesSeason(const Json::Value &jsonObj);
     SeriesSeason(string jsonString);
     ~SeriesSeason();
@@ -56,9 +56,30 @@ public:
     string getSeriesSeason();
     string getImdbRating();
     string getGenre();
-    string getImageURL();
+    string getPoster();
     string getSummary();
     vector<Episode> getEpisodeList();
+
+    /**
+     * Method to get episode from the episodeList by name.
+     * @param name : name of the episode
+     * @return Episode object 
+     **/
+    Episode getEpisode(string name);
+
+    /**
+     * Method to add episode to the episodeList for a SeriesSeason object.
+     * @param name : name of the episode to add to the list. 
+     * @return void 
+     **/
+    void addEpisode(string name);
+
+    /**
+     * Method to remove episode from the episodeList for a series.
+     * @param name : name of the episode to remove
+     * @return void.\ 
+     **/
+    void removeEpisode(string name);
 
     /**
      * Method to display String data in JSON file format for write output.
@@ -85,7 +106,7 @@ public:
      * @return void.
      **/
     void setValues(string aTitle, string aSeriesSeason,
-                   string aRating, string aGenre, string anImageURL);
+                   string aRating, string aGenre, string poster, string plotSummary);
     /**
      * Method to print SeriesSeason object information to console.
      * @return void. 

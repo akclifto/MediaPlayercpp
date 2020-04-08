@@ -35,17 +35,20 @@ SeriesSeason::SeriesSeason()
    seriesSeason = "";
    imdbRating = "";
    genre = "";
-   imageURL = "";
+   poster = "";
+   plotSummary = "";
 }
 
 SeriesSeason::SeriesSeason(string aTitle, string aSeriesSeason,
-                           string aRating, string aGenre, string anImageURL)
+                           string aRating, string aGenre,
+                           string poster, string plotSummary)
 {
-   title = aTitle;
-   seriesSeason = aSeriesSeason;
-   imdbRating = aRating;
-   genre = aGenre;
-   imageURL = anImageURL;
+   this->title = aTitle;
+   this->seriesSeason = aSeriesSeason;
+   this->imdbRating = aRating;
+   this->genre = aGenre;
+   this->poster = poster;
+   this->plotSummary = plotSummary;
 }
 
 SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
@@ -72,9 +75,13 @@ SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
       {
          genre = jsonM.asString();
       }
-      else if (*i == "imageURL")
+      else if (*i == "poster")
       {
-         imageURL = jsonM.asString();
+         poster = jsonM.asString();
+      }
+      else if (*i == "plotSummary")
+      {
+         plotSummary = jsonM.asString();
       }
    }
 }
@@ -108,9 +115,13 @@ SeriesSeason::SeriesSeason(string jsonString)
          {
             genre = jsonM.asString();
          }
-         else if (*i == "imageURL")
+         else if (*i == "poster")
          {
-            imageURL = jsonM.asString();
+            poster = jsonM.asString();
+         }
+         else if (*i == "plotSummary")
+         {
+            plotSummary = jsonM.asString();
          }
       }
    }
@@ -127,31 +138,55 @@ SeriesSeason::~SeriesSeason()
    seriesSeason = "";
    imdbRating = "";
    genre = "";
-   imageURL = "";
+   poster = "";
+   plotSummary = "";
 }
 
-string SeriesSeason::getTitle(){
+string SeriesSeason::getTitle()
+{
    return title;
 }
 
-string SeriesSeason::getSeriesSeason(){
+string SeriesSeason::getSeriesSeason()
+{
    return seriesSeason;
 }
-string SeriesSeason::getImdbRating() {
+string SeriesSeason::getImdbRating()
+{
    return imdbRating;
 }
-string SeriesSeason::getGenre(){
+string SeriesSeason::getGenre()
+{
    return genre;
 }
-string SeriesSeason::getImageURL() {
-   return imageURL;
+string SeriesSeason::getPoster()
+{
+   return poster;
 }
 
-string SeriesSeason::getSummary() {
-   return summary;
+string SeriesSeason::getSummary()
+{
+   return plotSummary;
 }
-vector<Episode> SeriesSeason::getEpisodeList(){
+vector<Episode> SeriesSeason::getEpisodeList()
+{
    return episodeList;
+}
+
+Episode SeriesSeason::getEpisode(string name)
+{
+   //TODO
+}
+
+void SeriesSeason::addEpisode(string name)
+{
+   //TODO
+}
+
+void SeriesSeason::removeEpisode(string name)
+{
+
+   //TODO
 }
 
 string SeriesSeason::toJsonString()
@@ -162,36 +197,41 @@ string SeriesSeason::toJsonString()
    jsonLib["seriesSeason"] = seriesSeason;
    jsonLib["rating"] = imdbRating;
    jsonLib["genre"] = genre;
-   jsonLib["imageURL"] = imageURL;
+   jsonLib["poster"] = poster;
+   jsonLib["plotSummary"] = plotSummary;
    ret = jsonLib.toStyledString();
    return ret;
 }
 
 Json::Value SeriesSeason::toJson()
 {
-   //string ret = "{}";
+
    Json::Value jsonLib;
    jsonLib["title"] = title;
    jsonLib["seriesSeason"] = seriesSeason;
    jsonLib["imdbRating"] = imdbRating;
    jsonLib["genre"] = genre;
-   jsonLib["imageURL"] = imageURL;
+   jsonLib["poster"] = poster;
+   jsonLib["plotSummary"] = plotSummary;
    return jsonLib;
 }
 
 void SeriesSeason::setValues(string aTitle, string aSeriesSeason,
-                             string aRating, string aGenre, string anImageURL)
+                             string aRating, string aGenre,
+                             string poster, string plotSummary)
 {
-   title = aTitle;
+   this->title = aTitle;
    seriesSeason = aSeriesSeason;
    imdbRating = aRating;
    genre = aGenre;
-   imageURL = anImageURL;
+   poster = poster;
+   plotSummary = plotSummary;
 }
 
 void SeriesSeason::print()
 {
-   cout << "media " << title << " series-season " << seriesSeason 
-         << " imdbRating " << imdbRating << " genre " << genre 
-         << " image-URL " << imageURL << "\n";
+   cout << "media " << title << " series-season " << seriesSeason
+        << " imdbRating " << imdbRating << " genre " << genre
+        << " image-URL " << poster
+        << " Summary " << plotSummary << "\n";
 }
