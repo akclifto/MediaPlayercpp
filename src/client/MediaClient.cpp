@@ -27,6 +27,7 @@ void run()
 {
    system(cmd.c_str());
 }
+void testCase();  //TODO be sure to remove this
 
 /**
  * Copyright 2020 Tim Lindquist, Adam Clifton 
@@ -327,21 +328,41 @@ public:
 int main(int argc, char *argv[])
 {
 
-   SeriesSeason s1("sereies1", "12", "10/10", "action", "link", "plotdetails");
-   SeriesSeason s2("sereies2", "10", "05/10", "comedy", "website", "some plotdetails");
-   Episode eps1("eps1", "5.0", "Epi plot");
-   Episode eps12("eps12", "5.0", "Epi plot second");
-   Episode eps2("seriers 2 ep1", "3.0", "Epi ploting");
-   s1.addEpisode(eps1);
-   s1.addEpisode(eps12);
-   s2.addEpisode(eps2);
-   s1.print();
-   s2.print();
+   testCase();
 
 
-   // std::string developer = (argc > 1) ? argv[1] : "Tim.Lindquist";
+
+   // std::string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
    // std::string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
    // std::string windowTitle = developer + "'s SeriesSeason Browser";
    // MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
    // return (Fl::run());
+}
+
+
+/**
+ * Method to testing and debugging. 
+ */
+void testCase() {
+
+   SeriesSeason s1("sereies1", "12", "10/10", "action", "link", "plotdetails");
+   SeriesSeason s2("sereies2", "10", "05/10", "comedy", "website", "some plotdetails");
+   cout  << "Episode check : " << s1.checkEpisodes() << endl;
+   Episode eps1("eps1", "5.0", "Epi plot");
+   Episode eps2("eps12", "5.0", "Epi plot second");
+   Episode eps3("seriers 2 ep1", "3.0", "Epi ploting");
+   s1.addEpisode(eps1);
+   s1.addEpisode(eps2);
+   s2.addEpisode(eps3);
+   s1.print();
+   s2.print();
+   int size = s1.getEpisodeList().size();
+   cout << "size: " << size << endl;
+   s1.removeEpisode("eps12");
+   s1.print();
+   size =  s1.getEpisodeList().size();
+   cout << "size: " << s1.getEpisodeList().size() << endl;
+
+   cout  << "Episode check : " << s1.checkEpisodes() << endl;
+   return;
 }

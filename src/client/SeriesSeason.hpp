@@ -76,10 +76,16 @@ public:
 
     /**
      * Method to remove episode from the episodeList for a series.
-     * @param name : name of the episode to remove
+     * @param name : string name of the episode to remove
      * @return true if removed successfully, false otherwise. 
      **/
     bool removeEpisode(string name);
+
+    /**
+     * Method to check if episode list is empty
+     * @return true if episode list is <b>not</b> empty, false otherwise.
+     **/
+    bool checkEpisodes();
 
     /**
      * Method to display String data in JSON file format for write output.

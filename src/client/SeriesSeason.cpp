@@ -153,14 +153,17 @@ string SeriesSeason::getSeriesSeason()
 {
    return seriesSeason;
 }
+
 string SeriesSeason::getImdbRating()
 {
    return imdbRating;
 }
+
 string SeriesSeason::getGenre()
 {
    return genre;
 }
+
 string SeriesSeason::getPoster()
 {
    return poster;
@@ -170,6 +173,7 @@ string SeriesSeason::getSummary()
 {
    return plotSummary;
 }
+
 map<string, Episode> SeriesSeason::getEpisodeList()
 {
    return episodeList;
@@ -178,12 +182,20 @@ map<string, Episode> SeriesSeason::getEpisodeList()
 Episode SeriesSeason::getEpisode(string name)
 {
 
-      map<string, Episode>::iterator iter = episodeList.find(name);
-      if(iter == episodeList.end()){
-         return Episode();
-      } else {
-         return iter->second;
-      }
+   map<string, Episode>::iterator iter = episodeList.find(name);
+   if (iter == episodeList.end())
+   {
+      return Episode();
+   }
+   else
+   {
+      return iter->second;
+   }
+}
+
+bool SeriesSeason::checkEpisodes()
+{
+   return (!episodeList.size() == 0);
 }
 
 void SeriesSeason::addEpisode(Episode epi)
@@ -195,12 +207,14 @@ bool SeriesSeason::removeEpisode(string name)
 {
 
    int removed = episodeList.erase(name);
-   if(removed == 0) {
+   if (removed == 0)
+   {
       return false;
-   } else {
+   }
+   else
+   {
       return true;
    }
-   
 }
 
 string SeriesSeason::toJsonString()
@@ -244,13 +258,13 @@ void SeriesSeason::setValues(string aTitle, string aSeriesSeason,
 
 void SeriesSeason::print()
 {
-   cout << "media " << title << " series-season " << seriesSeason
-        << " imdbRating " << imdbRating << " genre " << genre
-        << " image-URL " << poster
-        << " Summary " << plotSummary << "\n";
-        
-   for(auto epi : episodeList){
+   cout << "media: " << title << ", series-season: " << seriesSeason
+        << ", imdbRating: " << imdbRating << ", genre: " << genre
+        << ", image-URL: " << poster
+        << ", Summary: " << plotSummary << "\n";
 
+   for (auto epi : episodeList)
+   {
       epi.second.print();
    }
 }
