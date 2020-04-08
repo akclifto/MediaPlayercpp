@@ -32,13 +32,15 @@ Episode::Episode()
 {
     name = "";
     imdbRating = "";
+    epSummary = "";
 }
 
-Episode::Episode(string name, string imdbRating)
+Episode::Episode(string name, string imdbRating, string epSummary)
 {
 
-    name = name;
-    imdbRating = imdbRating;
+    this->name = name;
+    this->imdbRating = imdbRating;
+    this->epSummary = epSummary;
 }
 
 Episode::Episode(const Json::Value &jsonObj)
@@ -56,6 +58,9 @@ Episode::Episode(const Json::Value &jsonObj)
         else if (*i == "imdbRating")
         {
             imdbRating = jsonM.asString();
+        }
+        else if (*i == "epSummary"){
+            epSummary = jsonM.asString();
         }
     }
 }
@@ -81,6 +86,9 @@ Episode::Episode(string jsonString)
             {
                 imdbRating = jsonM.asString();
             }
+            else if (*i == "epSummary") {
+                epSummary = jsonM.asString();
+            }
         }
     }
     else
@@ -94,6 +102,7 @@ Episode::~Episode()
 {
     name = "";
     imdbRating = "";
+    epSummary = "";
 }
 
 string Episode::getImdbRating()
@@ -106,12 +115,17 @@ string Episode::getName()
     return name;
 }
 
+string Episode::getEpSummary() {
+    return epSummary;
+}
+
 string Episode::toJsonString()
 {
     string ret = "{}";
     Json::Value jsonLib;
     jsonLib["name"] = name;
     jsonLib["imdbRating"] = imdbRating;
+    jsonLib["epSummary"] = epSummary;
     ret = jsonLib.toStyledString();
     return ret;
 }
@@ -123,6 +137,7 @@ Json::Value Episode::toJson()
     Json::Value jsonLib;
     jsonLib["name"] = name;
     jsonLib["imdbRating"] = imdbRating;
+    jsonLib["epSummary"] = epSummary;
 
     return jsonLib;
 }
@@ -136,5 +151,6 @@ void Episode::fromjson(Json::Value json)
 void Episode::print()
 {
 
-    cout << "name " << name << " imdbRating " << imdbRating << "\n";
+    cout << "name " << name << " imdbRating " << imdbRating 
+         << "epSummary " << epSummary << "\n";
 }

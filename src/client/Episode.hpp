@@ -32,12 +32,13 @@ class Episode
 protected:
     string name;
     string imdbRating;
+    string epSummary;
 
 public:
 
     /* All Constructors and Destructor*/
     Episode();
-    Episode(string name, string imdbRating);
+    Episode(string name, string imdbRating, string epSummary);
     Episode(const Json::Value &jsonObj);
     Episode(string jsonString);
     ~Episode();
@@ -45,6 +46,7 @@ public:
     /* All getters*/
     string getImdbRating();
     string getName();
+    string getEpSummary();
 
     /**
      * Method to serialize data to Json string.
