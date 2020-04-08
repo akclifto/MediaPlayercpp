@@ -33,10 +33,9 @@ SeriesSeason::SeriesSeason()
 {
    title = "";
    seriesSeason = "";
-   rating = "";
+   imdbRating = "";
    genre = "";
    imageURL = "";
-   episodeList;
 }
 
 SeriesSeason::SeriesSeason(string aTitle, string aSeriesSeason,
@@ -44,10 +43,9 @@ SeriesSeason::SeriesSeason(string aTitle, string aSeriesSeason,
 {
    title = aTitle;
    seriesSeason = aSeriesSeason;
-   rating = aRating;
+   imdbRating = aRating;
    genre = aGenre;
    imageURL = anImageURL;
-   episodeList;
 }
 
 SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
@@ -66,9 +64,9 @@ SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
       {
          seriesSeason = jsonM.asString();
       }
-      else if (*i == "rating")
+      else if (*i == "imdbRating")
       {
-         rating = jsonM.asString();
+         imdbRating = jsonM.asString();
       }
       else if (*i == "genre")
       {
@@ -102,9 +100,9 @@ SeriesSeason::SeriesSeason(string jsonString)
          {
             seriesSeason = jsonM.asString();
          }
-         else if (*i == "rating")
+         else if (*i == "imdbRating")
          {
-            rating = jsonM.asString();
+            imdbRating = jsonM.asString();
          }
          else if (*i == "genre")
          {
@@ -127,9 +125,33 @@ SeriesSeason::~SeriesSeason()
 {
    title = "";
    seriesSeason = "";
-   rating = "";
+   imdbRating = "";
    genre = "";
    imageURL = "";
+}
+
+string SeriesSeason::getTitle(){
+   return title;
+}
+
+string SeriesSeason::getSeriesSeason(){
+   return seriesSeason;
+}
+string SeriesSeason::getImdbRating() {
+   return imdbRating;
+}
+string SeriesSeason::getGenre(){
+   return genre;
+}
+string SeriesSeason::getImageURL() {
+   return imageURL;
+}
+
+string SeriesSeason::getSummary() {
+   return summary;
+}
+vector<Episode> SeriesSeason::getEpisodeList(){
+   return episodeList;
 }
 
 string SeriesSeason::toJsonString()
@@ -138,7 +160,7 @@ string SeriesSeason::toJsonString()
    Json::Value jsonLib;
    jsonLib["title"] = title;
    jsonLib["seriesSeason"] = seriesSeason;
-   jsonLib["rating"] = rating;
+   jsonLib["rating"] = imdbRating;
    jsonLib["genre"] = genre;
    jsonLib["imageURL"] = imageURL;
    ret = jsonLib.toStyledString();
@@ -151,7 +173,7 @@ Json::Value SeriesSeason::toJson()
    Json::Value jsonLib;
    jsonLib["title"] = title;
    jsonLib["seriesSeason"] = seriesSeason;
-   jsonLib["rating"] = rating;
+   jsonLib["imdbRating"] = imdbRating;
    jsonLib["genre"] = genre;
    jsonLib["imageURL"] = imageURL;
    return jsonLib;
@@ -162,13 +184,14 @@ void SeriesSeason::setValues(string aTitle, string aSeriesSeason,
 {
    title = aTitle;
    seriesSeason = aSeriesSeason;
-   rating = aRating;
+   imdbRating = aRating;
    genre = aGenre;
    imageURL = anImageURL;
 }
 
 void SeriesSeason::print()
 {
-   cout << "media " << title << " series-season " << seriesSeason << " rating " << rating
-        << " genre " << genre << " image-URL " << imageURL << "\n";
+   cout << "media " << title << " series-season " << seriesSeason 
+         << " imdbRating " << imdbRating << " genre " << genre 
+         << " image-URL " << imageURL << "\n";
 }

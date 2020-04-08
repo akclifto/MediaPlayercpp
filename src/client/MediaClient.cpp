@@ -185,13 +185,13 @@ public:
             cout << "library entry not found" << endl;
             break;
          }
-         cout << "media: " << md.title << " " << md.seriesSeason << " "
-              << md.rating << " " << md.genre << " " << md.imageURL
+         cout << "media: " << md.getTitle() << " " << md.getSeriesSeason() << " "
+              << md.getImdbRating() << " " << md.getGenre() << " " << md.getImageURL()
               << endl;
-         episodeInput->value(md.title.c_str());
-         seriesSeasonInput->value(md.seriesSeason.c_str());
-         ratingInput->value(md.rating.c_str());
-         genreInput->value(md.genre.c_str());
+         episodeInput->value(md.getTitle().c_str());
+         seriesSeasonInput->value(md.getSeriesSeason().c_str());
+         ratingInput->value(md.getImdbRating().c_str());
+         genreInput->value(md.getGenre().c_str());
          break;
       }
       case FL_TREE_REASON_DESELECTED:
@@ -304,8 +304,8 @@ public:
       {
          cout << " " << result[i];
          SeriesSeason md = library->get(result[i]);
-         cout << md.title << " " << md.seriesSeason << " " << md.rating
-              << " " << md.genre << endl;
+         cout << md.getTitle() << " " << md.getSeriesSeason() << " " << md.getImdbRating()
+              << " " << md.getGenre() << endl;
       }
       cout << endl;
       tree->redraw();

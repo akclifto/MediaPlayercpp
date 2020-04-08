@@ -5,7 +5,7 @@
 using namespace std;
 
 /**
- * Copyright 2020 Tim Lindquist, Adam Clifton
+ * Copyright 2020 Adam Clifton
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,8 +23,6 @@ using namespace std;
  * Episode work - a single Episode that will make up a seriesSeason class object.
  * Ser321 Principles of Distributed Software Systems
  * see http://pooh.poly.asu.edu/Ser321
- * @author Tim Lindquist Tim.Lindquist@asu.edu
- *         Software Engineering, CIDSE, IAFSE, ASU Poly
  * @author Adam Clifton akclifto@asu.edu
  *         Software Engineering, ASU
  * @version April 2020
@@ -98,7 +96,7 @@ Episode::~Episode()
     imdbRating = "";
 }
 
-string Episode::getEpRating()
+string Episode::getImdbRating()
 {
     return imdbRating;
 }
