@@ -72,29 +72,30 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
 { //save to library
 
    bool ret = false;
-   Json::Value jsonLib;
-   Json::Value library;
+   Json::Value master;
+   Json::Value seriesArr;
+
    
    map<string, SeriesSeason>::iterator iter = libraryMap.begin();
+   try {
+   Json::Value seriesObj;
    for(auto lib: libraryMap) 
    {
       // string key = i->first;
       // cout << key << " " << endl;
-
-      Json::Value seriesObj = iter->second.toJson();
-      jsonLib[lib.first] = seriesObj;
-      library["series"] = jsonLib;
+      seriesObj = lib.second.toJson();
+      //seriesArr.append(seriesObj);
+      seriesArr["series"] = seriesObj;
+      master["library"].append(seriesArr);
       iter++;
    }
 
-   Json::Value master;
-
-   int index =- 0;
-
-   for(int i = 0; i < library.size(); i++) {
-       master["library"][index++] = library;
+    //master["library"].append(seriesArr);  //append creates an array.
+   } catch(exception ex){
+      cout << "Exception in toJsonFile: " << ex.what();
    }
 
+   //write to file
    Json::StyledStreamWriter ssw("  ");
    ofstream jsonOutFile(jsonFileName.c_str(), ofstream::binary);
    ssw.write(jsonOutFile, master);
@@ -102,40 +103,16 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
 
    return true;
 
-
-
-
-   // bool ret = false;
-   // Json::Value jsonLib;
-   // int index = -0;
-   // for (map<string, SeriesSeason>::iterator i = libraryMap.begin();
-   //      i != libraryMap.end(); i++)
-   // {
-
-   //    string key = i->first;
-   //    cout << key << " " << endl;
-
-   //    SeriesSeason ss = libraryMap[key];
-   //    Json::Value seriesObj = ss.toJson();
-   //    jsonLib[key] = seriesObj;
-   // }
-   // Json::Value master;
-   // Json::Value library;
-
-   // library["series"] = jsonLib;
-   // master["library"] = library;
-
-   // Json::StyledStreamWriter ssw("  ");
-   // ofstream jsonOutFile(jsonFileName.c_str(), ofstream::binary);
-   // ssw.write(jsonOutFile, master);
-
-   // return true;
 }
 
 SeriesSeason MediaLibrary::get(string aTitle)
 {
    SeriesSeason ss = libraryMap[aTitle];
    return ss;
+}
+
+map<string, SeriesSeason>  MediaLibrary::getLibrary() {
+   return libraryMap;
 }
 
 void MediaLibrary::addSeries(SeriesSeason seriesSeason)
