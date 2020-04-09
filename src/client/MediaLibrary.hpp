@@ -69,6 +69,12 @@ public:
    SeriesSeason get(string aTitle);
 
    /**
+    * Method to get map of library.
+    * @return map data structure for SeriesSeason objects. 
+    **/
+   map<string, SeriesSeason> getLibrary();
+
+   /**
     * Method to add series to the library
     * @param seriesSeason : SeriesSeason object to add to the library 
     **/
@@ -88,11 +94,11 @@ public:
    vector<string> getTitles();
 
    /**
-    * Method to get map of library.
-    * @return map data structure for SeriesSeason objects. 
+    * Method tom parse string data from URL request into JSON files for SeriesSeason
+    * and Episode(s), then creates objects for both.
+    * 
     **/
-   map<string, SeriesSeason> getLibrary();
-
+   void parseURLtoJSON();
    /**
     * Method to print everything in the library.
     * @return void.

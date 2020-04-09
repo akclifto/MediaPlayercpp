@@ -186,6 +186,10 @@ vector<string> MediaLibrary::getTitles()
    return myVec;
 }
 
+void MediaLibrary::parseURLtoJSON() {
+   //TODO:  this.
+}
+
 void MediaLibrary::print()
 {
 
