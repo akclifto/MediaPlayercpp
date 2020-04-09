@@ -49,4 +49,5 @@ public:
    void addSeries(SeriesSeason seriesSeason);
    std::vector<string> getTitles();
    map<string, SeriesSeason> getLibrary();
+   void print();
 };

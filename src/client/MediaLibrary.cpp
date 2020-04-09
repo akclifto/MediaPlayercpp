@@ -47,25 +47,50 @@ MediaLibrary::~MediaLibrary()
 
 bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName)
 { //load from library
+
    bool ret = false;
-   Json::Reader reader;
-   Json::Value root;
-   std::ifstream json(jsonFileName.c_str(), std::ifstream::binary);
-   bool parseSuccess = reader.parse(json, root, false);
-   if (parseSuccess)
-   {
-      Json::Value::Members mbr = root.getMemberNames();
-      for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++)
-      {
-         Json::Value jsonMedia = root[*i];
-         SeriesSeason *aDesc = new SeriesSeason(jsonMedia);
-         libraryMap[*i] = *aDesc;
-         cout << "adding ";
-         aDesc->print();
+      
+      libraryMap.clear();
+      Json::Reader reader;
+      Json::Value root;
+
+       std::ifstream json(jsonFileName.c_str(), std::ifstream::binary);
+      bool parseSucess = reader.parse(json, root);
+
+      if(parseSucess) {
+         for(Json::Value::const_iterator lib = root.begin(); lib != root.end(); lib++){
+
+            for(Json::Value::const_iterator series = (*lib).begin(); 
+                                    series != (*lib).end(); series++){
+
+               for(Json::Value::const_iterator input = (*series).begin(); 
+                                    input != (*series).end(); input++){
+
+                  // cout << *input << endl;
+                  SeriesSeason ss(*input);
+                  addSeries(ss);
+               }     
+            }
+         }
       }
-      ret = true;
-   }
-   return ret;
+      return true;
+
+   //    bool parseSuccess = reader.parse(json, root, false);
+   //    if (parseSuccess)
+   //    {
+   //       Json::Value::Members mbr = root.getMemberNames();
+   //       for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++)
+   //       {
+   //          Json::Value jsonMedia = root[*i];
+   //          SeriesSeason *aDesc = new SeriesSeason(jsonMedia);
+   //          libraryMap[*i] = *aDesc;
+   //          cout << "adding ";
+   //          aDesc->print();
+   //       }
+   //       ret = true;
+   //    }
+
+   // return ret;
 }
 
 bool MediaLibrary::toJsonFile(string jsonFileName)
@@ -75,23 +100,20 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
    Json::Value master;
    Json::Value seriesArr;
 
-   
-   map<string, SeriesSeason>::iterator iter = libraryMap.begin();
-   try {
-   Json::Value seriesObj;
-   for(auto lib: libraryMap) 
+   try
    {
-      // string key = i->first;
-      // cout << key << " " << endl;
-      seriesObj = lib.second.toJson();
-      //seriesArr.append(seriesObj);
-      seriesArr["series"] = seriesObj;
-      master["library"].append(seriesArr);
-      iter++;
-   }
+      Json::Value seriesObj;
+      for (auto lib : libraryMap)
+      {
 
-    //master["library"].append(seriesArr);  //append creates an array.
-   } catch(exception ex){
+         seriesObj = lib.second.toJson();
+
+         seriesArr["series"] = seriesObj;
+         master["library"].append(seriesArr); //append creates an array object
+      }
+   }
+   catch (exception ex)
+   {
       cout << "Exception in toJsonFile: " << ex.what();
    }
 
@@ -102,7 +124,6 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
    cout << "The library was saved to the following file: " << jsonFileName << endl;
 
    return true;
-
 }
 
 SeriesSeason MediaLibrary::get(string aTitle)
@@ -151,4 +172,15 @@ vector<string> MediaLibrary::getTitles()
       myVec.push_back(it->first);
    }
    return myVec;
+}
+
+void MediaLibrary::print() {
+
+   cout << "\nPRINTING LIBRARY: " << endl;
+   for(map<string, SeriesSeason>::const_iterator iter = libraryMap.begin(); 
+                                       iter != libraryMap.end(); iter++){
+      
+      SeriesSeason ss = iter->second;
+      ss.print();
+   }
 }

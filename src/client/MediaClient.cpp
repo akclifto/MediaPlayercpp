@@ -345,30 +345,25 @@ int main(int argc, char *argv[])
  */
 void testCase() {
 
-   SeriesSeason s1("sereies1", "12", "10/10", "action", "link", "plotdetails");
-   SeriesSeason s2("sereies2", "10", "05/10", "comedy", "website", "some plotdetails");
-   cout  << "Episode check : " << s1.checkEpisodes() << endl;
-   Episode eps1("eps1", "5.0", "Epi plot");
-   Episode eps2("eps12", "5.0", "Epi plot second");
-   Episode eps3("seriers 2 ep1", "3.0", "Epi ploting");
+   SeriesSeason s1("series 1", "12", "10/10", "action", "link.com", "this is details");
+   SeriesSeason s2("series 2", "10", "05/10", "comedy", "website.com", "some plot details");
+   Episode eps1("eps 1", "5.0", "Epi plot");
+   Episode eps2("eps 2", "5.0", "Epi plot second");
+   Episode eps3("Series 2 ep 1", "3.0", "Epi plotting");
    s1.addEpisode(eps1);
    s1.addEpisode(eps2);
    s2.addEpisode(eps3);
    int size = s1.getEpisodeList().size();
    size =  s1.getEpisodeList().size();
-   cout << "size: " << s1.getEpisodeList().size() << endl;
-   cout << s1.toJsonString() << endl;
-   cout << s2.toJsonString() << endl;
-   s2.toJsonString();
-   
-   
-   cout  << "Episode check : " << s1.checkEpisodes() << endl;
+   cout << "S1 epi size: " << s1.getEpisodeList().size() << endl;
    MediaLibrary ml;
    ml.addSeries(s1);
    ml.addSeries(s2);
    ml.addSeries(s1);
 
-   cout << ml.toJsonFile("test.json");
-
+   cout << ml.toJsonFile("test.json") << endl;
+   ml.initLibraryFromJsonFile("test.json");
+   cout << "size of the libMap: " << ml.getLibrary().size();
+   ml.print();
    return;
 }

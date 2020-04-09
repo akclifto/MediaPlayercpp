@@ -65,14 +65,17 @@ SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
       if (*i == "title")
       {
          title = jsonM.asString();
+         cout << "title name: " << title << endl;
       }
       else if (*i == "seriesSeason")
       {
          seriesSeason = jsonM.asString();
+         cout << "season NO.: " << seriesSeason << endl;
       }
       else if (*i == "imdbRating")
       {
          imdbRating = jsonM.asString();
+         cout << "Rating: " << imdbRating << endl;
       }
       else if (*i == "genre")
       {
@@ -86,7 +89,18 @@ SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
       {
          plotSummary = jsonM.asString();
       }
-      //TODO: add episode array
+      else if (*i == "episodes")
+      {
+         int size = jsonM["name"].size();
+         cout << "Size of episode array: " << size << endl;
+         // for (int i = 0; i < jsonM["episodes"].size(); i++)
+         // {
+
+         //    Episode epi = Episode(jsonM[i]);
+         //    cout << "Name of EPI: " << epi.getName() << endl;
+         //    addEpisode(epi);
+         // }
+      }
    }
 }
 
@@ -106,14 +120,17 @@ SeriesSeason::SeriesSeason(string jsonString)
          if (*i == "title")
          {
             title = jsonM.asString();
+            cout << "title name: " << title << endl;
          }
          else if (*i == "seriesSeason")
          {
             seriesSeason = jsonM.asString();
+            cout << "season NO.: " << seriesSeason << endl;
          }
          else if (*i == "imdbRating")
          {
             imdbRating = jsonM.asString();
+            cout << "Rating: " << imdbRating << endl;
          }
          else if (*i == "genre")
          {
@@ -127,8 +144,17 @@ SeriesSeason::SeriesSeason(string jsonString)
          {
             plotSummary = jsonM.asString();
          }
-
-         //TODO:  as episode array
+         else if (*i == "episodes")
+         {
+            // int size = jsonM["episodes"].size();
+            // cout << "Size of episode array: " << size << endl;
+            // for (int i = 0; i < jsonM["episodes"].size(); i++)
+            // {
+            //    Episode epi = Episode(jsonM[i]);
+            //    cout << "Name of EPI: " << epi.getName() << endl;
+            //    addEpisode(epi);
+            // }
+         }
       }
    }
    else
@@ -233,7 +259,8 @@ string SeriesSeason::toJsonString()
    jsonLib["poster"] = poster;
    jsonLib["plotSummary"] = plotSummary;
    int index = 0;
-   for(auto epi : episodeList) {
+   for (auto epi : episodeList)
+   {
       jsonLib["episodes"][index++] = epi.second.toJson();
    }
 
@@ -252,7 +279,8 @@ Json::Value SeriesSeason::toJson()
    jsonLib["poster"] = poster;
    jsonLib["plotSummary"] = plotSummary;
    int index = 0;
-   for(auto epi : episodeList) {
+   for (auto epi : episodeList)
+   {
       jsonLib["episodes"][index++] = epi.second.toJson();
    }
 
@@ -261,7 +289,7 @@ Json::Value SeriesSeason::toJson()
 
 void SeriesSeason::fromJson(Json::Value json)
 {
-   //TODO:   
+   //TODO:
 }
 
 void SeriesSeason::setValues(string aTitle, string aSeriesSeason,
