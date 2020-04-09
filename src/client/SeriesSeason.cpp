@@ -90,16 +90,12 @@ SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
          plotSummary = jsonM.asString();
       }
       else if (*i == "episodes")
-      {
-         int size = jsonM["name"].size();
-         cout << "Size of episode array: " << size << endl;
-         // for (int i = 0; i < jsonM["episodes"].size(); i++)
-         // {
-
-         //    Episode epi = Episode(jsonM[i]);
-         //    cout << "Name of EPI: " << epi.getName() << endl;
-         //    addEpisode(epi);
-         // }
+      {  
+         int size = jsonM.size();
+         for(int j = 0; j < jsonM.size(); j++) {
+            Episode epi = Episode(jsonM[j]);
+            addEpisode(epi);
+         }
       }
    }
 }
@@ -146,8 +142,6 @@ SeriesSeason::SeriesSeason(string jsonString)
          }
          else if (*i == "episodes")
          {
-            // int size = jsonM["episodes"].size();
-            // cout << "Size of episode array: " << size << endl;
             // for (int i = 0; i < jsonM["episodes"].size(); i++)
             // {
             //    Episode epi = Episode(jsonM[i]);

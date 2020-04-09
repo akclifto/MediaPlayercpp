@@ -365,5 +365,6 @@ void testCase() {
    ml.initLibraryFromJsonFile("test.json");
    cout << "size of the libMap: " << ml.getLibrary().size();
    ml.print();
+   cout << ml.toJsonFile("OUTPUT.json") << endl;
    return;
 }
