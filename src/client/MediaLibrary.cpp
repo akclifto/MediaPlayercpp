@@ -39,10 +39,10 @@ MediaLibrary::MediaLibrary(){
 }
 
 MediaLibrary::~MediaLibrary() {
-   media.clear();
+   libraryMap.clear();
 }
 
-bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){
+bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){  //load from library
    bool ret = false;
    Json::Reader reader;
    Json::Value root;
@@ -53,7 +53,7 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){
       for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
          Json::Value jsonMedia = root[*i];
          SeriesSeason * aDesc = new SeriesSeason(jsonMedia);
-         media[*i] = *aDesc;
+         libraryMap[*i] = *aDesc;
          cout << "adding ";
          aDesc->print();
       }
@@ -62,14 +62,16 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){
    return ret;
 }
 
-bool MediaLibrary::toJsonFile(string jsonFileName){
+bool MediaLibrary::toJsonFile(string jsonFileName){  //save to library
+   
    bool ret = false;
    Json::Value jsonLib;
-   for(std::map<string,SeriesSeason>::iterator i = media.begin();
-                                                         i!= media.end(); i++){
+
+   for(std::map<string,SeriesSeason>::iterator i = libraryMap.begin();
+                                                         i!= libraryMap.end(); i++){
       string key = i->first;
       cout << key << " " << endl;
-      SeriesSeason aMedia = media[key];
+      SeriesSeason aMedia = libraryMap[key];
       Json::Value jsonMedia = aMedia.toJson();
       jsonLib[key] = jsonMedia;
    }
@@ -80,14 +82,14 @@ bool MediaLibrary::toJsonFile(string jsonFileName){
 }
 
 SeriesSeason MediaLibrary::get(string aTitle){
-   SeriesSeason aMedia = media[aTitle];
+   SeriesSeason aMedia = libraryMap[aTitle];
    return aMedia;
 }
 
 vector<string> MediaLibrary::getTitles(){
    vector<string> myVec;
-   for(map<string,SeriesSeason>::iterator it = media.begin();
-                                              it != media.end();++it){
+   for(map<string,SeriesSeason>::iterator it = libraryMap.begin();
+                                              it != libraryMap.end();++it){
       myVec.push_back(it->first);
    }
    return myVec;

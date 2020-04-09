@@ -35,7 +35,8 @@ using namespace std;
 class MediaLibrary
 {
 protected:
-   std::map<std::string, SeriesSeason> media;
+   map<string, SeriesSeason> libraryMap;
+   map<string, SeriesSeason> SeriesSeasonList;  //may not need
 
 public:
    MediaLibrary();

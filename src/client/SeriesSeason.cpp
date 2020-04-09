@@ -127,6 +127,8 @@ SeriesSeason::SeriesSeason(string jsonString)
          {
             plotSummary = jsonM.asString();
          }
+
+         //TODO:  as episode array
       }
    }
    else
