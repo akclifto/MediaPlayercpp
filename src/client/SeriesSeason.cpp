@@ -56,10 +56,12 @@ SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
 {
 
    Json::Value::Members mbr = jsonObj.getMemberNames();
+
    for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++)
    {
       //cout << *i << " " << endl;
       Json::Value jsonM = jsonObj[*i];
+
       if (*i == "title")
       {
          title = jsonM.asString();
@@ -84,7 +86,7 @@ SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
       {
          plotSummary = jsonM.asString();
       }
-      //TODO add episode array
+      //TODO: add episode array
    }
 }
 
@@ -221,12 +223,18 @@ string SeriesSeason::toJsonString()
 {
    string ret = "{}";
    Json::Value jsonLib;
+
    jsonLib["title"] = title;
    jsonLib["seriesSeason"] = seriesSeason;
    jsonLib["rating"] = imdbRating;
    jsonLib["genre"] = genre;
    jsonLib["poster"] = poster;
    jsonLib["plotSummary"] = plotSummary;
+   int index = 0;
+   for(auto epi : episodeList) {
+      jsonLib["episodes"][index++] = epi.second.toJson();
+   }
+
    ret = jsonLib.toStyledString();
    return ret;
 }
@@ -237,16 +245,21 @@ Json::Value SeriesSeason::toJson()
    Json::Value jsonLib;
    jsonLib["title"] = title;
    jsonLib["seriesSeason"] = seriesSeason;
-   jsonLib["imdbRating"] = imdbRating;
+   jsonLib["rating"] = imdbRating;
    jsonLib["genre"] = genre;
    jsonLib["poster"] = poster;
    jsonLib["plotSummary"] = plotSummary;
+   int index = 0;
+   for(auto epi : episodeList) {
+      jsonLib["episodes"][index++] = epi.second.toJson();
+   }
+
    return jsonLib;
 }
 
 void SeriesSeason::fromJson(Json::Value json)
 {
-   //TODO  
+   //TODO:   
 }
 
 void SeriesSeason::setValues(string aTitle, string aSeriesSeason,

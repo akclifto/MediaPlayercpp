@@ -354,15 +354,12 @@ void testCase() {
    s1.addEpisode(eps1);
    s1.addEpisode(eps2);
    s2.addEpisode(eps3);
-   s1.print();
-   s2.print();
    int size = s1.getEpisodeList().size();
-   cout << "size: " << size << endl;
-   s1.removeEpisode("eps12");
-   s1.print();
    size =  s1.getEpisodeList().size();
    cout << "size: " << s1.getEpisodeList().size() << endl;
 
    cout  << "Episode check : " << s1.checkEpisodes() << endl;
+
+   cout << s1.toJsonString() << endl;
    return;
 }
