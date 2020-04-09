@@ -165,6 +165,6 @@ void MediaLibrary::print() {
                                        iter != libraryMap.end(); iter++){
       
       SeriesSeason ss = iter->second;
-      ss.toJsonString();
+      ss.print();
    }
 }

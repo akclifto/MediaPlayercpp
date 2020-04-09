@@ -151,7 +151,7 @@ void Episode::fromjson(Json::Value json)
 void Episode::print()
 {
 
-    cout << "name: " << name << ", imdbRating: " << imdbRating 
-         << ", epSummary: " << epSummary << "\n";
+    cout << "name: " << name << "\nimdbRating: " << imdbRating 
+         << "\nepSummary: " << epSummary << "\n\n";
 
 }

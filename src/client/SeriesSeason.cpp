@@ -299,10 +299,10 @@ void SeriesSeason::setValues(string aTitle, string aSeriesSeason,
 
 void SeriesSeason::print()
 {
-   cout << "media: " << title << ", series-season: " << seriesSeason
-        << ", imdbRating: " << imdbRating << ", genre: " << genre
-        << ", image-URL: " << poster
-        << ", Summary: " << plotSummary << "\n";
+   cout << "media: " << title << "\nseries-season: " << seriesSeason
+        << "\nimdbRating: " << imdbRating << "\ngenre: " << genre
+        << "\nimage-URL: " << poster
+        << "\nSummary: " << plotSummary << "\n";
 
    for (auto epi : episodeList)
    {
