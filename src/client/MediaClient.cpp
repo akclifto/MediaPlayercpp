@@ -299,13 +299,13 @@ public:
    void buildTree()
    {
       vector<string> result = library->getTitles();
-      cout << "server has titles";
+      cout << "Server has titles: \n";
       tree->clear();
       for (int i = 0; i < result.size(); i++)
       {
-         cout << " " << result[i];
+         cout << result[i];
          SeriesSeason md = library->get(result[i]);
-         cout << md.getTitle() << " " << md.getSeriesSeason() << " " << md.getImdbRating()
+         cout << " " << md.getTitle() << " " << md.getSeriesSeason() << " " << md.getImdbRating()
               << " " << md.getGenre() << endl;
       }
       cout << endl;
