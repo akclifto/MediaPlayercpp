@@ -357,7 +357,9 @@ void testCase() {
    int size = s1.getEpisodeList().size();
    size =  s1.getEpisodeList().size();
    cout << "size: " << s1.getEpisodeList().size() << endl;
-
+   cout << s1.toJsonString() << endl;
+   cout << s2.toJsonString() << endl;
+   
    cout  << "Episode check : " << s1.checkEpisodes() << endl;
    MediaLibrary ml;
    ml.addSeries(s1);

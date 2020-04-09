@@ -36,8 +36,8 @@ using namespace std;
 
 MediaLibrary::MediaLibrary()
 {
-   //initLibraryFromJsonFile("series.json");
-   //TODO: uncomment init^ when done debugging
+   // initLibraryFromJsonFile("series.json");
+   //TODO: uncomment about
 }
 
 MediaLibrary::~MediaLibrary()
@@ -73,23 +73,27 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
 
    bool ret = false;
    Json::Value jsonLib;
-   int index =- 0;
-   for (map<string, SeriesSeason>::iterator i = libraryMap.begin();
-                                       i != libraryMap.end(); i++)
-   {
-
-      string key = i->first;
-      cout << key << " " << endl;
-
-      SeriesSeason ss = libraryMap[key];
-      Json::Value seriesObj = ss.toJson();
-      jsonLib[key] = seriesObj;
-   }
-   Json::Value master;
    Json::Value library;
+   
+   map<string, SeriesSeason>::iterator iter = libraryMap.begin();
+   for(auto lib: libraryMap) 
+   {
+      // string key = i->first;
+      // cout << key << " " << endl;
 
-   library["series"] = jsonLib;
-   master["library"] = library;
+      Json::Value seriesObj = iter->second.toJson();
+      jsonLib[lib.first] = seriesObj;
+      library["series"] = jsonLib;
+      iter++;
+   }
+
+   Json::Value master;
+
+   int index =- 0;
+
+   for(int i = 0; i < library.size(); i++) {
+       master["library"][index++] = library;
+   }
 
    Json::StyledStreamWriter ssw("  ");
    ofstream jsonOutFile(jsonFileName.c_str(), ofstream::binary);
@@ -97,6 +101,35 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
    cout << "The library was saved to the following file: " << jsonFileName << endl;
 
    return true;
+
+
+
+
+   // bool ret = false;
+   // Json::Value jsonLib;
+   // int index = -0;
+   // for (map<string, SeriesSeason>::iterator i = libraryMap.begin();
+   //      i != libraryMap.end(); i++)
+   // {
+
+   //    string key = i->first;
+   //    cout << key << " " << endl;
+
+   //    SeriesSeason ss = libraryMap[key];
+   //    Json::Value seriesObj = ss.toJson();
+   //    jsonLib[key] = seriesObj;
+   // }
+   // Json::Value master;
+   // Json::Value library;
+
+   // library["series"] = jsonLib;
+   // master["library"] = library;
+
+   // Json::StyledStreamWriter ssw("  ");
+   // ofstream jsonOutFile(jsonFileName.c_str(), ofstream::binary);
+   // ssw.write(jsonOutFile, master);
+
+   // return true;
 }
 
 SeriesSeason MediaLibrary::get(string aTitle)
@@ -105,24 +138,30 @@ SeriesSeason MediaLibrary::get(string aTitle)
    return ss;
 }
 
-void MediaLibrary::addSeries(SeriesSeason seriesSeason) {
+void MediaLibrary::addSeries(SeriesSeason seriesSeason)
+{
 
    bool flag = false;
-   for(auto ss: libraryMap){
-      if(ss.second.getTitle() == seriesSeason.getTitle() && 
-               ss.second.getSeriesSeason() == seriesSeason.getSeriesSeason()) {
-                  flag = true;
-                  break;
-               }
+   for (auto ss : libraryMap)
+   {
+      if (ss.second.getTitle() == seriesSeason.getTitle() &&
+          ss.second.getSeriesSeason() == seriesSeason.getSeriesSeason())
+      {
+         flag = true;
+         break;
+      }
    }
 
-   if(flag) {
+   if (flag)
+   {
       cout << seriesSeason.getTitle() << " already included in the library!" << endl;
-   } else {
+   }
+   else
+   {
 
       this->libraryMap.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
       this->SeriesSeasonList.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
-      cout << seriesSeason.getTitle() << " was added to the library list." << endl;
+      cout << seriesSeason.getTitle() << " was added to the library." << endl;
    }
 }
 
