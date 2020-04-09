@@ -90,9 +90,10 @@ SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
          plotSummary = jsonM.asString();
       }
       else if (*i == "episodes")
-      {  
+      {
          int size = jsonM.size();
-         for(int j = 0; j < jsonM.size(); j++) {
+         for (int j = 0; j < jsonM.size(); j++)
+         {
             Episode epi = Episode(jsonM[j]);
             addEpisode(epi);
          }
@@ -141,9 +142,10 @@ SeriesSeason::SeriesSeason(string jsonString)
             plotSummary = jsonM.asString();
          }
          else if (*i == "episodes")
-         {  
+         {
             int size = jsonM.size();
-            for(int j = 0; j < jsonM.size(); j++) {
+            for (int j = 0; j < jsonM.size(); j++)
+            {
                Episode epi = Episode(jsonM[j]);
                addEpisode(epi);
             }
@@ -229,15 +231,30 @@ void SeriesSeason::addEpisode(Episode epi)
 bool SeriesSeason::removeEpisode(string name)
 {
 
+   if (episodeList.size() == 0)
+   {
+      cout << "The episode list is empty!" << endl;
+      return false;
+   }
+
    int removed = episodeList.erase(name);
    if (removed == 0)
    {
+      cout << name << " was not found in the list of episodes!" << endl;
       return false;
    }
    else
    {
+      cout << name << " successfully remove from the series." << endl;
       return true;
    }
+}
+
+vector<string> SeriesSeason::getEpisodeTitles()
+{
+   //TODO: this
+   vector<string> vec;
+   return vec;
 }
 
 string SeriesSeason::toJsonString()

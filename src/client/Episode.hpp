@@ -35,7 +35,6 @@ protected:
     string epSummary;
 
 public:
-
     /* All Constructors and Destructor*/
     Episode();
     Episode(string name, string imdbRating, string epSummary);

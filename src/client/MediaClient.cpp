@@ -27,7 +27,7 @@ void run()
 {
    system(cmd.c_str());
 }
-void testCase();  //TODO: be sure to remove this
+void testCase(); //TODO: be sure to remove this
 
 /**
  * Copyright 2020 Tim Lindquist, Adam Clifton 
@@ -319,7 +319,7 @@ public:
       tree->callback(TreeCallbackS, (void *)this);
       callback(ClickedX);
       omdbkey = key;
-      userId = "Tim.Lindquist";
+      userId = "Adam.Clifton";
       library = new MediaLibrary();
       buildTree();
    }
@@ -328,24 +328,21 @@ public:
 int main(int argc, char *argv[])
 {
 
-   MediaLibrary ml;
-   ml.print();
-   ml.toJsonFile("test.json");
+   // MediaLibrary ml;
+   // ml.print();
 
-
-
-   // std::string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
-   // std::string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
-   // std::string windowTitle = developer + "'s SeriesSeason Browser";
-   // MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
-   // return (Fl::run());
+   std::string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
+   std::string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
+   std::string windowTitle = developer + "'s SeriesSeason Browser";
+   MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
+   return (Fl::run());
 }
 
-
 /**
- * Method to testing and debugging. 
+ * Method for testing and debugging. 
  */
-void testCase() {
+void testCase()
+{
 
    SeriesSeason s1("series 1", "12", "10/10", "action", "link.com", "this is details");
    SeriesSeason s2("series 2", "10", "05/10", "comedy", "website.com", "some plot details");
@@ -356,7 +353,7 @@ void testCase() {
    s1.addEpisode(eps2);
    s2.addEpisode(eps3);
    int size = s1.getEpisodeList().size();
-   size =  s1.getEpisodeList().size();
+   size = s1.getEpisodeList().size();
    cout << "S1 epi size: " << s1.getEpisodeList().size() << endl;
    MediaLibrary ml;
    ml.addSeries(s1);

@@ -35,8 +35,8 @@ using namespace std;
 class MediaLibrary
 {
 protected:
-   map<string, SeriesSeason> libraryMap;        // map to store library objects.
-   map<string, SeriesSeason> SeriesSeasonList;  // may not need
+   map<string, SeriesSeason> libraryMap;       // map to store library objects.
+   map<string, SeriesSeason> SeriesSeasonList; // may not need
 
 public:
    MediaLibrary();
@@ -85,7 +85,7 @@ public:
     * Method to return vector of series title from the library.
     * @return vector of series' titles from library. 
     **/
-   std::vector<string> getTitles();
+   vector<string> getTitles();
 
    /**
     * Method to get map of library.

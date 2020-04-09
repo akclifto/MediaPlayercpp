@@ -59,7 +59,8 @@ Episode::Episode(const Json::Value &jsonObj)
         {
             imdbRating = jsonM.asString();
         }
-        else if (*i == "epSummary"){
+        else if (*i == "epSummary")
+        {
             epSummary = jsonM.asString();
         }
     }
@@ -86,7 +87,8 @@ Episode::Episode(string jsonString)
             {
                 imdbRating = jsonM.asString();
             }
-            else if (*i == "epSummary") {
+            else if (*i == "epSummary")
+            {
                 epSummary = jsonM.asString();
             }
         }
@@ -115,7 +117,8 @@ string Episode::getName()
     return name;
 }
 
-string Episode::getEpSummary() {
+string Episode::getEpSummary()
+{
     return epSummary;
 }
 
@@ -145,13 +148,12 @@ Json::Value Episode::toJson()
 void Episode::fromjson(Json::Value json)
 {
 
-    //TODO: 
+    //TODO:
 }
 
 void Episode::print()
 {
 
-    cout << "name: " << name << "\nimdbRating: " << imdbRating 
+    cout << "name: " << name << "\nimdbRating: " << imdbRating
          << "\nepSummary: " << epSummary << "\n\n";
-
 }

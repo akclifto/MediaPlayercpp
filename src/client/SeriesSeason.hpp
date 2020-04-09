@@ -59,6 +59,7 @@ public:
     string getPoster();
     string getSummary();
     map<string, Episode> getEpisodeList();
+    vector<string> getEpisodeTitles();
 
     /**
      * Method to get episode from the episodeList by name.
@@ -113,6 +114,7 @@ public:
      **/
     void setValues(string aTitle, string aSeriesSeason,
                    string aRating, string aGenre, string poster, string plotSummary);
+
     /**
      * Method to print SeriesSeason object information to console.
      * @return void. 
