@@ -34,25 +34,31 @@ using namespace std;
  * @version January 2020
  */
 
-MediaLibrary::MediaLibrary(){
-   initLibraryFromJsonFile("series.json");
+MediaLibrary::MediaLibrary()
+{
+   //initLibraryFromJsonFile("series.json");
+   //TODO: uncomment init^ when done debugging
 }
 
-MediaLibrary::~MediaLibrary() {
+MediaLibrary::~MediaLibrary()
+{
    libraryMap.clear();
 }
 
-bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){  //load from library
+bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName)
+{ //load from library
    bool ret = false;
    Json::Reader reader;
    Json::Value root;
    std::ifstream json(jsonFileName.c_str(), std::ifstream::binary);
-   bool parseSuccess = reader.parse(json,root,false);
-   if(parseSuccess){
+   bool parseSuccess = reader.parse(json, root, false);
+   if (parseSuccess)
+   {
       Json::Value::Members mbr = root.getMemberNames();
-      for(vector<string>::const_iterator i = mbr.begin(); i!= mbr.end(); i++){
+      for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++)
+      {
          Json::Value jsonMedia = root[*i];
-         SeriesSeason * aDesc = new SeriesSeason(jsonMedia);
+         SeriesSeason *aDesc = new SeriesSeason(jsonMedia);
          libraryMap[*i] = *aDesc;
          cout << "adding ";
          aDesc->print();
@@ -62,34 +68,70 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName){  //load from li
    return ret;
 }
 
-bool MediaLibrary::toJsonFile(string jsonFileName){  //save to library
-   
+bool MediaLibrary::toJsonFile(string jsonFileName)
+{ //save to library
+
    bool ret = false;
    Json::Value jsonLib;
+   int index =- 0;
+   for (map<string, SeriesSeason>::iterator i = libraryMap.begin();
+                                       i != libraryMap.end(); i++)
+   {
 
-   for(std::map<string,SeriesSeason>::iterator i = libraryMap.begin();
-                                                         i!= libraryMap.end(); i++){
       string key = i->first;
       cout << key << " " << endl;
-      SeriesSeason aMedia = libraryMap[key];
-      Json::Value jsonMedia = aMedia.toJson();
-      jsonLib[key] = jsonMedia;
+
+      SeriesSeason ss = libraryMap[key];
+      Json::Value seriesObj = ss.toJson();
+      jsonLib[key] = seriesObj;
    }
+   Json::Value master;
+   Json::Value library;
+
+   library["series"] = jsonLib;
+   master["library"] = library;
+
    Json::StyledStreamWriter ssw("  ");
-   std::ofstream jsonOutFile(jsonFileName.c_str(), std::ofstream::binary);
-   ssw.write(jsonOutFile, jsonLib);
+   ofstream jsonOutFile(jsonFileName.c_str(), ofstream::binary);
+   ssw.write(jsonOutFile, master);
+   cout << "The library was saved to the following file: " << jsonFileName << endl;
+
    return true;
 }
 
-SeriesSeason MediaLibrary::get(string aTitle){
-   SeriesSeason aMedia = libraryMap[aTitle];
-   return aMedia;
+SeriesSeason MediaLibrary::get(string aTitle)
+{
+   SeriesSeason ss = libraryMap[aTitle];
+   return ss;
 }
 
-vector<string> MediaLibrary::getTitles(){
+void MediaLibrary::addSeries(SeriesSeason seriesSeason) {
+
+   bool flag = false;
+   for(auto ss: libraryMap){
+      if(ss.second.getTitle() == seriesSeason.getTitle() && 
+               ss.second.getSeriesSeason() == seriesSeason.getSeriesSeason()) {
+                  flag = true;
+                  break;
+               }
+   }
+
+   if(flag) {
+      cout << seriesSeason.getTitle() << " already included in the library!" << endl;
+   } else {
+
+      this->libraryMap.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
+      this->SeriesSeasonList.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
+      cout << seriesSeason.getTitle() << " was added to the library list." << endl;
+   }
+}
+
+vector<string> MediaLibrary::getTitles()
+{
    vector<string> myVec;
-   for(map<string,SeriesSeason>::iterator it = libraryMap.begin();
-                                              it != libraryMap.end();++it){
+   for (map<string, SeriesSeason>::iterator it = libraryMap.begin();
+        it != libraryMap.end(); ++it)
+   {
       myVec.push_back(it->first);
    }
    return myVec;

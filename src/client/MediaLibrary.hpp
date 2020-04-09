@@ -46,5 +46,6 @@ public:
    bool toJsonFile(string jsonFileName);
    string serviceInfo();
    SeriesSeason get(string aTitle);
+   void addSeries(SeriesSeason seriesSeason);
    std::vector<string> getTitles();
 };

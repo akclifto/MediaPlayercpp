@@ -359,7 +359,12 @@ void testCase() {
    cout << "size: " << s1.getEpisodeList().size() << endl;
 
    cout  << "Episode check : " << s1.checkEpisodes() << endl;
+   MediaLibrary ml;
+   ml.addSeries(s1);
+   ml.addSeries(s2);
+   ml.addSeries(s1);
 
-   cout << s1.toJsonString() << endl;
+   cout << ml.toJsonFile("test.json");
+
    return;
 }
