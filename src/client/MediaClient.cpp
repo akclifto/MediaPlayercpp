@@ -330,6 +330,7 @@ int main(int argc, char *argv[])
 
    MediaLibrary ml;
    ml.print();
+   ml.toJsonFile("test.json");
 
 
 

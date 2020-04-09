@@ -35,19 +35,67 @@ using namespace std;
 class MediaLibrary
 {
 protected:
-   map<string, SeriesSeason> libraryMap;
-   map<string, SeriesSeason> SeriesSeasonList;  //may not need
+   map<string, SeriesSeason> libraryMap;        // map to store library objects.
+   map<string, SeriesSeason> SeriesSeasonList;  // may not need
 
 public:
    MediaLibrary();
    ~MediaLibrary();
 
+   /**
+    * Method to initialize library from a JSON file.
+    * @param jsonFileName : path/name of the JSON file used to initialize library.
+    * @return true if library parsed and implemented correctly, false otherwise.
+    **/
    bool initLibraryFromJsonFile(string jsonFileName);
+
+   /**
+    * Method to write library to JSON file. 
+    * @param jsonFileName : name of the file to be written
+    * @return true if written to file correctly, false otherwise
+    **/
    bool toJsonFile(string jsonFileName);
+
+   /**
+    * Method default code. TODO: 
+    * */
    string serviceInfo();
+
+   /**
+    * Method to get SeriesSeason object from library by title
+    * @param aTitle : title of the series to return from the library
+    * @return SeriesSeason object if found in library.
+    **/
    SeriesSeason get(string aTitle);
+
+   /**
+    * Method to add series to the library
+    * @param seriesSeason : SeriesSeason object to add to the library 
+    **/
    void addSeries(SeriesSeason seriesSeason);
+
+   /**
+    * Method to remove series from the library by searching its title
+    * @param title : title of the series to remove. 
+    * @return true if successfully removed from library, false otherwise.  
+    * */
+   bool removeSeries(string title);
+
+   /**
+    * Method to return vector of series title from the library.
+    * @return vector of series' titles from library. 
+    **/
    std::vector<string> getTitles();
+
+   /**
+    * Method to get map of library.
+    * @return map data structure for SeriesSeason objects. 
+    **/
    map<string, SeriesSeason> getLibrary();
+
+   /**
+    * Method to print everything in the library.
+    * @return void.
+    **/
    void print();
 };

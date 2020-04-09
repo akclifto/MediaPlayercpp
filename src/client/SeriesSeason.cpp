@@ -65,17 +65,17 @@ SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
       if (*i == "title")
       {
          title = jsonM.asString();
-         cout << "title name: " << title << endl;
+         // cout << "title name: " << title << endl;
       }
       else if (*i == "seriesSeason")
       {
          seriesSeason = jsonM.asString();
-         cout << "season NO.: " << seriesSeason << endl;
+         // cout << "season NO.: " << seriesSeason << endl;
       }
       else if (*i == "imdbRating")
       {
          imdbRating = jsonM.asString();
-         cout << "Rating: " << imdbRating << endl;
+         // cout << "Rating: " << imdbRating << endl;
       }
       else if (*i == "genre")
       {
@@ -116,17 +116,17 @@ SeriesSeason::SeriesSeason(string jsonString)
          if (*i == "title")
          {
             title = jsonM.asString();
-            cout << "title name: " << title << endl;
+            // cout << "title name: " << title << endl;
          }
          else if (*i == "seriesSeason")
          {
             seriesSeason = jsonM.asString();
-            cout << "season NO.: " << seriesSeason << endl;
+            // cout << "season NO.: " << seriesSeason << endl;
          }
          else if (*i == "imdbRating")
          {
             imdbRating = jsonM.asString();
-            cout << "Rating: " << imdbRating << endl;
+            // cout << "Rating: " << imdbRating << endl;
          }
          else if (*i == "genre")
          {

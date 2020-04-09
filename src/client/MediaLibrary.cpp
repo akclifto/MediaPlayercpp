@@ -10,7 +10,7 @@
 
 using namespace std;
 /**
- * Copyright 2020 Tim Lindquist,
+ * Copyright 2020 Tim Lindquist, Adam CLifton
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,9 @@ using namespace std;
  * see http://pooh.poly.asu.edu/Ser321
  * @author Tim Lindquist Tim.Lindquist@asu.edu
  *         Software Engineering, CIDSE, IAFSE, ASU Poly
- * @version January 2020
+ * @author Adam Clifton akclifto@asu.edu
+ *         Software Engineering, ASU
+ * @version April 2020
  */
 
 MediaLibrary::MediaLibrary()
@@ -140,11 +142,30 @@ void MediaLibrary::addSeries(SeriesSeason seriesSeason)
    }
    else
    {
-
       this->libraryMap.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
       this->SeriesSeasonList.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
       cout << seriesSeason.getTitle() << " was added to the library." << endl;
    }
+}
+
+bool MediaLibrary::removeSeries(string title) {
+
+
+   if(libraryMap.size() == 0){
+      cout << "The Library is empty!" << endl;
+      return false;
+   }
+
+   for(auto ss : libraryMap){
+      if(ss.second.getTitle() == title) {
+         libraryMap.erase(ss.second.getTitle());
+         cout << ss.second.getTitle() << " was removed from the library." << endl;
+         return true;
+      }
+   }
+
+   cout << title << " was not found in the library!" << endl;
+   return false;
 }
 
 vector<string> MediaLibrary::getTitles()
