@@ -27,7 +27,7 @@ void run()
 {
    system(cmd.c_str());
 }
-void testCase();  //TODO be sure to remove this
+void testCase();  //TODO: be sure to remove this
 
 /**
  * Copyright 2020 Tim Lindquist, Adam Clifton 
