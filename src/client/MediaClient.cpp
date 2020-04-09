@@ -328,7 +328,8 @@ public:
 int main(int argc, char *argv[])
 {
 
-   testCase();
+   MediaLibrary ml;
+   ml.print();
 
 
 

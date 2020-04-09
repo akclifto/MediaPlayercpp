@@ -36,8 +36,8 @@ using namespace std;
 
 MediaLibrary::MediaLibrary()
 {
-   // initLibraryFromJsonFile("series.json");
-   //TODO: uncomment about
+   initLibraryFromJsonFile("series.json");
+
 }
 
 MediaLibrary::~MediaLibrary()
@@ -72,25 +72,9 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName)
                }     
             }
          }
+         ret = true;
       }
-      return true;
-
-   //    bool parseSuccess = reader.parse(json, root, false);
-   //    if (parseSuccess)
-   //    {
-   //       Json::Value::Members mbr = root.getMemberNames();
-   //       for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++)
-   //       {
-   //          Json::Value jsonMedia = root[*i];
-   //          SeriesSeason *aDesc = new SeriesSeason(jsonMedia);
-   //          libraryMap[*i] = *aDesc;
-   //          cout << "adding ";
-   //          aDesc->print();
-   //       }
-   //       ret = true;
-   //    }
-
-   // return ret;
+      return ret;
 }
 
 bool MediaLibrary::toJsonFile(string jsonFileName)
@@ -181,6 +165,6 @@ void MediaLibrary::print() {
                                        iter != libraryMap.end(); iter++){
       
       SeriesSeason ss = iter->second;
-      ss.print();
+      ss.toJsonString();
    }
 }
