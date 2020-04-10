@@ -185,9 +185,10 @@ public:
 
       box = new Fl_Box(350, 180, 320 - 20, 320 - 20);
       png = new Fl_PNG_Image("default.png");
-      box->image(png);
+      box->image(png);  //TODO:  need to reset
 
       summaryMLI = new Fl_Multiline_Input(665, 180, 300, 300, 0);
+      summaryMLI->label("Plot Summary");
       summaryMLI->wrap(1);
       summaryMLI->readonly(1);
 

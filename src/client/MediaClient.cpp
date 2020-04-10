@@ -330,11 +330,14 @@ public:
       {
          cout << result[i];
          SeriesSeason series = library->getSeries(result[i]);
+         
          cout << " " << series.getTitle() << " " << series.getSeriesSeason()
               << " " << series.getImdbRating() << " " << series.getGenre() 
               << " " << series.getSummary() <<  endl;
+
       }
       cout << endl;
+
       tree->redraw();
    }
 
@@ -353,16 +356,11 @@ public:
 
 int main(int argc, char *argv[])
 {
-
-   MediaLibrary ml;
-
-
-
-   // string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
-   // string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
-   // string windowTitle = developer + "'s SeriesSeason Browser";
-   // MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
-   // return (Fl::run());
+   string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
+   string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
+   string windowTitle = developer + "'s SeriesSeason Browser";
+   MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
+   return (Fl::run());
 }
 
 /**
@@ -380,7 +378,7 @@ void testCase()
    {
       cout << i << endl;
    }
-   
+
    ml.toJsonFile("test.json");
    ml.initLibraryFromJsonFile("test.json");
    ml.print();
