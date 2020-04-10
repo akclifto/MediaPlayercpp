@@ -33,6 +33,7 @@ using namespace std;
  *         Software Engineering, CIDSE, IAFSE, ASU Poly
  * @author Adam Clifton akclifto@asu.edu
  *         Software Engineering, ASU
+ * @file MediaLibrary.cpp
  * @version April 2020
  */
 

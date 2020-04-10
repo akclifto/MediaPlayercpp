@@ -52,6 +52,7 @@ void testCase(); //TODO: be sure to remove this
  *         Software Engineering, CIDSE, IAFSE, ASU Poly
  * @author Adam Clifton akclifto@asu.edu
  *         Software Engineering, ASU
+ * @MediaClient.cpp
  * @version April 2020
  */
 class MediaClient : public MediaClientGui

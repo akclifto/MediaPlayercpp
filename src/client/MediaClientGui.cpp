@@ -49,8 +49,10 @@ using namespace std;
  * see http://pooh.poly.asu.edu/Ser321
  * @author Tim Lindquist (Tim.Lindquist@asu.edu) CIDSE - Software Engineering,
  *                       IAFSE, ASU at the Polytechnic campus
- * @file    MediaClientGui.cpp
- * @date    January, 2020
+ * @author Adam Clifton akclifto@asu.edu
+ *         Software Engineering, ASU
+ * @file MediaClientGui.cpp
+ * @version April 2020
  **/
 class MediaClientGui : public Fl_Window
 {

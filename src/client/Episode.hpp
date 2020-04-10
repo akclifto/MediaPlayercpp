@@ -23,6 +23,7 @@ using namespace std;
  * Ser321 Principles of Distributed Software Systems
  * @author Adam Clifton akclifto@asu.edu
  *         Software Engineering, ASU
+ * @file Episode.hpp
  * @version April 2020
  */
 
