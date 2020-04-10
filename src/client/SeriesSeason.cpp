@@ -91,10 +91,10 @@ SeriesSeason::SeriesSeason(const Json::Value &jsonObj)
       }
       else if (*i == "episodes")
       {
-         int size = jsonM.size();
+
          for (int j = 0; j < jsonM.size(); j++)
          {
-            Episode epi = Episode(jsonM[j]);
+            Episode epi(jsonM[j]);
             addEpisode(epi);
          }
       }

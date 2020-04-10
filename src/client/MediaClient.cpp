@@ -328,14 +328,14 @@ public:
 int main(int argc, char *argv[])
 {
 
-   // MediaLibrary ml;
-   // ml.print();
+   MediaLibrary ml;
+   ml.print();
 
-   std::string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
-   std::string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
-   std::string windowTitle = developer + "'s SeriesSeason Browser";
-   MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
-   return (Fl::run());
+   // std::string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
+   // std::string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
+   // std::string windowTitle = developer + "'s SeriesSeason Browser";
+   // MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
+   // return (Fl::run());
 }
 
 /**

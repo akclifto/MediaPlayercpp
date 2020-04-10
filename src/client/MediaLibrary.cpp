@@ -55,7 +55,7 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName)
    Json::Reader reader;
    Json::Value root;
 
-   std::ifstream json(jsonFileName.c_str(), std::ifstream::binary);
+   ifstream json(jsonFileName.c_str(), ifstream::binary);
    bool parseSucess = reader.parse(json, root);
 
    if (parseSucess)
@@ -94,9 +94,7 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
       Json::Value seriesObj;
       for (auto lib : libraryMap)
       {
-
          seriesObj = lib.second.toJson();
-
          seriesArr["series"] = seriesObj;
          master["library"].append(seriesArr); //append creates an array object
       }
@@ -105,7 +103,7 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
    {
       cout << "Exception in toJsonFile: " << ex.what();
    }
-
+   
    //write to file
    Json::StyledStreamWriter ssw("  ");
    ofstream jsonOutFile(jsonFileName.c_str(), ofstream::binary);
