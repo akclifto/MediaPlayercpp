@@ -227,11 +227,21 @@ public:
       if (selectPath.compare("File/Save") == 0)
       {
          bool restSave = library->toJsonFile("series.json");
-         cout << "Save not implemented" << endl;
+         if(restSave){
+            cout << "Save Successful" << endl;
+         } else {
+         cout << "Save unsuccessful" << endl;
+         }
       }
       else if (selectPath.compare("File/Restore") == 0)
       {
-         cout << "Restore not implemented" << endl;
+         bool flag = library->initLibraryFromJsonFile("series.json");
+         if(flag){
+            buildTree();
+            cout << "Restore Successful" << endl;
+         } else {
+            cout << "Restore Unsuccessful" << endl;
+         }
       }
       else if (selectPath.compare("File/Tree Refresh") == 0)
       {
@@ -297,7 +307,7 @@ public:
       return result;
    }
 
-   void buildTree()
+   void buildTree()  //TODO:
    {
       vector<string> result = library->getTitles();
       cout << "Server has titles: \n";
@@ -305,16 +315,16 @@ public:
       for (int i = 0; i < result.size(); i++)
       {
          cout << result[i];
-         SeriesSeason md = library->get(result[i]);
-         cout << " " << md.getTitle() << " " << md.getSeriesSeason()
-              << " " << md.getImdbRating()
-              << " " << md.getGenre() << endl;
+         SeriesSeason series = library->get(result[i]);
+         cout << " " << series.getTitle() << " " << series.getSeriesSeason()
+              << " " << series.getImdbRating() << " " << series.getGenre() 
+              << " " << series.getSummary() <<  endl;
       }
       cout << endl;
       tree->redraw();
    }
 
-   MediaClient(const char *name = "Tim", const char *key = "myKey") : MediaClientGui(name)
+   MediaClient(const char *name = "Adam", const char *key = "myKey") : MediaClientGui(name)
    {
       searchButt->callback(SearchCallbackS, (void *)this);
       menubar->callback(Menu_ClickedS, (void *)this);
@@ -323,7 +333,7 @@ public:
       omdbkey = key;
       userId = "Adam.Clifton";
       library = new MediaLibrary();
-      //buildTree();  //TODO:
+      buildTree();  //TODO:
    }
 };
 
@@ -338,6 +348,7 @@ int main(int argc, char *argv[])
 
 /**
  * Method for testing and debugging. 
+ * @return void
  */
 void testCase()
 {
