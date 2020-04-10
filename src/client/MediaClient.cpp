@@ -59,10 +59,10 @@ class MediaClient : public MediaClientGui
 {
 
 public:
-   std::string userId;
-   std::string omdbkey;
+   string userId;
+   string omdbkey;
 
-   std::thread *playThread;
+   thread *playThread;
    MediaLibrary *library;
 
    /** ClickedX is one of the callbacks for GUI controls.
@@ -74,7 +74,7 @@ public:
     */
    static void ClickedX(Fl_Widget *w, void *userdata)
    {
-      std::cout << "You clicked Exit" << std::endl;
+      cout << "You clicked Exit" << endl;
       exit(1);
    }
 
@@ -110,22 +110,22 @@ public:
          */
          url = url + "&t=" + urlEncodedQuery + "&season=" + o->seasonSrchInput->value();
          cout << "sending request url: " << url << endl;
-         std::ostringstream os;
+         ostringstream os;
          curlpp::Easy myRequest;
          myRequest.setOpt(new curlpp::options::WriteStream(&os));
          //curlpp::options::Url myUrl(std::string(url));
          myRequest.setOpt(new curlpp::options::Url(url.c_str()));
          myRequest.perform();
-         std::string aString = os.str();
-         std::cout << aString << std::endl;
+         string aString = os.str();
+         cout << aString << endl;
       }
       catch (curlpp::LogicError &e)
       {
-         std::cout << e.what() << std::endl;
+         cout << e.what() << endl;
       }
       catch (curlpp::RuntimeError &e)
       {
-         std::cout << e.what() << std::endl;
+         cout << e.what() << endl;
       }
    }
 
@@ -154,57 +154,57 @@ public:
          cout << "none";
       }
       cout << endl;
-      std::string aStr("unknown");
-      std::string aTitle(item->label());
+      string aStr("unknown");
+      string aTitle(item->label());
       switch (tree->callback_reason())
       { // reason callback was invoked
-      case FL_TREE_REASON_NONE:
-      {
-         aStr = "none";
-         break;
-      }
-      case FL_TREE_REASON_OPENED:
-      {
-         aStr = "opened";
-         break;
-      }
-      case FL_TREE_REASON_CLOSED:
-      {
-         aStr = "closed";
-         break;
-      }
-      case FL_TREE_REASON_SELECTED:
-      {
-         aStr = "selected";
-         SeriesSeason md;
-         if (library)
+         case FL_TREE_REASON_NONE:
          {
-            cout << "trying to get: " << item->label() << endl;
-            md = library->get(aTitle);
-         }
-         else
-         {
-            cout << "library entry not found" << endl;
+            aStr = "none";
             break;
          }
-         cout << "media: " << md.getTitle() << " " << md.getSeriesSeason() << " "
-              << md.getImdbRating() << " " << md.getGenre() << " " << md.getPoster()
-              << endl;
-         episodeInput->value(md.getTitle().c_str());
-         seriesSeasonInput->value(md.getSeriesSeason().c_str());
-         ratingInput->value(md.getImdbRating().c_str());
-         genreInput->value(md.getGenre().c_str());
-         break;
-      }
-      case FL_TREE_REASON_DESELECTED:
-      {
-         aStr = "deselected";
-         break;
-      }
-      default:
-      {
-         break;
-      }
+         case FL_TREE_REASON_OPENED:
+         {
+            aStr = "opened";
+            break;
+         }
+         case FL_TREE_REASON_CLOSED:
+         {
+            aStr = "closed";
+            break;
+         }
+         case FL_TREE_REASON_SELECTED:
+         {
+            aStr = "selected";
+            SeriesSeason md;
+            if (library)
+            {
+               cout << "trying to get: " << item->label() << endl;
+               md = library->get(aTitle);
+            }
+            else
+            {
+               cout << "library entry not found" << endl;
+               break;
+            }
+            cout << "media: " << md.getTitle() << " " << md.getSeriesSeason() << " "
+               << md.getImdbRating() << " " << md.getGenre() << " " << md.getPoster()
+               << endl;
+            episodeInput->value(md.getTitle().c_str());
+            seriesSeasonInput->value(md.getSeriesSeason().c_str());
+            ratingInput->value(md.getImdbRating().c_str());
+            genreInput->value(md.getGenre().c_str());
+            break;
+         }
+         case FL_TREE_REASON_DESELECTED:
+         {
+            aStr = "deselected";
+            break;
+         }
+         default:
+         {
+            break;
+         }
       }
       cout << "Callback reason: " << aStr.c_str() << endl;
    }
@@ -259,7 +259,7 @@ public:
     * a static method to remove spaces, tabs, new lines and returns from the
     * begining or end of a string.
     */
-   static std::string &trimMe(std::string &str)
+   static string &trimMe(string &str)
    {
       // right trim
       while (str.length() > 0 && (str[str.length() - 1] == ' ' ||
@@ -281,13 +281,13 @@ public:
     * a method to execute a command line command and to return
     * the resulting string.
     */
-   std::string exec(const char *cmd)
+   string exec(const char *cmd)
    {
       FILE *pipe = popen(cmd, "r");
       if (!pipe)
          return "ERROR";
       char buffer[128];
-      std::string result = "";
+      string result = "";
       while (!feof(pipe))
       {
          if (fgets(buffer, 128, pipe) != NULL)
@@ -306,7 +306,8 @@ public:
       {
          cout << result[i];
          SeriesSeason md = library->get(result[i]);
-         cout << " " << md.getTitle() << " " << md.getSeriesSeason() << " " << md.getImdbRating()
+         cout << " " << md.getTitle() << " " << md.getSeriesSeason()
+              << " " << md.getImdbRating()
               << " " << md.getGenre() << endl;
       }
       cout << endl;
@@ -322,15 +323,15 @@ public:
       omdbkey = key;
       userId = "Adam.Clifton";
       library = new MediaLibrary();
-      buildTree();
+      //buildTree();  //TODO:
    }
 };
 
 int main(int argc, char *argv[])
 {
-   std::string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
-   std::string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
-   std::string windowTitle = developer + "'s SeriesSeason Browser";
+   string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
+   string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
+   string windowTitle = developer + "'s SeriesSeason Browser";
    MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
    return (Fl::run());
 }

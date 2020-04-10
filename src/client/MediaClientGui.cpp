@@ -124,7 +124,7 @@ protected:
 
 public:
    //MediaClientGui(const char * name = "Ser321") : Fl_Window(635,350,name) {
-   MediaClientGui(const char *name = "Ser321") : Fl_Window(980, 500, name)
+   MediaClientGui(const char *name = "SER321") : Fl_Window(980, 500, name)
    {
       begin();
 
