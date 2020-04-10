@@ -253,16 +253,14 @@ bool SeriesSeason::removeEpisode(string name)
 
 vector<string> SeriesSeason::getEpisodeTitles()
 {
-   //TODO: this
 
    vector<string> epVector;
    for(map<string, Episode>::iterator iter = episodeList.begin(); 
                iter != episodeList.end(); ++iter)
    {
       epVector.push_back(iter->first);
-      cout << iter->first << endl;
-   }
-   
+      // cout << iter->first << endl;
+   }   
    return epVector;
 }
 

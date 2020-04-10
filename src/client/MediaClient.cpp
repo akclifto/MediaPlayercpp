@@ -180,7 +180,7 @@ public:
             if (library)
             {
                cout << "trying to get: " << item->label() << endl;
-               md = library->get(aTitle);
+               md = library->getSeries(aTitle);
             }
             else
             {
@@ -329,7 +329,7 @@ public:
       for (int i = 0; i < result.size(); i++)
       {
          cout << result[i];
-         SeriesSeason series = library->get(result[i]);
+         SeriesSeason series = library->getSeries(result[i]);
          cout << " " << series.getTitle() << " " << series.getSeriesSeason()
               << " " << series.getImdbRating() << " " << series.getGenre() 
               << " " << series.getSummary() <<  endl;
@@ -355,10 +355,7 @@ int main(int argc, char *argv[])
 {
 
    MediaLibrary ml;
-   vector<string> epis = ml.getSeries("The Big Bang Theory - Season 11").getEpisodeTitles();
-   for (auto i : epis){
-      cout << i << endl;
-   }
+
 
 
    // string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
@@ -376,6 +373,14 @@ void testCase()
 {
 
    MediaLibrary ml;
+   vector<string> epis = ml.getSeries("The Big Bang Theory - Season 11").getEpisodeTitles();
+   cout << "Epis size " << epis.size() << endl;
+
+   for (auto i : epis)
+   {
+      cout << i << endl;
+   }
+   
    ml.toJsonFile("test.json");
    ml.initLibraryFromJsonFile("test.json");
    ml.print();
