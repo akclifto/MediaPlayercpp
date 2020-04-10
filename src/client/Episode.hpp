@@ -61,14 +61,6 @@ public:
     Json::Value toJson();
 
     /**
-     * Method to parse data from Json::Value object to construct Episode 
-     * class object.
-     * @param json : Json object to parse
-     * @return void 
-     **/
-    void fromjson(Json::Value json);
-
-    /**
      * Method to print Episode object informatio to console.
      * @return void
      * */

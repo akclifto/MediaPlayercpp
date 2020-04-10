@@ -1,6 +1,3 @@
-#include "MediaClientGui.cpp"
-#include "MediaLibrary.hpp"
-
 #include <FL/Fl.H>
 #include <FL/Fl_Window.H>
 #include <FL/Fl_Button.H>
@@ -20,6 +17,9 @@
 #include <curlpp/Easy.hpp>
 #include <curlpp/Exception.hpp>
 
+#include "MediaClientGui.cpp"
+#include "MediaLibrary.hpp"
+
 using namespace std;
 
 std::string cmd;
@@ -27,7 +27,7 @@ void run()
 {
    system(cmd.c_str());
 }
-void testCase(); //TODO: be sure to remove this
+void testCase(); //for debugging
 
 /**
  * Copyright 2020 Tim Lindquist, Adam Clifton 
@@ -189,21 +189,25 @@ public:
                break;
             }
 
-            if(item->depth() == 0 || item->depth() == 1){
+            if (item->depth() == 0 || item->depth() == 1)
+            {
 
-               aStr = "Library selected";   
-               if(item->depth() == 0) {
+               aStr = "Library selected";
+
+               if (item->depth() == 0)
+               {
                   item->label(userId.c_str());
-               }              
-                  seriesSeasonInput->value("Series Name & Season");
-                  genreInput->value("Genre");
-                  episodeInput->value("Episode Name");
-                  ratingInput->value("IMDB Rating");
-                  summaryMLI->value("Plot Summary");
-                  break;
+               }
+               seriesSeasonInput->value("Season Number");
+               genreInput->value("Genre");
+               episodeInput->value("Episode Name");
+               ratingInput->value("IMDB Rating");
+               summaryMLI->value("Plot Summary");
+               break;
             }
-            else if (item->depth() == 2){
-               
+            else if (item->depth() == 2)
+            {
+
                // series.print();
                // cout << endl;
                //TODO:  set poster somehow here and persis through episodes
@@ -214,15 +218,15 @@ public:
                summaryMLI->value(series.getSummary().c_str());
                break;
             }
-            else if(item->depth() == 3){
+            else if (item->depth() == 3)
+            {
 
                Fl_Tree_Item *parent = item->parent();
                string parentLabel = parent->label();
-               cout << "parent label: " << parentLabel << "\n\n";
-
                Episode epi = library->getSeries(parentLabel).getEpisode(item->label());
-               cout << "Epi name:  " << epi.getName() << " \n\n" ;
-               
+               // cout << "parent label: " << parentLabel << "\n\n";
+               // cout << "Epi name:  " << epi.getName() << " \n\n" ;
+
                seriesSeasonInput->value(library->getSeries(parentLabel).getSeriesSeason().c_str());
                genreInput->value(library->getSeries(parentLabel).getGenre().c_str());
                episodeInput->value(epi.getName().c_str());

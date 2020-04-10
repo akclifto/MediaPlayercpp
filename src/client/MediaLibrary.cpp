@@ -1,4 +1,3 @@
-#include "MediaLibrary.hpp"
 #include <iostream>
 #include <stdlib.h>
 #include <cmath>
@@ -7,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "MediaLibrary.hpp"
 
 using namespace std;
 /**

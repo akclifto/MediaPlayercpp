@@ -146,12 +146,6 @@ Json::Value Episode::toJson()
     return jsonLib;
 }
 
-void Episode::fromjson(Json::Value json)
-{
-
-    //TODO:
-}
-
 void Episode::print()
 {
 
