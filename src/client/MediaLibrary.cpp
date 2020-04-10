@@ -77,6 +77,8 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName)
             }
          }
       }
+      cout << jsonFileName << " initialized and loaded to the library.\n"
+           << endl;
       ret = true;
    }
    return ret;
@@ -89,21 +91,15 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
    Json::Value master;
    Json::Value seriesArr;
 
-   try
+   Json::Value seriesObj;
+
+   for (auto lib : libraryMap)
    {
-      Json::Value seriesObj;
-      for (auto lib : libraryMap)
-      {
-         seriesObj = lib.second.toJson();
-         seriesArr["series"] = seriesObj;
-         master["library"].append(seriesArr); //append creates an array object
-      }
+      seriesObj = lib.second.toJson();
+      seriesArr["series"] = seriesObj;
+      master["library"].append(seriesArr); //append creates an array object
    }
-   catch (exception ex)
-   {
-      cout << "Exception in toJsonFile: " << ex.what();
-   }
-   
+
    //write to file
    Json::StyledStreamWriter ssw("  ");
    ofstream jsonOutFile(jsonFileName.c_str(), ofstream::binary);
@@ -164,7 +160,8 @@ bool MediaLibrary::removeSeries(string title)
       if (ss.second.getTitle() == title)
       {
          libraryMap.erase(ss.second.getTitle());
-         cout << ss.second.getTitle() << " was removed from the library." << endl;
+         cout << ss.second.getTitle() << " was removed from the library."
+              << "\n\n";
          return true;
       }
    }
@@ -184,7 +181,8 @@ vector<string> MediaLibrary::getTitles()
    return myVec;
 }
 
-void MediaLibrary::parseURLtoJSON() {
+void MediaLibrary::parseURLtoJSON()
+{
    //TODO:  this.
 }
 
@@ -195,8 +193,9 @@ void MediaLibrary::print()
    for (map<string, SeriesSeason>::const_iterator iter = libraryMap.begin();
         iter != libraryMap.end(); iter++)
    {
-
+      
       SeriesSeason ss = iter->second;
-      ss.print();
+      cout << ss.getTitle() << ": \n";
+      cout << ss.toJsonString() << endl;
    }
 }

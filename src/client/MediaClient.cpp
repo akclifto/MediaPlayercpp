@@ -327,15 +327,11 @@ public:
 
 int main(int argc, char *argv[])
 {
-
-   MediaLibrary ml;
-   ml.print();
-
-   // std::string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
-   // std::string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
-   // std::string windowTitle = developer + "'s SeriesSeason Browser";
-   // MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
-   // return (Fl::run());
+   std::string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
+   std::string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
+   std::string windowTitle = developer + "'s SeriesSeason Browser";
+   MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
+   return (Fl::run());
 }
 
 /**
@@ -344,6 +340,12 @@ int main(int argc, char *argv[])
 void testCase()
 {
 
+   MediaLibrary ml;
+   ml.toJsonFile("test.json");
+   ml.initLibraryFromJsonFile("test.json");
+   ml.print();
+
+   //initial debugging
    SeriesSeason s1("series 1", "12", "10/10", "action", "link.com", "this is details");
    SeriesSeason s2("series 2", "10", "05/10", "comedy", "website.com", "some plot details");
    Episode eps1("eps 1", "5.0", "Epi plot");
@@ -355,15 +357,15 @@ void testCase()
    int size = s1.getEpisodeList().size();
    size = s1.getEpisodeList().size();
    cout << "S1 epi size: " << s1.getEpisodeList().size() << endl;
-   MediaLibrary ml;
-   ml.addSeries(s1);
-   ml.addSeries(s2);
-   ml.addSeries(s1);
+   MediaLibrary mll;
+   mll.addSeries(s1);
+   mll.addSeries(s2);
+   mll.addSeries(s1);
 
-   cout << ml.toJsonFile("test.json") << endl;
-   ml.initLibraryFromJsonFile("test.json");
-   cout << "size of the libMap: " << ml.getLibrary().size();
-   ml.print();
-   cout << ml.toJsonFile("OUTPUT.json") << endl;
+   cout << mll.toJsonFile("test.json") << endl;
+   mll.initLibraryFromJsonFile("test.json");
+   cout << "size of the libMap: " << mll.getLibrary().size();
+   mll.print();
+   cout << mll.toJsonFile("OUTPUT.json") << endl;
    return;
 }
