@@ -207,16 +207,27 @@ map<string, Episode> SeriesSeason::getEpisodeList()
 
 Episode SeriesSeason::getEpisode(string name)
 {
+   Episode epi = episodeList[name];
+   return epi;
 
-   map<string, Episode>::iterator iter = episodeList.find(name);
-   if (iter == episodeList.end())
-   {
-      return Episode();
+   if(epi.getName() != ""){
+      cout << name << " found and returned." << endl;
+   } else {
+      cout << name << " not found in list."  << endl;
    }
-   else
-   {
-      return iter->second;
-   }
+
+   // map<string, Episode>::iterator iter = episodeList.find(name);
+   // if (iter == episodeList.end())
+   // {
+   //    cout << name << " not found in Episode list." << endl;
+   //    return Episode();
+
+   // }
+   // else
+   // {
+   //    cout << "Returned " << name << " from Episode List" << endl;
+   //    return iter->second;
+   // }
 }
 
 bool SeriesSeason::checkEpisodes()

@@ -151,9 +151,9 @@ public:
       // create a tree control at position x=10, y=10. Its 150 pixels wide
       // and window height less 20 pixels high. Add some sample tree nodes.
       tree = new Fl_Tree(10, 120, 325, this->h() - 135);
-      tree->add("Flintstones/Fred");
-      tree->add("Flintstones/Wilma");
-      tree->close("/Flintstones");
+      // tree->add("Flintstones/Fred");
+      // tree->add("Flintstones/Wilma");
+      // tree->close("/Flintstones");
 
       /*
        * add a text input control at x=250, y=35 of width 200 pixels and
@@ -165,22 +165,22 @@ public:
        */
       seriesSeasonInput = new Fl_Input(450, 35, 175, 25);
       seriesSeasonInput->label("Series-Season");
-      seriesSeasonInput->value("Series Name and Season");
+      seriesSeasonInput->value("");
       seriesSeasonInput->readonly(1);
 
       genreInput = new Fl_Input(700, 35, 265, 25);
       genreInput->label("Genre");
-      genreInput->value("Genre");
+      genreInput->value("");
       genreInput->readonly(1);
 
       episodeInput = new Fl_Input(405, 80, 220, 25);
       episodeInput->label("Episode");
-      episodeInput->value("Episode Name");
+      episodeInput->value("");
       episodeInput->readonly(1);
 
       ratingInput = new Fl_Input(750, 80, 175, 25);
       ratingInput->label("IMDB Rating");
-      ratingInput->value("IMDB Rating");
+      ratingInput->value("");
       ratingInput->readonly(1);
 
       box = new Fl_Box(350, 180, 320 - 20, 320 - 20);
@@ -189,7 +189,7 @@ public:
 
       summaryMLI = new Fl_Multiline_Input(665, 180, 300, 300, 0);
       summaryMLI->wrap(1);
-      summaryMLI->value("Plot Summary");
+      summaryMLI->value("");
       summaryMLI->readonly(1);
       
       end();

@@ -158,55 +158,88 @@ public:
       string aTitle(item->label());
       switch (tree->callback_reason())
       { // reason callback was invoked
-      case FL_TREE_REASON_NONE:
-      {
-         aStr = "none";
-         break;
-      }
-      case FL_TREE_REASON_OPENED:
-      {
-         aStr = "opened";
-         break;
-      }
-      case FL_TREE_REASON_CLOSED:
-      {
-         aStr = "closed";
-         break;
-      }
-      case FL_TREE_REASON_SELECTED:
-      {
-         aStr = "selected";
-         SeriesSeason series;
-         if (library)
+         case FL_TREE_REASON_NONE:
          {
-            cout << "trying to get: " << item->label() << endl;
-            series = library->getSeries(aTitle);
-         }
-         else
-         {
-            cout << "library entry not found" << endl;
+            aStr = "none";
             break;
          }
-         // series.print();
-         // cout << endl;
+         case FL_TREE_REASON_OPENED:
+         {
+            aStr = "opened";
+            break;
+         }
+         case FL_TREE_REASON_CLOSED:
+         {
+            aStr = "closed";
+            break;
+         }
+         case FL_TREE_REASON_SELECTED:
+         {
 
-         //TODO:  update GUI text fields with proper input. set poster somehow.
-         seriesSeasonInput->value(series.getSeriesSeason().c_str());
-         genreInput->value(series.getGenre().c_str());
-         episodeInput->value(series.getTitle().c_str());
-         ratingInput->value(series.getImdbRating().c_str());
-         summaryMLI->value(series.getSummary().c_str());
-         break;
-      }
-      case FL_TREE_REASON_DESELECTED:
-      {
-         aStr = "deselected";
-         break;
-      }
-      default:
-      {
-         break;
-      }
+            aStr = "selected";
+            SeriesSeason series;
+            if (library)
+            {
+               cout << "trying to get: " << item->label() << endl;
+               series = library->getSeries(aTitle);
+            }
+            else
+            {
+               cout << "library entry not found" << endl;
+               break;
+            }
+
+            if(item->depth() == 0 || item->depth() == 1){
+
+               aStr = "Library selected";   
+               if(item->depth() == 0) {
+                  item->label(userId.c_str());
+               }              
+                  seriesSeasonInput->value("Series Name & Season");
+                  genreInput->value("Genre");
+                  episodeInput->value("Episode Name");
+                  ratingInput->value("IMDB Rating");
+                  summaryMLI->value("Plot Summary");
+                  break;
+            }
+            else if (item->depth() == 2){
+               
+               // series.print();
+               // cout << endl;
+               //TODO:  set poster somehow here and persis through episodes
+               seriesSeasonInput->value(series.getSeriesSeason().c_str());
+               genreInput->value(series.getGenre().c_str());
+               episodeInput->value(series.getTitle().c_str());
+               ratingInput->value(series.getImdbRating().c_str());
+               summaryMLI->value(series.getSummary().c_str());
+               break;
+            }
+            else if(item->depth() == 3){
+
+               Fl_Tree_Item *parent = item->parent();
+               string parentLabel = parent->label();
+               cout << "parent label: " << parentLabel << "\n\n";
+
+               Episode epi = library->getSeries(parentLabel).getEpisode(item->label());
+               cout << "Epi name:  " << epi.getName() << " \n\n" ;
+               
+               seriesSeasonInput->value(library->getSeries(parentLabel).getSeriesSeason().c_str());
+               genreInput->value(library->getSeries(parentLabel).getGenre().c_str());
+               episodeInput->value(epi.getName().c_str());
+               ratingInput->value(epi.getImdbRating().c_str());
+               summaryMLI->value(epi.getEpSummary().c_str());
+               break;
+            }
+         }
+         case FL_TREE_REASON_DESELECTED:
+         {
+            aStr = "deselected\n";
+            break;
+         }
+         default:
+         {
+            break;
+         }
       }
       cout << "Callback reason: " << aStr.c_str() << endl;
    }
@@ -356,7 +389,7 @@ public:
       omdbkey = key;
       userId = "Adam.Clifton";
       library = new MediaLibrary();
-      buildTree(); //TODO:
+      buildTree();
    }
 };
 
