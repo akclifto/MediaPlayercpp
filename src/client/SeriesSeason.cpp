@@ -271,7 +271,7 @@ string SeriesSeason::toJsonString()
 
    jsonLib["title"] = title;
    jsonLib["seriesSeason"] = seriesSeason;
-   jsonLib["rating"] = imdbRating;
+   jsonLib["imdbRating"] = imdbRating;
    jsonLib["genre"] = genre;
    jsonLib["poster"] = poster;
    jsonLib["plotSummary"] = plotSummary;
@@ -291,7 +291,7 @@ Json::Value SeriesSeason::toJson()
    Json::Value jsonLib;
    jsonLib["title"] = title;
    jsonLib["seriesSeason"] = seriesSeason;
-   jsonLib["rating"] = imdbRating;
+   jsonLib["imdbRating"] = imdbRating;
    jsonLib["genre"] = genre;
    jsonLib["poster"] = poster;
    jsonLib["plotSummary"] = plotSummary;

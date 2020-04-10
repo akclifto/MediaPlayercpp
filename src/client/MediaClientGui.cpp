@@ -165,22 +165,22 @@ public:
        */
       seriesSeasonInput = new Fl_Input(450, 35, 175, 25);
       seriesSeasonInput->label("Series-Season");
-      seriesSeasonInput->value("");
+      seriesSeasonInput->value("Series Name and Season");
       seriesSeasonInput->readonly(1);
 
       genreInput = new Fl_Input(700, 35, 265, 25);
       genreInput->label("Genre");
-      genreInput->value("");
+      genreInput->value("Genre");
       genreInput->readonly(1);
 
       episodeInput = new Fl_Input(405, 80, 220, 25);
       episodeInput->label("Episode");
-      episodeInput->value("");
+      episodeInput->value("Episode Name");
       episodeInput->readonly(1);
 
       ratingInput = new Fl_Input(750, 80, 175, 25);
       ratingInput->label("IMDB Rating");
-      ratingInput->value("");
+      ratingInput->value("IMDB Rating");
       ratingInput->readonly(1);
 
       box = new Fl_Box(350, 180, 320 - 20, 320 - 20);
@@ -188,10 +188,10 @@ public:
       box->image(png);  //TODO:  need to reset
 
       summaryMLI = new Fl_Multiline_Input(665, 180, 300, 300, 0);
-      summaryMLI->label("Plot Summary");
       summaryMLI->wrap(1);
+      summaryMLI->value("Plot Summary");
       summaryMLI->readonly(1);
-
+      
       end();
       show();
    }

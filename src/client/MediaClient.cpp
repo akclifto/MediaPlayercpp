@@ -158,53 +158,55 @@ public:
       string aTitle(item->label());
       switch (tree->callback_reason())
       { // reason callback was invoked
-         case FL_TREE_REASON_NONE:
+      case FL_TREE_REASON_NONE:
+      {
+         aStr = "none";
+         break;
+      }
+      case FL_TREE_REASON_OPENED:
+      {
+         aStr = "opened";
+         break;
+      }
+      case FL_TREE_REASON_CLOSED:
+      {
+         aStr = "closed";
+         break;
+      }
+      case FL_TREE_REASON_SELECTED:
+      {
+         aStr = "selected";
+         SeriesSeason series;
+         if (library)
          {
-            aStr = "none";
+            cout << "trying to get: " << item->label() << endl;
+            series = library->getSeries(aTitle);
+         }
+         else
+         {
+            cout << "library entry not found" << endl;
             break;
          }
-         case FL_TREE_REASON_OPENED:
-         {
-            aStr = "opened";
-            break;
-         }
-         case FL_TREE_REASON_CLOSED:
-         {
-            aStr = "closed";
-            break;
-         }
-         case FL_TREE_REASON_SELECTED:
-         {
-            aStr = "selected";
-            SeriesSeason md;
-            if (library)
-            {
-               cout << "trying to get: " << item->label() << endl;
-               md = library->getSeries(aTitle);
-            }
-            else
-            {
-               cout << "library entry not found" << endl;
-               break;
-            }
-            cout << "media: " << md.getTitle() << " " << md.getSeriesSeason() << " "
-               << md.getImdbRating() << " " << md.getGenre() << " " << md.getPoster()
-               << endl;
-            episodeInput->value(md.getTitle().c_str());
-            seriesSeasonInput->value(md.getSeriesSeason().c_str());
-            ratingInput->value(md.getImdbRating().c_str());
-            genreInput->value(md.getGenre().c_str());
-            break;
-         }
-         case FL_TREE_REASON_DESELECTED:
-         {
-            aStr = "deselected";
-            break;
-         }
-         default:
-         {
-            break;
-         }
+         // series.print();
+         // cout << endl;
+
+         //TODO:  update GUI text fields with proper input. set poster somehow.
+         seriesSeasonInput->value(series.getSeriesSeason().c_str());
+         genreInput->value(series.getGenre().c_str());
+         episodeInput->value(series.getTitle().c_str());
+         ratingInput->value(series.getImdbRating().c_str());
+         summaryMLI->value(series.getSummary().c_str());
+         break;
+      }
+      case FL_TREE_REASON_DESELECTED:
+      {
+         aStr = "deselected";
+         break;
+      }
+      default:
+      {
+         break;
+      }
       }
       cout << "Callback reason: " << aStr.c_str() << endl;
    }
@@ -321,23 +323,27 @@ public:
       return result;
    }
 
-   void buildTree()  //TODO:
+   void buildTree()
    {
       vector<string> result = library->getTitles();
       cout << "Server has titles: \n";
       tree->clear();
-      for (int i = 0; i < result.size(); i++)
-      {
-         cout << result[i];
-         SeriesSeason series = library->getSeries(result[i]);
-         
-         cout << " " << series.getTitle() << " " << series.getSeriesSeason()
-              << " " << series.getImdbRating() << " " << series.getGenre() 
-              << " " << series.getSummary() <<  endl;
 
+      for (const auto &res : result)
+      {
+         cout << res << " \n";
+         SeriesSeason series = library->getSeries(res);
+         vector<string> epTitle = library->getSeries(res).getEpisodeTitles();
+         // cout << "size of epTitle: " << epTitle.size() << endl;
+         string st = "Library/" + series.getTitle() + "/";
+         for (const auto &ep : epTitle)
+         {
+            Episode epi = series.getEpisode(ep);
+            string fin = st + epi.getName();
+            tree->add(fin.c_str());
+         }
       }
       cout << endl;
-
       tree->redraw();
    }
 
@@ -350,7 +356,7 @@ public:
       omdbkey = key;
       userId = "Adam.Clifton";
       library = new MediaLibrary();
-      buildTree();  //TODO:
+      buildTree(); //TODO:
    }
 };
 

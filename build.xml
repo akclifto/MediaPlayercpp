@@ -54,7 +54,7 @@
       <cc outtype="executable" subsystem="console"
           outfile="${dist.dir}/mediaPlayer"
           objdir="${obj.dir}">
-	  <compilerarg value="-std=c++17"/>
+	  <compilerarg value="-std=c++11"/>
           <includepath>
              <dirset dir="/" includes="usr/include,usr/local/include,usr/include/jsoncpp"/>
           </includepath>
