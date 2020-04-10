@@ -104,7 +104,7 @@ public:
                urlEncodedQuery += query.at(i);
             }
          }
-         /*
+         /* TODO:
          * Another API call would have to be made here to get
          * the rest of the required information. Same as assignment 2.
          */
@@ -227,19 +227,25 @@ public:
       if (selectPath.compare("File/Save") == 0)
       {
          bool restSave = library->toJsonFile("series.json");
-         if(restSave){
+         if (restSave)
+         {
             cout << "Save Successful" << endl;
-         } else {
-         cout << "Save unsuccessful" << endl;
+         }
+         else
+         {
+            cout << "Save unsuccessful" << endl;
          }
       }
       else if (selectPath.compare("File/Restore") == 0)
       {
          bool flag = library->initLibraryFromJsonFile("series.json");
-         if(flag){
+         if (flag)
+         {
             buildTree();
             cout << "Restore Successful" << endl;
-         } else {
+         }
+         else
+         {
             cout << "Restore Unsuccessful" << endl;
          }
       }
@@ -257,11 +263,19 @@ public:
       }
       else if (selectPath.compare("Series-Season/Add") == 0)
       {
-         cout << "Add not implemented" << endl;
+         cout << "Add not implemented" << endl; //TODO:
       }
       else if (selectPath.compare("Series-Season/Remove") == 0)
       {
-         cout << "Remove not implemented" << endl;
+         cout << "Remove not implemented" << endl; //TODO:
+      }
+      else if (selectPath.compare("Episode/Add") == 0)
+      {
+         //TODO:
+      }
+      else if (selectPath.compare("Episode/Remove") == 0)
+      {
+         //TODO:
       }
    }
 
@@ -339,11 +353,19 @@ public:
 
 int main(int argc, char *argv[])
 {
-   string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
-   string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
-   string windowTitle = developer + "'s SeriesSeason Browser";
-   MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
-   return (Fl::run());
+
+   MediaLibrary ml;
+   vector<string> epis = ml.getSeries("The Big Bang Theory - Season 11").getEpisodeTitles();
+   for (auto i : epis){
+      cout << i << endl;
+   }
+
+
+   // string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
+   // string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
+   // string windowTitle = developer + "'s SeriesSeason Browser";
+   // MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
+   // return (Fl::run());
 }
 
 /**

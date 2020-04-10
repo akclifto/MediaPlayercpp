@@ -67,7 +67,7 @@ public:
     * @param aTitle : title of the series to return from the library
     * @return SeriesSeason object if found in library.
     **/
-   SeriesSeason get(string aTitle);
+   SeriesSeason getSeries(string aTitle);
 
    /**
     * Method to get map of library.

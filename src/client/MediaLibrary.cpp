@@ -110,7 +110,7 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
    return true;
 }
 
-SeriesSeason MediaLibrary::get(string aTitle)
+SeriesSeason MediaLibrary::getSeries(string aTitle)
 {
    SeriesSeason ss = libraryMap[aTitle];
    return ss;
