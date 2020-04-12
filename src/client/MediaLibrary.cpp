@@ -71,7 +71,7 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName)
             for (Json::Value::const_iterator input = (*series).begin();
                  input != (*series).end(); input++)
             {
-
+               
                // cout << *input << endl;
                SeriesSeason ss(*input);
                addSeries(ss);
@@ -182,7 +182,7 @@ vector<string> MediaLibrary::getTitles()
    return myVec;
 }
 
-void MediaLibrary::parseURLtoJSON()
+void MediaLibrary::parseURLtoJSON(string seriesInfo, string seasonInfo)
 {
    //TODO:  this.
 }

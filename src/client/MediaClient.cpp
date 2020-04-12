@@ -109,7 +109,7 @@ public:
          * the rest of the required information. Same as assignment 2.
          */
 
-        // search for season/episode info 
+         // search and fetch for season/episode info 
          url = url + "&t=" + urlEncodedQuery + "&season=" + o->seasonSrchInput->value();
          cout << "sending request url: " << url << endl;
           ostringstream os;
@@ -119,23 +119,26 @@ public:
          myRequest.setOpt(new curlpp::options::Url(url.c_str()));
          myRequest.perform();
 
-         // string seasonInfo = os.str();
-         // cout << seasonInfo << endl;
+         string seasonInfo = os.str();
+         cout << "Season info: " << seasonInfo << endl;
 
          //search and fetch for series info
          string url2 = "https://www.omdbapi.com/?r=json&apikey=";
          url2 += o->omdbkey;
          url2 += "&t=" + urlEncodedQuery;
          cout << "sending request url: " << url2 << endl;
+
          ostringstream os2;
          myRequest.reset();
-
          myRequest.setOpt(new curlpp::options::WriteStream(&os2));
          myRequest.setOpt(new curlpp::options::Url(url2.c_str()));
          myRequest.perform();
 
          string seriesInfo = os2.str();
-         cout << seriesInfo << endl;
+         cout << "Series info: " << seriesInfo << endl;
+
+         // TODO: parse URL
+
       }
       catch (curlpp::LogicError &e)
       {
@@ -145,6 +148,7 @@ public:
       {
          cout << e.what() << endl;
       }
+      
    }
 
 
