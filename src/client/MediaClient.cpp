@@ -127,10 +127,10 @@ public:
          url2 += o->omdbkey;
          url2 += "&t=" + urlEncodedQuery;
          cout << "sending request url: " << url2 << endl;
+
          os.clear();
          myRequest.reset();
          myRequest.setOpt(new curlpp::options::WriteStream(&os));
-         //curlpp::options::Url myUrl(std::string(url));
          myRequest.setOpt(new curlpp::options::Url(url2.c_str()));
          myRequest.perform();
 
