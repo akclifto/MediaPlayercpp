@@ -119,22 +119,22 @@ public:
          myRequest.setOpt(new curlpp::options::Url(url.c_str()));
          myRequest.perform();
 
-         string seasonInfo = os.str();
-         cout << seasonInfo << endl;
+         // string seasonInfo = os.str();
+         // cout << seasonInfo << endl;
 
          //search and fetch for series info
          string url2 = "https://www.omdbapi.com/?r=json&apikey=";
          url2 += o->omdbkey;
          url2 += "&t=" + urlEncodedQuery;
          cout << "sending request url: " << url2 << endl;
-
-         os.clear();
+         ostringstream os2;
          myRequest.reset();
-         myRequest.setOpt(new curlpp::options::WriteStream(&os));
+
+         myRequest.setOpt(new curlpp::options::WriteStream(&os2));
          myRequest.setOpt(new curlpp::options::Url(url2.c_str()));
          myRequest.perform();
 
-         string seriesInfo = os.str();
+         string seriesInfo = os2.str();
          cout << seriesInfo << endl;
       }
       catch (curlpp::LogicError &e)
