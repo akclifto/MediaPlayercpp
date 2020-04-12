@@ -87,7 +87,7 @@ public:
       cout << "Search Clicked. You asked for a OMDb search of Season: " << o->seasonSrchInput->value() << " Series: " << o->seriesSrchInput->value() << endl;
       try
       {
-         std::string url = "https://www.omdbapi.com/?r=json&apikey=";
+         string url = "https://www.omdbapi.com/?r=json&apikey=";
          url = url + o->omdbkey;
 
          //Spaces must be converted to %20
@@ -104,20 +104,38 @@ public:
                urlEncodedQuery += query.at(i);
             }
          }
-         /* TODO:
+         /*
          * Another API call would have to be made here to get
          * the rest of the required information. Same as assignment 2.
          */
+
+        // search for season/episode info 
          url = url + "&t=" + urlEncodedQuery + "&season=" + o->seasonSrchInput->value();
          cout << "sending request url: " << url << endl;
-         ostringstream os;
-         curlpp::Easy myRequest;
+          ostringstream os;
+          curlpp::Easy myRequest;
          myRequest.setOpt(new curlpp::options::WriteStream(&os));
          //curlpp::options::Url myUrl(std::string(url));
          myRequest.setOpt(new curlpp::options::Url(url.c_str()));
          myRequest.perform();
-         string aString = os.str();
-         cout << aString << endl;
+
+         string seasonInfo = os.str();
+         cout << seasonInfo << endl;
+
+         //search and fetch for series info
+         string url2 = "https://www.omdbapi.com/?r=json&apikey=";
+         url2 += o->omdbkey;
+         url2 += "&t=" + urlEncodedQuery;
+         cout << "sending request url: " << url2 << endl;
+         os.clear();
+         myRequest.reset();
+         myRequest.setOpt(new curlpp::options::WriteStream(&os));
+         //curlpp::options::Url myUrl(std::string(url));
+         myRequest.setOpt(new curlpp::options::Url(url2.c_str()));
+         myRequest.perform();
+
+         string seriesInfo = os.str();
+         cout << seriesInfo << endl;
       }
       catch (curlpp::LogicError &e)
       {
@@ -128,6 +146,7 @@ public:
          cout << e.what() << endl;
       }
    }
+
 
    // Static menu callback method
    static void TreeCallbackS(Fl_Widget *w, void *data)
