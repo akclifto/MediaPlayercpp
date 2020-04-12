@@ -137,7 +137,8 @@ public:
          string seriesInfo = os2.str();
          cout << "Series info: " << seriesInfo << endl;
 
-         // TODO: parse URL
+         // Get out of static method and parse URL info
+         o->searchCallBack(seriesInfo, seasonInfo);
 
       }
       catch (curlpp::LogicError &e)
@@ -151,6 +152,22 @@ public:
       
    }
 
+   /**
+    * Method to parse search call back information regarding series and season search
+    * results.
+    * @param seriesInfo : string containing series information in JSON format
+    * @param seasonInfo : string containing season information in JSON format
+    * @return void.
+    * */
+   void searchCallBack(string seriesInfo, string seasonInfo){
+
+      bool flag = library->parseURLtoJSON(seriesInfo, seasonInfo);
+      if(flag){
+         buildTree();
+      } else {
+         cout << "Error parsing URL call back." << endl;
+      }
+   }
 
    // Static menu callback method
    static void TreeCallbackS(Fl_Widget *w, void *data)

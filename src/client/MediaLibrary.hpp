@@ -40,6 +40,7 @@ class MediaLibrary
       map<string, SeriesSeason> SeriesSeasonList; // may not need
 
    public:
+
       MediaLibrary();
       ~MediaLibrary();
 
@@ -99,7 +100,7 @@ class MediaLibrary
        * and Episode(s), then creates objects for both.
        * 
        **/
-      void parseURLtoJSON(string seriesInfo, string seasonInfo);
+      bool parseURLtoJSON(string seriesInfo, string seasonInfo);
       /**
        * Method to print everything in the library.
        * @return void.

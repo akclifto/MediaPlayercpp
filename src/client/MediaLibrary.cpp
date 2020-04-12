@@ -182,9 +182,84 @@ vector<string> MediaLibrary::getTitles()
    return myVec;
 }
 
-void MediaLibrary::parseURLtoJSON(string seriesInfo, string seasonInfo)
+bool MediaLibrary::parseURLtoJSON(string seriesInfo, string seasonInfo)
 {
    //TODO:  this.
+   Json::Reader reader;
+   Json::Value root;
+
+   Json::Value seriesObj;
+   Json::Value epiObj;
+   //run through series info
+   bool parseSuccess = reader.parse(seriesInfo, root, false);
+
+   if (parseSuccess)
+   {
+      // cout << "successful parse" << endl;
+      Json::Value::Members mbr = root.getMemberNames();
+      for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++)
+      {
+         Json::Value jsonM = root[*i];
+         if (*i == "Title")
+         {
+            seriesObj["title"] = jsonM.asString();
+            cout << "title: " << jsonM.asString() << endl;
+         }
+         else if (*i == "Genre") {
+            seriesObj["genre"] = jsonM.asString();
+            cout << "Genre: " << jsonM.asString() << endl;
+         }
+         else if (*i == "Poster") {
+            seriesObj["poster"] = jsonM.asString();
+            cout << "poster: " << jsonM.asString() << endl;
+         }
+         else if (*i == "Plot") {
+            seriesObj["plotSummary"] = jsonM.asString();
+            epiObj["epSummary"] = jsonM.asString();
+            cout << "Plot: " << jsonM.asString() << endl;
+         }
+         else if (*i == "Ratings"){
+            //TODO:
+            for (Json::Value::ArrayIndex i = 0; i != jsonM.size(); i++)
+            {
+               if(jsonM[i].isMember("Value")){
+                  seriesObj["imdbRating"] = jsonM[i]["Value"].asString();;
+                  cout << jsonM[i]["Value"].asString() << endl;
+               }
+            }
+         }
+      }
+   } 
+   else
+   {
+      cout << "Error parsing seasonInfo string." << endl;
+      return false;
+   }
+   
+   //run through season info
+   parseSuccess = reader.parse(seasonInfo, root, false);
+   if (parseSuccess)
+   {
+      // cout << "successful parse" << endl;
+      Json::Value::Members mbr = root.getMemberNames();
+      for (vector<string>::const_iterator i = mbr.begin(); i != mbr.end(); i++)
+      {
+         Json::Value jsonM = root[*i];
+         Json::Value epiInfo;
+         if (*i == "Season")
+         {
+            seriesObj["seriesSeason"] = jsonM.asString();
+            cout << "season: " << jsonM.asString() << endl;
+         }
+      }
+
+   }
+   else
+   {
+      cout << "Error parsing seasonInfo string." << endl;
+      return false;
+   }
+   return false;
 }
 
 void MediaLibrary::print()

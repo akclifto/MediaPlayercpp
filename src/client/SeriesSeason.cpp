@@ -144,7 +144,7 @@ SeriesSeason::SeriesSeason(string jsonString)
          }
          else if (*i == "episodes")
          {
-            int size = jsonM.size();
+            
             for (int j = 0; j < jsonM.size(); j++)
             {
                Episode epi = Episode(jsonM[j]);
@@ -216,18 +216,6 @@ Episode SeriesSeason::getEpisode(string name)
       cout << name << " not found in list."  << endl;
    }
 
-   // map<string, Episode>::iterator iter = episodeList.find(name);
-   // if (iter == episodeList.end())
-   // {
-   //    cout << name << " not found in Episode list." << endl;
-   //    return Episode();
-
-   // }
-   // else
-   // {
-   //    cout << "Returned " << name << " from Episode List" << endl;
-   //    return iter->second;
-   // }
 }
 
 bool SeriesSeason::checkEpisodes()
@@ -315,9 +303,10 @@ Json::Value SeriesSeason::toJson()
    return jsonLib;
 }
 
-void SeriesSeason::fromJson(Json::Value json)
+void SeriesSeason::fromJson(string seriesInfo, string seasonInfo)
 {
    //TODO:
+
 }
 
 void SeriesSeason::setValues(string aTitle, string aSeriesSeason,
