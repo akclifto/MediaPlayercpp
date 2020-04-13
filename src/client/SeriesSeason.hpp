@@ -72,9 +72,9 @@ public:
     /**
      * Method to add episode to the episodeList for a SeriesSeason object.
      * @param name : name of the episode to add to the list. 
-     * @return void 
+     * @return true if episode added to the list successfully, false otherwise. 
      **/
-    void addEpisode(Episode name);
+    bool addEpisode(Episode name);
 
     /**
      * Method to remove episode from the episodeList for a series.

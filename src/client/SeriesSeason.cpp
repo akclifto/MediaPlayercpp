@@ -223,31 +223,45 @@ bool SeriesSeason::checkEpisodes()
    return (!episodeList.size() == 0);
 }
 
-void SeriesSeason::addEpisode(Episode epi)
+bool SeriesSeason::addEpisode(Episode epi)
 {
+
+   for (auto ep : episodeList)
+   {
+      if (ep.second.getName() == epi.getName())
+      {
+         cout << epi.getName() << " is already on the episode list!" << endl;
+         return false;
+      }
+   }
    this->episodeList.insert(pair<string, Episode>(epi.getName(), epi));
+   // cout << epi.getName() << " was added to the episode list for " << this->getTitle() << endl;
+   return true;
 }
 
 bool SeriesSeason::removeEpisode(string name)
 {
+   // cout << "Epi list size: " << episodeList.size() << endl;
 
    if (episodeList.size() == 0)
    {
       cout << "The episode list is empty!" << endl;
       return false;
    }
+   for (auto epi : episodeList)
+   {
+      if (epi.second.getName() == name)
+      {
+         this->episodeList.erase(name);
+         cout << epi.second.getName() << " was removed from the library."
+              << "\n\n";
+         // cout << "Epi list size: " << episodeList.size() << endl;
+         return true;
+      }
+   }
+   cout << name << " was not found in the episode list.\n";
+   return false;
 
-   int removed = episodeList.erase(name);
-   if (removed == 0)
-   {
-      cout << name << " was not found in the list of episodes!" << endl;
-      return false;
-   }
-   else
-   {
-      cout << name << " successfully remove from the series." << endl;
-      return true;
-   }
 }
 
 vector<string> SeriesSeason::getEpisodeTitles()

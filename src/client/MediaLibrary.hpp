@@ -38,14 +38,32 @@ class MediaLibrary
    private:
 
       /**
-       * Method to remove series from the library using top menu Series-Season/Remove button
-       * @return true if series removed successfully, false otherwise.
+       * Method to add a series and season to the library from the top menu button action.
+       * Method submits api call for series and season information, then passed to parse to 
+       * library series and episode objects. 
+       * @return void.
        * */
-      bool actionRemoveSeries();
-
+      void fetchURLAddSeries() ;
       
-      bool actionAddEpisode();
-      bool actionRemoveEpisode();
+      /**
+       * Method to remove series from the library using top menu Series-Season/Remove button.
+       * @return void
+       * */
+      void actionRemoveSeries();
+
+
+      /**
+       * Method to add episode for a series to the library using top menu Episode/Add button.
+       * @return void.
+       * */
+      void actionAddEpisode();
+
+      /**
+       * Method to remove Episode from a series in the library using the top menu 
+       * Episode/Remove button.
+       * @return void
+       * */
+      void actionRemoveEpisode();
 
    protected:
       map<string, SeriesSeason> libraryMap;       // map to store library objects.
@@ -71,7 +89,7 @@ class MediaLibrary
       bool toJsonFile(string jsonFileName);
 
       /**
-       * Method default code. TODO: 
+       * Method default code from sample.
        * */
       string serviceInfo();
 
@@ -89,6 +107,12 @@ class MediaLibrary
       map<string, SeriesSeason> getLibrary();
 
       /**
+       * Method to get the size of the episode list for a given series.
+       * @return size of episode list.
+       * */
+      int getEpisodeListSize(string title);
+
+      /**
        * Method to add series to the library
        * @param seriesSeason : SeriesSeason object to add to the library 
        **/
@@ -100,6 +124,14 @@ class MediaLibrary
        * @return true if successfully removed from library, false otherwise.  
        * */
       bool removeSeries(string title);
+
+      /**
+       * Method to remove episode from the library by searching its series and title
+       * @param series : title of the series to find episode.
+       * @param episode : title of the episode to remove 
+       * @return true if successfully removed from library, false otherwise.  
+       * */
+      bool removeEpisode(string series, string episode);
 
       /**
        * Method to return vector of series title from the library.

@@ -4,6 +4,50 @@
     {
       "series" : 
       {
+        "genre" : "",
+        "imdbRating" : "",
+        "plotSummary" : "",
+        "poster" : "",
+        "seriesSeason" : "",
+        "title" : ""
+      }
+    },
+    {
+      "series" : 
+      {
+        "genre" : "",
+        "imdbRating" : "",
+        "plotSummary" : "",
+        "poster" : "",
+        "seriesSeason" : "",
+        "title" : ""
+      }
+    },
+    {
+      "series" : 
+      {
+        "genre" : "",
+        "imdbRating" : "",
+        "plotSummary" : "",
+        "poster" : "",
+        "seriesSeason" : "",
+        "title" : ""
+      }
+    },
+    {
+      "series" : 
+      {
+        "genre" : "",
+        "imdbRating" : "",
+        "plotSummary" : "",
+        "poster" : "",
+        "seriesSeason" : "",
+        "title" : ""
+      }
+    },
+    {
+      "series" : 
+      {
         "episodes" : 
         [
           {
@@ -63,377 +107,78 @@
     {
       "series" : 
       {
-        "episodes" : 
-        [
-          {
-            "epSummary" : "Five friends with big egos and slightly arrogant attitudes are the proprietors of an Irish pub in Philadelphia.",
-            "imdbRating" : "8.6",
-            "name" : "Charlie Got Molested"
-          },
-          {
-            "epSummary" : "Five friends with big egos and slightly arrogant attitudes are the proprietors of an Irish pub in Philadelphia.",
-            "imdbRating" : "8.3",
-            "name" : "Charlie Has Cancer"
-          },
-          {
-            "epSummary" : "Five friends with big egos and slightly arrogant attitudes are the proprietors of an Irish pub in Philadelphia.",
-            "imdbRating" : "8.4",
-            "name" : "Charlie Wants an Abortion"
-          },
-          {
-            "epSummary" : "Five friends with big egos and slightly arrogant attitudes are the proprietors of an Irish pub in Philadelphia.",
-            "imdbRating" : "8.2",
-            "name" : "Gun Fever"
-          },
-          {
-            "epSummary" : "Five friends with big egos and slightly arrogant attitudes are the proprietors of an Irish pub in Philadelphia.",
-            "imdbRating" : "8.3",
-            "name" : "The Gang Finds a Dead Guy"
-          },
-          {
-            "epSummary" : "Five friends with big egos and slightly arrogant attitudes are the proprietors of an Irish pub in Philadelphia.",
-            "imdbRating" : "8.4",
-            "name" : "The Gang Gets Racist"
-          },
-          {
-            "epSummary" : "Five friends with big egos and slightly arrogant attitudes are the proprietors of an Irish pub in Philadelphia.",
-            "imdbRating" : "8.5",
-            "name" : "Underage Drinking: A National Concern"
-          }
-        ],
-        "genre" : "Comedy",
-        "imdbRating" : "8.8/10",
-        "plotSummary" : "Five friends with big egos and slightly arrogant attitudes are the proprietors of an Irish pub in Philadelphia.",
-        "poster" : "https://m.media-amazon.com/images/M/MV5BOTExNGZkMWMtMmIwZC00YjA3LTgwM2ItZjQ2YmZkMzQ1YWZkXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg",
-        "seriesSeason" : "1",
-        "title" : "It's Always Sunny in Philadelphia - Season 1"
+        "genre" : "",
+        "imdbRating" : "",
+        "plotSummary" : "",
+        "poster" : "",
+        "seriesSeason" : "",
+        "title" : ""
       }
     },
     {
       "series" : 
       {
-        "episodes" : 
-        [
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.1",
-            "name" : "Camping"
-          },
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.3",
-            "name" : "Eagleton"
-          },
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.8",
-            "name" : "Harvest Festival"
-          },
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.2",
-            "name" : "Indianapolis"
-          },
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.8",
-            "name" : "Jerry's Painting"
-          },
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.9",
-            "name" : "Li'l Sebastian"
-          },
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.1",
-            "name" : "Media Blitz"
-          },
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.6",
-            "name" : "Road Trip"
-          },
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.6",
-            "name" : "Ron & Tammy: Part Two"
-          },
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.2",
-            "name" : "The Bubble"
-          },
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.9",
-            "name" : "The Fight"
-          },
-          {
-            "epSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-            "imdbRating" : "8.3",
-            "name" : "Time Capsule"
-          }
-        ],
-        "genre" : "Comedy",
-        "imdbRating" : "8.6/10",
-        "plotSummary" : "The absurd antics of an Indiana town's public officials as they pursue sundry projects to make their city a better place.",
-        "poster" : "https://m.media-amazon.com/images/M/MV5BMjA5MjUxNDgwNF5BMl5BanBnXkFtZTgwMDI5NjMwNDE@._V1_SX300.jpg",
-        "seriesSeason" : "3",
-        "title" : "Parks and Recreation - Season 3"
+        "genre" : "",
+        "imdbRating" : "",
+        "plotSummary" : "",
+        "poster" : "",
+        "seriesSeason" : "",
+        "title" : ""
       }
     },
     {
       "series" : 
       {
-        "episodes" : 
-        [
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.6",
-            "name" : "Booze Cruise"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.2",
-            "name" : "Boys and Girls"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "9.4",
-            "name" : "Casino Night"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.9",
-            "name" : "Christmas Party"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.7",
-            "name" : "Conflict Resolution"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.4",
-            "name" : "Drug Testing"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.5",
-            "name" : "Dwight's Speech"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.4",
-            "name" : "E-Mail Surveillance"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.1",
-            "name" : "Halloween"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.1",
-            "name" : "Michael's Birthday"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.4",
-            "name" : "Office Olympics"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.2",
-            "name" : "Performance Review"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.2",
-            "name" : "Sexual Harassment"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.3",
-            "name" : "Take Your Daughter to Work Day"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "7.9",
-            "name" : "The Carpet"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.6",
-            "name" : "The Client"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.7",
-            "name" : "The Dundies"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.2",
-            "name" : "The Fight"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.4",
-            "name" : "The Fire"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "9.1",
-            "name" : "The Injury"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.3",
-            "name" : "The Secret"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.3",
-            "name" : "Valentine's Day"
-          }
-        ],
-        "genre" : "Comedy",
-        "imdbRating" : "8.9/10",
-        "plotSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-        "poster" : "https://m.media-amazon.com/images/M/MV5BMDNkOTE4NDQtMTNmYi00MWE0LWE4ZTktYTc0NzhhNWIzNzJiXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg",
-        "seriesSeason" : "2",
-        "title" : "The Office - Season 2"
+        "genre" : "",
+        "imdbRating" : "",
+        "plotSummary" : "",
+        "poster" : "",
+        "seriesSeason" : "",
+        "title" : ""
       }
     },
     {
       "series" : 
       {
-        "episodes" : 
-        [
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.8",
-            "name" : "A Benihana Christmas"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.5",
-            "name" : "Back from Vacation"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "9.2",
-            "name" : "Beach Games"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.2",
-            "name" : "Ben Franklin"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.6",
-            "name" : "Branch Closing"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.9",
-            "name" : "Business School"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.5",
-            "name" : "Cocktails"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.0",
-            "name" : "Diwali"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "9.0",
-            "name" : "Gay Witch Hunt"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.0",
-            "name" : "Grief Counseling"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.2",
-            "name" : "Initiation"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.3",
-            "name" : "Phyllis' Wedding"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.8",
-            "name" : "Product Recall"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.8",
-            "name" : "Safety Training"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.2",
-            "name" : "The Convention"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.3",
-            "name" : "The Convict"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.6",
-            "name" : "The Coup"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "9.4",
-            "name" : "The Job"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.8",
-            "name" : "The Merger"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "9.0",
-            "name" : "The Negotiation"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.8",
-            "name" : "The Return"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.7",
-            "name" : "Traveling Salesmen"
-          },
-          {
-            "epSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-            "imdbRating" : "8.8",
-            "name" : "Women's Appreciation"
-          }
-        ],
-        "genre" : "Comedy",
-        "imdbRating" : "8.9/10",
-        "plotSummary" : "A mockumentary on a group of typical office workers, where the workday consists of ego clashes, inappropriate behavior, and tedium.",
-        "poster" : "https://m.media-amazon.com/images/M/MV5BMDNkOTE4NDQtMTNmYi00MWE0LWE4ZTktYTc0NzhhNWIzNzJiXkEyXkFqcGdeQXVyMzQ2MDI5NjU@._V1_SX300.jpg",
-        "seriesSeason" : "3",
-        "title" : "The Office - Season 3"
+        "genre" : "",
+        "imdbRating" : "",
+        "plotSummary" : "",
+        "poster" : "",
+        "seriesSeason" : "",
+        "title" : ""
+      }
+    },
+    {
+      "series" : 
+      {
+        "genre" : "",
+        "imdbRating" : "",
+        "plotSummary" : "",
+        "poster" : "",
+        "seriesSeason" : "",
+        "title" : ""
+      }
+    },
+    {
+      "series" : 
+      {
+        "genre" : "",
+        "imdbRating" : "",
+        "plotSummary" : "",
+        "poster" : "",
+        "seriesSeason" : "",
+        "title" : ""
+      }
+    },
+    {
+      "series" : 
+      {
+        "genre" : "",
+        "imdbRating" : "",
+        "plotSummary" : "",
+        "poster" : "",
+        "seriesSeason" : "",
+        "title" : ""
       }
     }
   ]

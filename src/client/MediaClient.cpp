@@ -252,10 +252,17 @@ public:
                // series.print();
                // cout << endl;
                //TODO:  set poster somehow here and persis through episodes
-          
-               seriesSeasonInput->value(series.getSeriesSeason().c_str());
+               int epCount = library->getEpisodeListSize(series.getTitle());
+               string epInput;
+               if(epCount == 1){
+                  epInput = " " + to_string(epCount) + " Episode in Library";
+                  episodeInput->value(epInput.c_str());
+               } else {
+                  epInput = " " + to_string(epCount) + " Episodes in Library";
+                  episodeInput->value(epInput.c_str());
+               }
+               seriesSeasonInput->value(series.getTitle().c_str());
                genreInput->value(series.getGenre().c_str());
-               episodeInput->value(series.getTitle().c_str());
                ratingInput->value(series.getImdbRating().c_str());
                summaryMLI->value(series.getSummary().c_str());
                break;
@@ -268,8 +275,9 @@ public:
                Episode epi = library->getSeries(parentLabel).getEpisode(item->label());
                // cout << "parent label: " << parentLabel << "\n\n";
                // cout << "Epi name:  " << epi.getName() << " \n\n" ;
-               string seriesTitle = library->getSeries(parentLabel).getTitle() 
-                     + " - Season " + library->getSeries(parentLabel).getSeriesSeason();
+               string seriesTitle = library->getSeries(parentLabel).getTitle();
+               
+
                seriesSeasonInput->value(seriesTitle.c_str());
                genreInput->value(library->getSeries(parentLabel).getGenre().c_str());
                episodeInput->value(epi.getName().c_str());
@@ -351,14 +359,8 @@ public:
       }
       else if (selectPath.compare("Series-Season/Remove") == 0)
       {
-         bool flag = actionRemoveSeries();
-         if (flag)
-         {
-            buildTree();
-            cout << "Series removed from library." << endl;
-         }
-         else
-            cout << "Error removing series from library." << endl;
+         actionRemoveSeries();
+
       }
       else if (selectPath.compare("Episode/Add") == 0)
       {
@@ -375,41 +377,48 @@ public:
       else if (selectPath.compare("Episode/Remove") == 0)
       {
 
-         bool flag = actionRemoveEpisode();
-
-         if (flag)
-         {
-            buildTree();
-            cout << "Episode removed from library." << endl;
-         }
-         else
-            cout << "Error removing episode from library." << endl;
+         actionRemoveEpisode();
       }
    }
 
 
-   bool actionRemoveSeries()
+   void actionRemoveSeries()
    {
-
-      return library->removeSeries(episodeInput->value());
-
+      bool flag = library->removeSeries(seriesSeasonInput->value());
+      if (flag)
+      {
+         buildTree();
+         cout << "Series removed from library." << endl;
+      }
+      else
+      {
+         cout << "Error removing series from library." << endl;
+      }
    }
+
+
    bool actionAddEpisode()
    {
       return false; //TODO:
    }
-   bool actionRemoveEpisode()
+
+
+   void actionRemoveEpisode()
    {
 
-      return false; //TODO:
+      bool flag = library->removeEpisode(seriesSeasonInput->value(), episodeInput->value());
+      if (flag)
+      {
+         buildTree();
+         cout << "Episode removed from library." << endl;
+      }
+      else
+      {
+         cout << "Error removing episode from library." << endl;
+      }
    }
 
-   /**
-    * Method to add a series and season to the library from the top menu button action.
-    * Method submits api call for series and season information, then passed to parse to 
-    * library series and episode objects. 
-    * @return void.
-    * */
+
    void fetchURLAddSeries() {
 
       cout << "Search Clicked. You asked for a OMDb search of Season: "
@@ -525,15 +534,15 @@ public:
    void buildTree()
    {
       vector<string> result = library->getTitles();
-      cout << "Server has titles: \n";
+      // cout << "Server has titles: \n";
       tree->clear();
 
       for (const auto &res : result)
       {
-         cout << res << " \n";
+         // cout << res << endl;
          SeriesSeason series = library->getSeries(res);
          vector<string> epTitle = library->getSeries(res).getEpisodeTitles();
-         // cout << "size of epTitle: " << epTitle.size() << endl;
+         //  cout << "size of epTitle: " << epTitle.size() << endl;
          string st = "Library/" + series.getTitle() + "/";
          for (const auto &ep : epTitle)
          {
