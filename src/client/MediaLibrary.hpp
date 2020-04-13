@@ -35,6 +35,13 @@ using namespace std;
  */
 class MediaLibrary
 {  
+   private:
+   
+      bool actionAddSeries();
+      bool actionRemoveSeries();
+      bool actionAddEpisode();
+      bool actionRemoveEpisode();
+
    protected:
       map<string, SeriesSeason> libraryMap;       // map to store library objects.
       map<string, SeriesSeason> SeriesSeasonList; // may not need

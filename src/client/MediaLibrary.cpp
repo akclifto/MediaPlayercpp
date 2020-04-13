@@ -184,7 +184,7 @@ vector<string> MediaLibrary::getTitles()
 
 bool MediaLibrary::parseURLtoJSON(string seriesInfo, string seasonInfo)
 {
-   //TODO:  this.
+   
    Json::Reader reader;
    Json::Value root;
 

@@ -102,15 +102,6 @@ public:
     Json::Value toJson();
 
     /**
-     * Method to parse data from Json::Value object to construct SeriesSeason
-     * class object.
-     * @param seriesInfo : string with series information from URL callback
-     * @param seasonInfo : string with season information from URL callback
-     * @return void
-     **/
-    void fromJson(string seriesInfo, string seasonInfo);
-
-    /**
      * Method to set values to SeriesSeason Object.  Provdied with base code. 
      * @return void.
      **/

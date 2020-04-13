@@ -303,12 +303,6 @@ Json::Value SeriesSeason::toJson()
    return jsonLib;
 }
 
-void SeriesSeason::fromJson(string seriesInfo, string seasonInfo)
-{
-   //TODO:
-
-}
-
 void SeriesSeason::setValues(string aTitle, string aSeriesSeason,
                              string aRating, string aGenre,
                              string poster, string plotSummary)

@@ -342,21 +342,67 @@ public:
       }
       else if (selectPath.compare("Series-Season/Add") == 0)
       {
-         cout << "Add not implemented" << endl; //TODO:
+
+         bool flag = actionAddSeries();
+         if (flag)
+         {
+            buildTree();
+            cout << "Series added to library." << endl;
+         }
+         else
+            cout << "Error adding series to library." << endl;
       }
       else if (selectPath.compare("Series-Season/Remove") == 0)
       {
-         cout << "Remove not implemented" << endl; //TODO:
+         bool flag = actionRemoveSeries();
+         if (flag)
+         {
+            buildTree();
+            cout << "Series removed from library." << endl;
+         }
+         else
+            cout << "Error removing series from library." << endl;
       }
       else if (selectPath.compare("Episode/Add") == 0)
       {
-         //TODO:
+
+         bool flag = actionAddEpisode();
+         if (flag)
+         {
+            buildTree();
+            cout << "Episode added to library." << endl;
+         }
+         else
+            cout << "Error adding episode to library." << endl;
       }
       else if (selectPath.compare("Episode/Remove") == 0)
       {
-         //TODO:
+
+         bool flag = actionRemoveEpisode();
+         if (flag)
+         {
+            buildTree();
+            cout << "Episode removed from library." << endl;
+         }
+         else
+            cout << "Error removing episode from library." << endl;
       }
    }
+
+
+      bool actionAddSeries(){
+         return false; TODO:
+      }
+      bool actionRemoveSeries() {
+         return false; //TODO:
+      }
+      bool actionAddEpisode() {
+         return false; //TODO:
+      }
+      bool actionRemoveEpisode() {
+         return false; //TODO:
+      }
+
 
    /**
     * a static method to remove spaces, tabs, new lines and returns from the
