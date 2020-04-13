@@ -192,6 +192,8 @@ bool MediaLibrary::parseURLtoJSON(string seriesInfo, string seasonInfo)
    Json::Value epiObj;
    //run through series info
    bool parseSuccess = reader.parse(seriesInfo, root, false);
+   string season;
+   string title;
 
    if (parseSuccess)
    {
@@ -202,40 +204,45 @@ bool MediaLibrary::parseURLtoJSON(string seriesInfo, string seasonInfo)
          Json::Value jsonM = root[*i];
          if (*i == "Title")
          {
-            seriesObj["title"] = jsonM.asString();
+            title = jsonM.asString();
             // cout << "title: " << jsonM.asString() << endl;
          }
-         else if (*i == "Genre") {
+         else if (*i == "Genre")
+         {
             seriesObj["genre"] = jsonM.asString();
             // cout << "Genre: " << jsonM.asString() << endl;
          }
-         else if (*i == "Poster") {
+         else if (*i == "Poster")
+         {
             seriesObj["poster"] = jsonM.asString();
             // cout << "poster: " << jsonM.asString() << endl;
          }
-         else if (*i == "Plot") {
+         else if (*i == "Plot")
+         {
             seriesObj["plotSummary"] = jsonM.asString();
             epiObj["epSummary"] = jsonM.asString();
             // cout << "Plot: " << jsonM.asString() << endl;
          }
-         else if (*i == "Ratings"){
-            //TODO:
+         else if (*i == "Ratings")
+         {
+
             for (Json::Value::ArrayIndex i = 0; i != jsonM.size(); i++)
             {
-               if(jsonM[i].isMember("Value")){
-                  seriesObj["imdbRating"] = jsonM[i]["Value"].asString();;
-                  cout << "Rating: " << jsonM[i]["Value"].asString() << endl;
+               if (jsonM[i].isMember("Value"))
+               {
+                  seriesObj["imdbRating"] = jsonM[i]["Value"].asString();
+                  // cout << "Rating: " << jsonM[i]["Value"].asString() << endl;
                }
             }
          }
       }
-   } 
+   }
    else
    {
       cout << "Error parsing seasonInfo string." << endl;
       return false;
    }
-   
+
    //run through season info
    parseSuccess = reader.parse(seasonInfo, root, false);
    if (parseSuccess)
@@ -249,10 +256,33 @@ bool MediaLibrary::parseURLtoJSON(string seriesInfo, string seasonInfo)
          if (*i == "Season")
          {
             seriesObj["seriesSeason"] = jsonM.asString();
-            cout << "season: " << jsonM.asString() << endl;
+            seriesObj["title"] = title + " - Season " + jsonM.asString();
+            // cout << "season: " << jsonM.asString() << endl;
+         }
+         else if (*i == "Episodes")
+         {
+
+            for (Json::Value::ArrayIndex i = 0; i != jsonM.size(); i++)
+            {
+               if (jsonM[i].isMember("Title"))
+               {
+                  epiObj["name"] = jsonM[i]["Title"].asString();
+                  // cout << "Ep Title: " << jsonM[i]["Title"].asString() << endl;
+               }
+               if (jsonM[i].isMember("imdbRating"))
+               {
+                  epiObj["imdbRating"] = jsonM[i]["imdbRating"].asString();
+                  // cout << "imdbRating: " << jsonM[i]["imdbRating"].asString() << endl;
+               }
+               seriesObj["episodes"].append(epiObj);
+            }
          }
       }
-
+      // cout << "Series so far:  \n"
+      //      << seriesObj.toStyledString() << endl;
+      SeriesSeason ss(seriesObj);
+      addSeries(ss);
+      return true;
    }
    else
    {
