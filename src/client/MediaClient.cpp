@@ -83,6 +83,7 @@ public:
     */
    static void SearchCallbackS(Fl_Widget *w, void *data)
    {
+
       MediaClient *o = (MediaClient *)data;
       cout << "Search Clicked. You asked for a OMDb search of Season: " << o->seasonSrchInput->value() << " Series: " << o->seriesSrchInput->value() << endl;
       try
@@ -391,6 +392,7 @@ public:
 
 
       bool actionAddSeries(){
+         
          return false; TODO:
       }
       bool actionRemoveSeries() {
@@ -402,6 +404,84 @@ public:
       bool actionRemoveEpisode() {
          return false; //TODO:
       }
+
+
+   /**
+    * Method to add a series and season to the library from the top menu button action.
+    * Method submits api call for series and season information, then passed to parse to 
+    * library series and episode objects. 
+    * @return void.
+    * */
+   void fetchURLAddSeries() {
+
+            cout << "Search Clicked. You asked for a OMDb search of Season: " 
+               << seasonSrchInput->value() << " Series: " 
+               << seriesSrchInput->value() << endl;
+      try
+      {
+         string url = "https://www.omdbapi.com/?r=json&apikey=";
+         url = url + omdbkey;
+
+         //Spaces must be converted to %20
+         string query = seriesSrchInput->value();
+         string urlEncodedQuery = "";
+         for (int i = 0; i < query.length(); i++)
+         {
+            if (query.at(i) == ' ')
+            {
+               urlEncodedQuery += "%20";
+            }
+            else
+            {
+               urlEncodedQuery += query.at(i);
+            }
+         }
+         /*
+         * Another API call would have to be made here to get
+         * the rest of the required information. Same as assignment 2.
+         */
+
+         // search and fetch for season/episode info 
+         url = url + "&t=" + urlEncodedQuery + "&season=" + seasonSrchInput->value();
+         cout << "sending request url: " << url << endl;
+          ostringstream os;
+          curlpp::Easy myRequest;
+         myRequest.setOpt(new curlpp::options::WriteStream(&os));
+         //curlpp::options::Url myUrl(std::string(url));
+         myRequest.setOpt(new curlpp::options::Url(url.c_str()));
+         myRequest.perform();
+
+         string seasonInfo = os.str();
+         cout << "Season info: " << seasonInfo << endl;
+
+         //search and fetch for series info
+         string url2 = "https://www.omdbapi.com/?r=json&apikey=";
+         url2 += omdbkey;
+         url2 += "&t=" + urlEncodedQuery;
+         cout << "sending request url: " << url2 << endl;
+
+         ostringstream os2;
+         myRequest.reset();
+         myRequest.setOpt(new curlpp::options::WriteStream(&os2));
+         myRequest.setOpt(new curlpp::options::Url(url2.c_str()));
+         myRequest.perform();
+
+         string seriesInfo = os2.str();
+         cout << "Series info: " << seriesInfo << endl;
+
+         // Get out of static method and parse URL info
+         searchCallBack(seriesInfo, seasonInfo);
+
+      }
+      catch (curlpp::LogicError &e)
+      {
+         cout << e.what() << endl;
+      }
+      catch (curlpp::RuntimeError &e)
+      {
+         cout << e.what() << endl;
+      }
+   }
 
 
    /**
