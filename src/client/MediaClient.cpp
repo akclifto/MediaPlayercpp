@@ -252,6 +252,7 @@ public:
                // series.print();
                // cout << endl;
                //TODO:  set poster somehow here and persis through episodes
+          
                seriesSeasonInput->value(series.getSeriesSeason().c_str());
                genreInput->value(series.getGenre().c_str());
                episodeInput->value(series.getTitle().c_str());
@@ -267,8 +268,9 @@ public:
                Episode epi = library->getSeries(parentLabel).getEpisode(item->label());
                // cout << "parent label: " << parentLabel << "\n\n";
                // cout << "Epi name:  " << epi.getName() << " \n\n" ;
-
-               seriesSeasonInput->value(library->getSeries(parentLabel).getSeriesSeason().c_str());
+               string seriesTitle = library->getSeries(parentLabel).getTitle() 
+                     + " - Season " + library->getSeries(parentLabel).getSeriesSeason();
+               seriesSeasonInput->value(seriesTitle.c_str());
                genreInput->value(library->getSeries(parentLabel).getGenre().c_str());
                episodeInput->value(epi.getName().c_str());
                ratingInput->value(epi.getImdbRating().c_str());
@@ -344,14 +346,8 @@ public:
       else if (selectPath.compare("Series-Season/Add") == 0)
       {
 
-         bool flag = actionAddSeries();
-         if (flag)
-         {
-            buildTree();
-            cout << "Series added to library." << endl;
-         }
-         else
-            cout << "Error adding series to library." << endl;
+         fetchURLAddSeries();
+
       }
       else if (selectPath.compare("Series-Season/Remove") == 0)
       {
@@ -380,6 +376,7 @@ public:
       {
 
          bool flag = actionRemoveEpisode();
+
          if (flag)
          {
             buildTree();
@@ -391,20 +388,21 @@ public:
    }
 
 
-      bool actionAddSeries(){
-         
-         return false; TODO:
-      }
-      bool actionRemoveSeries() {
-         return false; //TODO:
-      }
-      bool actionAddEpisode() {
-         return false; //TODO:
-      }
-      bool actionRemoveEpisode() {
-         return false; //TODO:
-      }
+   bool actionRemoveSeries()
+   {
 
+      return library->removeSeries(episodeInput->value());
+
+   }
+   bool actionAddEpisode()
+   {
+      return false; //TODO:
+   }
+   bool actionRemoveEpisode()
+   {
+
+      return false; //TODO:
+   }
 
    /**
     * Method to add a series and season to the library from the top menu button action.
@@ -414,9 +412,9 @@ public:
     * */
    void fetchURLAddSeries() {
 
-            cout << "Search Clicked. You asked for a OMDb search of Season: " 
-               << seasonSrchInput->value() << " Series: " 
-               << seriesSrchInput->value() << endl;
+      cout << "Search Clicked. You asked for a OMDb search of Season: "
+           << seasonSrchInput->value() << " Series: "
+           << seriesSrchInput->value() << endl;
       try
       {
          string url = "https://www.omdbapi.com/?r=json&apikey=";
@@ -441,11 +439,11 @@ public:
          * the rest of the required information. Same as assignment 2.
          */
 
-         // search and fetch for season/episode info 
+         // search and fetch for season/episode info
          url = url + "&t=" + urlEncodedQuery + "&season=" + seasonSrchInput->value();
          cout << "sending request url: " << url << endl;
-          ostringstream os;
-          curlpp::Easy myRequest;
+         ostringstream os;
+         curlpp::Easy myRequest;
          myRequest.setOpt(new curlpp::options::WriteStream(&os));
          //curlpp::options::Url myUrl(std::string(url));
          myRequest.setOpt(new curlpp::options::Url(url.c_str()));
@@ -471,7 +469,6 @@ public:
 
          // Get out of static method and parse URL info
          searchCallBack(seriesInfo, seasonInfo);
-
       }
       catch (curlpp::LogicError &e)
       {
@@ -482,7 +479,6 @@ public:
          cout << e.what() << endl;
       }
    }
-
 
    /**
     * a static method to remove spaces, tabs, new lines and returns from the

@@ -36,9 +36,14 @@ using namespace std;
 class MediaLibrary
 {  
    private:
-   
-      bool actionAddSeries();
+
+      /**
+       * Method to remove series from the library using top menu Series-Season/Remove button
+       * @return true if series removed successfully, false otherwise.
+       * */
       bool actionRemoveSeries();
+
+      
       bool actionAddEpisode();
       bool actionRemoveEpisode();
 
