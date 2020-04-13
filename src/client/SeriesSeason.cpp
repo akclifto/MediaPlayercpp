@@ -207,7 +207,12 @@ map<string, Episode> SeriesSeason::getEpisodeList()
 
 Episode SeriesSeason::getEpisode(string name)
 {
-   Episode epi = episodeList[name];
+   Episode epi;
+   for(auto &ep : episodeList){
+      if(ep.second.getName() == name) {
+         epi = ep.second;
+      }
+   }
    return epi;
 
 }
@@ -243,16 +248,13 @@ bool SeriesSeason::removeEpisode(string name)
       cout << "The episode list is empty!" << endl;
       return false;
    }
-   for (auto epi : episodeList)
-   {
-      if (epi.second.getName() == name)
-      {
-         this->episodeList.erase(name);
-         cout << epi.second.getName() << " was removed from the library."
-              << "\n\n";
-         // cout << "Epi list size: " << episodeList.size() << endl;
-         return true;
-      }
+
+   int remove = episodeList.erase(name);
+   if(remove != 0){
+      cout << name << " was removed from the library."
+           << "\n\n";
+      // cout << "Epi list size: " << episodeList.size() << endl;
+      return true;
    }
    cout << name << " was not found in the episode list.\n";
    return false;
@@ -323,6 +325,7 @@ void SeriesSeason::setValues(string aTitle, string aSeriesSeason,
    poster = poster;
    plotSummary = plotSummary;
 }
+
 
 void SeriesSeason::print()
 {

@@ -409,7 +409,7 @@ public:
 
    void actionRemoveEpisode()
    {
-
+      //TODO: episode not removing, changes not holding.
       bool flag = library->removeEpisode(seriesSeasonInput->value(), episodeInput->value());
       if (flag)
       {

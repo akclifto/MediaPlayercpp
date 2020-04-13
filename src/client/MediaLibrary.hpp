@@ -37,8 +37,7 @@ class MediaLibrary
 {  
    private:
 
-      map<string, SeriesSeason> libraryMap;       // map to store library objects.
-      map<string, SeriesSeason> seriesSeasonList; // may not need
+      std::map<string, SeriesSeason> libraryMap;       // map to store library objects.
       
       /**
        * Method to add a series and season to the library from the top menu button action.

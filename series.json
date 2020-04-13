@@ -4,181 +4,40 @@
     {
       "series" : 
       {
-        "genre" : "",
-        "imdbRating" : "",
-        "plotSummary" : "",
-        "poster" : "",
-        "seriesSeason" : "",
-        "title" : ""
-      }
-    },
-    {
-      "series" : 
-      {
-        "genre" : "",
-        "imdbRating" : "",
-        "plotSummary" : "",
-        "poster" : "",
-        "seriesSeason" : "",
-        "title" : ""
-      }
-    },
-    {
-      "series" : 
-      {
-        "genre" : "",
-        "imdbRating" : "",
-        "plotSummary" : "",
-        "poster" : "",
-        "seriesSeason" : "",
-        "title" : ""
-      }
-    },
-    {
-      "series" : 
-      {
-        "genre" : "",
-        "imdbRating" : "",
-        "plotSummary" : "",
-        "poster" : "",
-        "seriesSeason" : "",
-        "title" : ""
-      }
-    },
-    {
-      "series" : 
-      {
         "episodes" : 
         [
           {
-            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
-            "imdbRating" : "9.1",
-            "name" : "ABQ"
+            "epSummary" : "The comedic misadventures of Roy, Moss and their grifting supervisor Jen, a rag-tag team of IT support workers at a large corporation headed by a hotheaded yuppie.",
+            "imdbRating" : "8.2",
+            "name" : "Aunt Irma Visits"
           },
           {
-            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
-            "imdbRating" : "9.0",
-            "name" : "Better Call Saul"
-          },
-          {
-            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
-            "imdbRating" : "8.4",
-            "name" : "Bit by a Dead Bee"
-          },
-          {
-            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "epSummary" : "The comedic misadventures of Roy, Moss and their grifting supervisor Jen, a rag-tag team of IT support workers at a large corporation headed by a hotheaded yuppie.",
             "imdbRating" : "8.3",
-            "name" : "Down"
+            "name" : "Calamity Jen"
           },
           {
-            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
-            "imdbRating" : "9.3",
-            "name" : "Grilled"
+            "epSummary" : "The comedic misadventures of Roy, Moss and their grifting supervisor Jen, a rag-tag team of IT support workers at a large corporation headed by a hotheaded yuppie.",
+            "imdbRating" : "7.9",
+            "name" : "Fifty-Fifty"
           },
           {
-            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
-            "imdbRating" : "8.7",
-            "name" : "Negro Y Azul"
+            "epSummary" : "The comedic misadventures of Roy, Moss and their grifting supervisor Jen, a rag-tag team of IT support workers at a large corporation headed by a hotheaded yuppie.",
+            "imdbRating" : "8.0",
+            "name" : "The Red Door"
           },
           {
-            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
-            "imdbRating" : "8.6",
-            "name" : "Over"
-          },
-          {
-            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
-            "imdbRating" : "8.9",
-            "name" : "Peekaboo"
-          },
-          {
-            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
-            "imdbRating" : "8.7",
-            "name" : "Seven Thirty-Seven"
+            "epSummary" : "The comedic misadventures of Roy, Moss and their grifting supervisor Jen, a rag-tag team of IT support workers at a large corporation headed by a hotheaded yuppie.",
+            "imdbRating" : "7.7",
+            "name" : "Yesterday's Jam"
           }
         ],
-        "genre" : "Crime, Drama, Thriller",
-        "imdbRating" : "9.5/10",
-        "plotSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
-        "poster" : "https://m.media-amazon.com/images/M/MV5BMjhiMzgxZTctNDc1Ni00OTIxLTlhMTYtZTA3ZWFkODRkNmE2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
-        "seriesSeason" : "2",
-        "title" : "Breaking Bad - Season 2"
-      }
-    },
-    {
-      "series" : 
-      {
-        "genre" : "",
-        "imdbRating" : "",
-        "plotSummary" : "",
-        "poster" : "",
-        "seriesSeason" : "",
-        "title" : ""
-      }
-    },
-    {
-      "series" : 
-      {
-        "genre" : "",
-        "imdbRating" : "",
-        "plotSummary" : "",
-        "poster" : "",
-        "seriesSeason" : "",
-        "title" : ""
-      }
-    },
-    {
-      "series" : 
-      {
-        "genre" : "",
-        "imdbRating" : "",
-        "plotSummary" : "",
-        "poster" : "",
-        "seriesSeason" : "",
-        "title" : ""
-      }
-    },
-    {
-      "series" : 
-      {
-        "genre" : "",
-        "imdbRating" : "",
-        "plotSummary" : "",
-        "poster" : "",
-        "seriesSeason" : "",
-        "title" : ""
-      }
-    },
-    {
-      "series" : 
-      {
-        "genre" : "",
-        "imdbRating" : "",
-        "plotSummary" : "",
-        "poster" : "",
-        "seriesSeason" : "",
-        "title" : ""
-      }
-    },
-    {
-      "series" : 
-      {
-        "genre" : "",
-        "imdbRating" : "",
-        "plotSummary" : "",
-        "poster" : "",
-        "seriesSeason" : "",
-        "title" : ""
-      }
-    },
-    {
-      "series" : 
-      {
-        "genre" : "",
-        "imdbRating" : "",
-        "plotSummary" : "",
-        "poster" : "",
-        "seriesSeason" : "",
-        "title" : ""
+        "genre" : "Comedy",
+        "imdbRating" : "8.5/10",
+        "plotSummary" : "The comedic misadventures of Roy, Moss and their grifting supervisor Jen, a rag-tag team of IT support workers at a large corporation headed by a hotheaded yuppie.",
+        "poster" : "https://m.media-amazon.com/images/M/MV5BMjE5MThjMzAtNWVmNC00YThkLTlmNzktMTM3Yzk4YTZhMTgwXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg",
+        "seriesSeason" : "1",
+        "title" : "The IT Crowd - Season 1"
       }
     }
   ]

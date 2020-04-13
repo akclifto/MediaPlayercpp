@@ -40,6 +40,7 @@ using namespace std;
 MediaLibrary::MediaLibrary()
 {
    initLibraryFromJsonFile("series.json");
+
 }
 
 MediaLibrary::~MediaLibrary()
@@ -53,6 +54,9 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName)
    bool ret = false;
 
    libraryMap.clear();
+   if(libraryMap.empty()){
+      cout << "map is empty.\n";
+   }
    Json::Reader reader;
    Json::Value root;
 
@@ -72,7 +76,8 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName)
                  input != (*series).end(); input++)
             {
                
-               // cout << *input << endl;
+               cout << *input << endl;
+              
                SeriesSeason ss(*input);
                addSeries(ss);
             }
@@ -94,7 +99,7 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
 
    Json::Value seriesObj;
 
-   for (auto lib : libraryMap)
+   for (auto &lib : libraryMap)
    {
       seriesObj = lib.second.toJson();
       seriesArr["series"] = seriesObj;
@@ -112,8 +117,13 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
 
 SeriesSeason MediaLibrary::getSeries(string aTitle)
 {
-   SeriesSeason ss = libraryMap[aTitle];
-   return ss;
+   SeriesSeason series;
+   for(auto &ss : libraryMap){
+      if(ss.second.getTitle() == aTitle){
+         series =  ss.second;
+      }
+   }
+   return series;
 }
 
 map<string, SeriesSeason> MediaLibrary::getLibrary()
@@ -131,7 +141,7 @@ void MediaLibrary::addSeries(SeriesSeason seriesSeason)
 {
 
    bool flag = false;
-   for (auto ss : libraryMap)
+   for (auto &ss : libraryMap)
    {
       if (ss.second.getTitle() == seriesSeason.getTitle() &&
           ss.second.getSeriesSeason() == seriesSeason.getSeriesSeason())
@@ -147,8 +157,7 @@ void MediaLibrary::addSeries(SeriesSeason seriesSeason)
    }
    else
    {
-      this->libraryMap.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
-      this->seriesSeasonList.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
+      libraryMap.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
       cout << seriesSeason.getTitle() << " was added to the library." << endl;
    }
 }
@@ -162,16 +171,12 @@ bool MediaLibrary::removeSeries(string title)
       return false;
    }
 
-   for (auto ss : libraryMap)
-   {
-      if (ss.second.getTitle() == title)
-      {
-         this->libraryMap.erase(title);
-         this->seriesSeasonList.erase(title);
-         cout << ss.second.getTitle() << " was removed from the library."
-              << "\n\n";
-         return true;
-      }
+   int remove = libraryMap.erase(title);
+   // cout << to_string(remove) << endl;
+   if(remove != 0){
+      cout << title << " was removed from the library."
+           << "\n\n";
+      return true;
    }
 
    cout << title << " was not found in the library!" << endl;
@@ -188,22 +193,13 @@ vector<string> MediaLibrary::getTitles()
 {
    vector<string> myVec;
 
-   for (const auto &it : seriesSeasonList) {
-      if(it.first == ""){
-         cout << "iter is empty.\n";
-         continue;
-      } else {
-         cout << "iter output: " << it.first << endl;
-         myVec.push_back(it.first);
-      }
+   //print();
+   for (map<string, SeriesSeason>::const_iterator it = libraryMap.begin();
+        it != libraryMap.end(); ++it)
+   {
+      cout << "iter output: " << it->first << endl;
+      myVec.push_back(it->first);
    }
-
-   // for (map<string, SeriesSeason>::const_iterator it = seriesSeasonList.begin();
-   //      it != seriesSeasonList.end(); ++it)
-   // {
-   //    cout << "iter output: " << it->first << endl;
-   //    myVec.push_back(it->first);
-   // }
    return myVec;
 }
 
