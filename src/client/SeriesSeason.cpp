@@ -210,12 +210,6 @@ Episode SeriesSeason::getEpisode(string name)
    Episode epi = episodeList[name];
    return epi;
 
-   if(epi.getName() != ""){
-      cout << name << " found and returned." << endl;
-   } else {
-      cout << name << " not found in list."  << endl;
-   }
-
 }
 
 bool SeriesSeason::checkEpisodes()
@@ -226,7 +220,7 @@ bool SeriesSeason::checkEpisodes()
 bool SeriesSeason::addEpisode(Episode epi)
 {
 
-   for (auto ep : episodeList)
+   for (auto &ep : episodeList)
    {
       if (ep.second.getName() == epi.getName())
       {
@@ -238,6 +232,7 @@ bool SeriesSeason::addEpisode(Episode epi)
    // cout << epi.getName() << " was added to the episode list for " << this->getTitle() << endl;
    return true;
 }
+
 
 bool SeriesSeason::removeEpisode(string name)
 {

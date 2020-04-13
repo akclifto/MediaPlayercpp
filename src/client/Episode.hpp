@@ -29,11 +29,12 @@ using namespace std;
 
 class Episode
 {
-
-protected:
+private: 
     string name;
     string imdbRating;
     string epSummary;
+    
+protected:
 
 public:
     /* All Constructors and Destructor*/

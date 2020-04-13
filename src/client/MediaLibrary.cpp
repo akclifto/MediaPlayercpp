@@ -148,7 +148,7 @@ void MediaLibrary::addSeries(SeriesSeason seriesSeason)
    else
    {
       this->libraryMap.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
-      this->SeriesSeasonList.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
+      this->seriesSeasonList.insert(pair<string, SeriesSeason>(seriesSeason.getTitle(), seriesSeason));
       cout << seriesSeason.getTitle() << " was added to the library." << endl;
    }
 }
@@ -167,7 +167,7 @@ bool MediaLibrary::removeSeries(string title)
       if (ss.second.getTitle() == title)
       {
          this->libraryMap.erase(title);
-         this->SeriesSeasonList.erase(title);
+         this->seriesSeasonList.erase(title);
          cout << ss.second.getTitle() << " was removed from the library."
               << "\n\n";
          return true;
@@ -187,12 +187,23 @@ bool MediaLibrary::removeEpisode(string series, string episode) {
 vector<string> MediaLibrary::getTitles()
 {
    vector<string> myVec;
-   for (map<string, SeriesSeason>::const_iterator it = libraryMap.begin();
-        it != libraryMap.end(); ++it)
-   {
-      cout << "iter output: " << it->first << endl;
-      myVec.push_back(it->first);
+
+   for (const auto &it : seriesSeasonList) {
+      if(it.first == ""){
+         cout << "iter is empty.\n";
+         continue;
+      } else {
+         cout << "iter output: " << it.first << endl;
+         myVec.push_back(it.first);
+      }
    }
+
+   // for (map<string, SeriesSeason>::const_iterator it = seriesSeasonList.begin();
+   //      it != seriesSeasonList.end(); ++it)
+   // {
+   //    cout << "iter output: " << it->first << endl;
+   //    myVec.push_back(it->first);
+   // }
    return myVec;
 }
 

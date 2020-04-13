@@ -33,8 +33,7 @@ using namespace std;
  */
 class SeriesSeason
 {
-
-protected:
+private: 
     string title;
     string seriesSeason;
     string imdbRating;
@@ -42,6 +41,8 @@ protected:
     string poster;
     string plotSummary;
     map<string, Episode> episodeList;
+    
+protected:
 
 public:
     /*All Constructors and Destructor*/

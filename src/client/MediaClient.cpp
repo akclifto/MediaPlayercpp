@@ -365,14 +365,8 @@ public:
       else if (selectPath.compare("Episode/Add") == 0)
       {
 
-         bool flag = actionAddEpisode();
-         if (flag)
-         {
-            buildTree();
-            cout << "Episode added to library." << endl;
-         }
-         else
-            cout << "Error adding episode to library." << endl;
+         actionAddEpisode();
+
       }
       else if (selectPath.compare("Episode/Remove") == 0)
       {
@@ -388,7 +382,6 @@ public:
       if (flag)
       {
          buildTree();
-         cout << "Series removed from library." << endl;
       }
       else
       {
@@ -397,9 +390,20 @@ public:
    }
 
 
-   bool actionAddEpisode()
+   void actionAddEpisode()
    {
-      return false; //TODO:
+      //TODO
+      bool flag = true;
+      //flag = library->getSeries(seriesSeasonInput->value()).addEpisode(episodeInput->value());
+      if (flag)
+      {
+         buildTree();
+         cout << "Episode added to library." << endl;
+      }
+      else
+      {
+         cout << "Error adding episode to library." << endl;
+      }
    }
 
 

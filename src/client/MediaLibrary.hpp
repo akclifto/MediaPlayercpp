@@ -37,6 +37,9 @@ class MediaLibrary
 {  
    private:
 
+      map<string, SeriesSeason> libraryMap;       // map to store library objects.
+      map<string, SeriesSeason> seriesSeasonList; // may not need
+      
       /**
        * Method to add a series and season to the library from the top menu button action.
        * Method submits api call for series and season information, then passed to parse to 
@@ -66,8 +69,6 @@ class MediaLibrary
       void actionRemoveEpisode();
 
    protected:
-      map<string, SeriesSeason> libraryMap;       // map to store library objects.
-      map<string, SeriesSeason> SeriesSeasonList; // may not need
 
    public:
 
