@@ -12,6 +12,8 @@
 #include <FL/Fl_Box.H>
 #include <FL/Fl_PNG_Image.H>
 #include <FL/Fl_Image.H>
+#include <FL/Fl_JPEG_Image.H>
+#include <FL/Fl_Shared_Image.H>
 #include <stdio.h>
 #include <iostream>
 #include <stdlib.h>
@@ -57,8 +59,8 @@ using namespace std;
 class MediaClientGui : public Fl_Window
 {
 protected:
-   Fl_Box *box;
-   Fl_PNG_Image *png;
+   Fl_Box *imageBox;
+   Fl_JPEG_Image *jpgImage;
 
    /**
     * tree is the Fl_Tree object that occupies the left side of the window.
@@ -124,7 +126,7 @@ protected:
 
 public:
    //MediaClientGui(const char * name = "Ser321") : Fl_Window(635,350,name) {
-   MediaClientGui(const char *name = "SER321") : Fl_Window(980, 500, name)
+   MediaClientGui(const char *name = "SER321") : Fl_Window(980, 540, name)
    {
       begin();
 
@@ -183,9 +185,9 @@ public:
       ratingInput->value("");
       ratingInput->readonly(1);
 
-      box = new Fl_Box(350, 180, 320 - 20, 320 - 20);
-      png = new Fl_PNG_Image("default.png");
-      box->image(png);  //TODO:  need to reset
+      imageBox = new Fl_Box(350, 145, 320, 380);
+      jpgImage = new Fl_JPEG_Image("default.jpg");
+      imageBox->image(jpgImage); 
 
       summaryMLI = new Fl_Multiline_Input(665, 180, 300, 300, 0);
       summaryMLI->wrap(1);

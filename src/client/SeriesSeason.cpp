@@ -208,6 +208,7 @@ map<string, Episode> SeriesSeason::getEpisodeList()
 Episode SeriesSeason::getEpisode(string name)
 {
    Episode epi;
+
    for(auto &ep : episodeList){
       if(ep.second.getName() == name) {
          epi = ep.second;
@@ -265,7 +266,7 @@ vector<string> SeriesSeason::getEpisodeTitles()
 {
 
    vector<string> epVector;
-   for(map<string, Episode>::iterator iter = episodeList.begin(); 
+   for(map<string, Episode>::const_iterator iter = episodeList.begin(); 
                iter != episodeList.end(); ++iter)
    {
       epVector.push_back(iter->first);

@@ -54,9 +54,6 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName)
    bool ret = false;
 
    libraryMap.clear();
-   if(libraryMap.empty()){
-      cout << "map is empty.\n";
-   }
    Json::Reader reader;
    Json::Value root;
 

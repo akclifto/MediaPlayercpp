@@ -7,6 +7,104 @@
         "episodes" : 
         [
           {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "8.7",
+            "name" : "...And the Bag's in the River"
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "8.9",
+            "name" : "A No-Rough-Stuff-Type Deal"
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "8.3",
+            "name" : "Cancer Man"
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "8.7",
+            "name" : "Cat's in the Bag..."
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "9.3",
+            "name" : "Crazy Handful of Nothin'"
+          }
+        ],
+        "genre" : "Crime, Drama, Thriller",
+        "imdbRating" : "96%",
+        "plotSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+        "poster" : "https://m.media-amazon.com/images/M/MV5BMjhiMzgxZTctNDc1Ni00OTIxLTlhMTYtZTA3ZWFkODRkNmE2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+        "seriesSeason" : "1",
+        "title" : "Breaking Bad - Season 1"
+      }
+    },
+    {
+      "series" : 
+      {
+        "episodes" : 
+        [
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "9.1",
+            "name" : "ABQ"
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "9.0",
+            "name" : "Better Call Saul"
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "8.4",
+            "name" : "Bit by a Dead Bee"
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "8.3",
+            "name" : "Down"
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "9.3",
+            "name" : "Grilled"
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "8.7",
+            "name" : "Negro Y Azul"
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "8.6",
+            "name" : "Over"
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "8.9",
+            "name" : "Peekaboo"
+          },
+          {
+            "epSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+            "imdbRating" : "8.7",
+            "name" : "Seven Thirty-Seven"
+          }
+        ],
+        "genre" : "Crime, Drama, Thriller",
+        "imdbRating" : "96%",
+        "plotSummary" : "A high school chemistry teacher diagnosed with inoperable lung cancer turns to manufacturing and selling methamphetamine in order to secure his family's future.",
+        "poster" : "https://m.media-amazon.com/images/M/MV5BMjhiMzgxZTctNDc1Ni00OTIxLTlhMTYtZTA3ZWFkODRkNmE2XkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg",
+        "seriesSeason" : "2",
+        "title" : "Breaking Bad - Season 2"
+      }
+    },
+    {
+      "series" : 
+      {
+        "episodes" : 
+        [
+          {
             "epSummary" : "The comedic misadventures of Roy, Moss and their grifting supervisor Jen, a rag-tag team of IT support workers at a large corporation headed by a hotheaded yuppie.",
             "imdbRating" : "8.2",
             "name" : "Aunt Irma Visits"
@@ -38,6 +136,80 @@
         "poster" : "https://m.media-amazon.com/images/M/MV5BMjE5MThjMzAtNWVmNC00YThkLTlmNzktMTM3Yzk4YTZhMTgwXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg",
         "seriesSeason" : "1",
         "title" : "The IT Crowd - Season 1"
+      }
+    },
+    {
+      "series" : 
+      {
+        "episodes" : 
+        [
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "8.0",
+            "name" : "Bart the General"
+          },
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "7.7",
+            "name" : "Bart the Genius"
+          },
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "7.5",
+            "name" : "Homer's Night Out"
+          },
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "7.4",
+            "name" : "Homer's Odyssey"
+          },
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "8.4",
+            "name" : "Krusty Gets Busted"
+          },
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "7.5",
+            "name" : "Life on the Fast Lane"
+          },
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "7.6",
+            "name" : "Moaning Lisa"
+          },
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "7.8",
+            "name" : "Some Enchanted Evening"
+          },
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "7.9",
+            "name" : "The Call of the Simpsons"
+          },
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "7.9",
+            "name" : "The Crepes of Wrath"
+          },
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "7.7",
+            "name" : "The Telltale Head"
+          },
+          {
+            "epSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+            "imdbRating" : "7.7",
+            "name" : "There's No Disgrace Like Home"
+          }
+        ],
+        "genre" : "Animation, Comedy",
+        "imdbRating" : "85%",
+        "plotSummary" : "The satiric adventures of a working-class family in the misfit city of Springfield.",
+        "poster" : "https://m.media-amazon.com/images/M/MV5BYjFkMTlkYWUtZWFhNy00M2FmLThiOTYtYTRiYjVlZWYxNmJkXkEyXkFqcGdeQXVyNTAyODkwOQ@@._V1_SX300.jpg",
+        "seriesSeason" : "1",
+        "title" : "The Simpsons - Season 1"
       }
     }
   ]

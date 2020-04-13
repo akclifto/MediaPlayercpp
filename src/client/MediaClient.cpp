@@ -6,6 +6,7 @@
 #include <FL/Fl_Check_Browser.H>
 #include <stdio.h>
 #include <iostream>
+#include <fstream>
 #include <chrono>
 #include <ctime>
 #include <stdlib.h>
@@ -251,7 +252,9 @@ public:
 
                // series.print();
                // cout << endl;
-               //TODO:  set poster somehow here and persis through episodes
+               //set poster somehow here and persis through episodes
+               setImagefromURL(series.getPoster());
+
                int epCount = library->getEpisodeListSize(series.getTitle());
                string epInput;
                if(epCount == 1){
@@ -277,6 +280,7 @@ public:
                // cout << "Epi name:  " << epi.getName() << " \n\n" ;
                string seriesTitle = library->getSeries(parentLabel).getTitle();
                
+               setImagefromURL(library->getSeries(parentLabel).getPoster());
 
                seriesSeasonInput->value(seriesTitle.c_str());
                genreInput->value(library->getSeries(parentLabel).getGenre().c_str());
@@ -297,6 +301,41 @@ public:
          }
       }
       cout << "Callback reason: " << aStr.c_str() << endl;
+   }
+
+   /**
+    * Method to download image from URL and set to imageBox in the gui display
+    * @param urlString : a string of url source for the image.
+    * @return void.
+    * */
+   void setImagefromURL(string urlString){
+      int n = urlString.length();
+      
+      try {
+
+         ostringstream stream;
+         curlpp::Easy request;
+ 
+         request.setOpt(new curlpp::options::WriteStream(&stream));
+         request.setOpt(new curlpp::options::Url(urlString.c_str()));
+         request.perform();
+         string strOut = stream.str();
+         
+         std::ofstream imgstream;
+         imgstream.open("seriesImage.jpg");
+         imgstream << strOut;
+         imgstream.close();
+         jpgImage = new Fl_JPEG_Image("seriesImage.jpg");
+         
+         imageBox->image(jpgImage);
+         imageBox->redraw();
+
+      } catch (curlpp::LogicError & e){
+         cout << e.what() << endl;
+      } catch(curlpp::RuntimeError & e){
+         cout << e.what() << endl;
+      }
+
    }
 
    // Static menu callback method
