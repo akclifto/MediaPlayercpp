@@ -307,7 +307,6 @@ bool MediaLibrary::parseURLtoJSON(string seriesInfo, string seasonInfo)
       cout << "Error parsing seasonInfo string." << endl;
       return false;
    }
-   return false;
 }
 
 void MediaLibrary::print()
