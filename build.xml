@@ -18,15 +18,16 @@
    <property environment="env"/>
 
 
-   <target name="targets">   <!-- need to remove build and execute when server/client works-->
-     <echo message="targets are clean, prepare, build, execute, build.server, build.client, build.all, targets"/>
+<!-- Targets -->
+   <target name="targets">   <!-- TODO: need to remove build and execute when server/client works-->
+     <echo message="targets are clean, prepare, build, execute, build.cpp.server, build.cpp.client, build.all, targets"/>
      <echo message="execute cpp server with: ./bin/MediaLibraryRPCServer ${port.num}"/>
      <echo message="execute cpp client with: ./bin/MediaRPCClient http://${host.name}:${port.num}"/>
      <echo message="to run, enter: ant execute -DuserId=${userId} -Domdbkey=${omdbkey}"/>
    </target>
 
 
-<!-- Clean project -->
+<!-- Clean -->
    <target name="clean">
       <delete dir="${classes.dir}" failonerror="false"/>
       <delete dir="${dist.dir}" failonerror="false"/>
@@ -43,7 +44,7 @@
 
 
 <!-- Prepare  -->
- <target name="prepare">
+ <target name="prepare" depends="clean">
       <mkdir dir="${classes.dir}"/>
       <mkdir dir="${dist.dir}" />
       <mkdir dir="log" />
@@ -65,7 +66,7 @@
       <echo message="host arch is: ${os.arch}"/>
       <echo message="host version is: ${os.version}"/>
 
-      <!-- Platform identification -->
+      <!-- Platform identification : Only tested Linux prepare path; may not work with other systems -->
       <condition property="build.host.islinux">
         <and>
           <os family="unix" />
@@ -97,22 +98,22 @@
          <then>
             <echo message="detected a mac host"/>
             <property name="cxxflag" value="-std=c++14"/>
-            <property name="includepath" value="/opt/local/include:/usr/local/include"/>
+            <property name="includepath" value="/opt/local/include:/usr/local/include:/usr/include/jsoncpp:/usr/lib"/>
             <property name="client.lib.path" value="/opt/local/lib"/>
-            <property name="client.lib.list" value="c++,jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++"/>
+            <property name="client.lib.list" value="c++,jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++,fltk,fltk_images,curl,curlpp,jsoncpp,pthread"/>
             <property name="server.lib.path" value="/opt/local/lib"/>
-            <property name="server.lib.list" value="c++,jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd"/>
+            <property name="server.lib.list" value="c++,jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,fltk,fltk_images,curl,curlpp,jsoncpp,pthread"/>
          </then>
       <elseif>
          <isset property="build.host.islinux"/>
          <then>
             <echo message="detected a linux host"/>
             <property name="cxxflag" value="-std=c++14"/>
-            <property name="includepath" value="/usr/include:/usr/local/include:/usr/include/jsoncpp"/> <!--TODO: -->
+            <property name="includepath" value="/usr/lib:/usr/include:/usr/local/include:/usr/include/jsoncpp"/> <!--TODO: may need to update-->
             <property name="client.lib.path" value="/usr/local/lib"/>
-            <property name="client.lib.list" value="jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++"/>
+            <property name="client.lib.list" value="jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++,fltk,fltk_images,curl,curlpp,jsoncpp,pthread"/>
             <property name="server.lib.path" value="/usr/local/lib"/>
-            <property name="server.lib.list" value="jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,stdc++"/>
+            <property name="server.lib.list" value="jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,stdc++,fltk,fltk_images,curl,curlpp,jsoncpp,pthread"/>
          </then>
       </elseif>
       <else>
@@ -124,7 +125,7 @@
 
 <!-- Build all (server and client) -->
    <target name="build.all"
-           depends="clean,prepare,build.server,build.client"
+           depends="clean,prepare,build.cpp.server,build.cpp.client"
            description="Clean then build cpp server, cpp client"/>
 
 
@@ -140,7 +141,7 @@
 
 
 <!--  Build Client  -->
-   <target name="build.client" depends="generate.client.stub">
+   <target name="build.cpp.client" depends="generate.client.stub">
       <cc outtype="executable" subsystem="console"
           outfile="${dist.dir}/MediaRPCClient"
           objdir="${obj.dir}/client">
@@ -150,7 +151,7 @@
          </includepath>
          <libset dir="${client.lib.path}" libs="${client.lib.list}"/>
          <fileset dir="${src.dir}/cpp/client" includes="MediaClientGui.cpp,MediaClient.cpp"/>
-         <fileset dir="${src.dir}/cpp/server" includes="MediaLibrary.cpp"/>  <!-- May need to change -->
+         <fileset dir="${src.dir}/cpp/server" includes="MediaLibrary.cpp"/>  <!-- TODO: May need to change -->
       </cc>
    </target>
 
@@ -167,7 +168,7 @@
 
 
 <!-- Build Server -->
-   <target name="build.server" depends="generate.server.stub">
+   <target name="build.cpp.server" depends="generate.server.stub">
      <cc outtype="executable" subsystem="console"
          outfile="${dist.dir}/MediaLibraryRPCServer"
          objdir="${obj.dir}/server">
@@ -178,7 +179,7 @@
          </includepath>
          <libset dir="${server.lib.path}" libs="${server.lib.list}"/>
          <fileset dir="${src.dir}/cpp/server"
-                  includes="MediaLibrary.cpp, SeriesSesason.cpp, Epsisode.cpp"/>
+                  includes="MediaLibrary.cpp, SeriesSesason.cpp, Epsisode.cpp"/>  <!-- TODO: include any additional files if created/-->
       </cc>
    </target>
 
@@ -188,12 +189,11 @@
       <cc outtype="executable" subsystem="console"
           outfile="${dist.dir}/mediaPlayer"
           objdir="${obj.dir}">
-	  <compilerarg value="-std=c++14"/>
+	  <compilerarg value="${cxxflag}"/>
           <includepath>
-             <dirset dir="/" includes="usr/include,usr/local/include,usr/include/jsoncpp"/>
+             <pathelement path="${includepath}"/>
           </includepath>
-          <libset dir="/usr/lib" libs="stdc++,fltk,fltk_images,curl,jsoncpp,pthread"/>
-          <libset dir="/usr/local/lib" libs="curlpp"/>
+          <libset dir="${server.lib.path}" libs="${server.lib.list}"/>
           <fileset dir="${src.cpp.dir}/server/" includes="MediaLibrary.cpp,SeriesSeason.cpp,Episode.cpp"/>
           <fileset dir="${src.cpp.dir}/client/" includes="MediaClient.cpp,MediaClientGui.cpp,"/>
       </cc>
@@ -207,6 +207,5 @@
        <arg line= "${userId} ${omdbkey}"/>
      </exec>
    </target>
-
 
 </project>
