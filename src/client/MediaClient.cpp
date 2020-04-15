@@ -19,7 +19,7 @@
 #include <curlpp/Exception.hpp>
 
 #include "MediaClientGui.cpp"
-#include "MediaLibrary.h"
+#include "../server/MediaLibrary.h"
 
 using namespace std;
 

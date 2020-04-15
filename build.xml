@@ -7,49 +7,183 @@
    <property name="src" value="./src" />
    <property name="lib" value="./lib" />
    <property name="src.cpp.dir" value="src"/>
+   <property name="classes.dir" value="classes" />
    <property name="obj.dir" value="obj"/>
    <property name="dist.dir" value="bin"/>
    <property name="omdbkey" value="myomdbkey"/>
-   <property environment="env"/>
+   <property name="host.name" value="localhost"/>
+   <property name="port.num" value="8888"/>
+   <property name="json.file.name" value="MediaLibraryMethods.json"/>
    <property name="userId" value="${env.USER}"/>
+   <property environment="env"/>
 
-   <target name="targets">
-     <echo message="targets are clean, prepare, build, execute, targets"/>
+
+   <target name="targets">   <!-- need to remove build and execute when server/client works-->
+     <echo message="targets are clean, prepare, build, execute, build.server, build.client, build.all, targets"/>
+     <echo message="execute cpp server with: ./bin/MediaLibraryRPCServer ${port.num}"/>
+     <echo message="execute cpp client with: ./bin/MediaRPCClient http://${host.name}:${port.num}"/>
      <echo message="to run, enter: ant execute -DuserId=${userId} -Domdbkey=${omdbkey}"/>
    </target>
 
+
+<!-- Clean project -->
    <target name="clean">
-     <delete dir="${obj.dir}" failonerror="false"/>
-     <delete dir="${dist.dir}" failonerror="false"/>
+      <delete dir="${classes.dir}" failonerror="false"/>
+      <delete dir="${dist.dir}" failonerror="false"/>
+      <delete dir="${obj.dir}" failonerror="false"/>
+      <delete dir="log" failonerror="false"/>
+      <delete file="log.txt" failonerror="false"/>
+      <delete file="logerrors.txt" failonerror="false"/>
+      <delete file="logpid.txt" failonerror="false"/>
+      <delete file="${src.dir}/cpp/server/MediaServerStub.h"
+              failonerror="false"/>
+      <delete file="${src.dir}/cpp/client/MediaClientStub.h"
+              failonerror="false"/>
    </target>
 
 
-   <target name="prepare">
-      <!-- Create the time stamp -->
-      <tstamp/>
-      <!-- Create the build directory structure used by compile -->
-      <echo message="home defined as: ${env.HOME}" />
+<!-- Prepare  -->
+ <target name="prepare">
+      <mkdir dir="${classes.dir}"/>
       <mkdir dir="${dist.dir}" />
-      <mkdir dir="${obj.dir}" />
+      <mkdir dir="log" />
+      <mkdir dir="${obj.dir}/client" />
+      <mkdir dir="${obj.dir}/server" />
       <if>
          <isset property="env.USERNAME"/>
          <then>
-           <echo message="detected username is: ${env.USERNAME}"/>
-          </then>
+            <echo message="detected username is: ${env.USERNAME}"/>
+         </then>
       <elseif>
          <isset property="env.USER"/>
          <then>
             <echo message="detected user is: ${env.USER}"/>
-          </then>
+         </then>
       </elseif>
       </if>
       <echo message="host name is: ${os.name}"/>
       <echo message="host arch is: ${os.arch}"/>
       <echo message="host version is: ${os.version}"/>
-      <echo message="base directory is: ${basedir}"/>
+
+      <!-- Platform identification -->
+      <condition property="build.host.islinux">
+        <and>
+          <os family="unix" />
+          <not>
+            <contains string="${os.name}" substring="mac"
+                      casesensitive="false" />
+          </not>
+        </and>
+      </condition>
+      <condition property="build.host.platform" value="linux">
+        <isset property="build.host.islinux" />
+      </condition>
+
+      <condition property="build.host.ismac">
+        <and>
+          <os family="unix" />
+          <contains string="${os.name}" substring="mac" casesensitive="false"/>
+        </and>
+      </condition>
+      <condition property="build.host.platform" value="mac">
+        <isset property="build.host.ismac" />
+      </condition>
+
+      <fail unless="build.host.platform"
+            message="Building on ${os.name} is not supported" />
+      <echo message="build.host.platform is: ${build.host.platform}"/>
+      <if>
+         <isset property="build.host.ismac"/>
+         <then>
+            <echo message="detected a mac host"/>
+            <property name="cxxflag" value="-std=c++14"/>
+            <property name="includepath" value="/opt/local/include:/usr/local/include"/>
+            <property name="client.lib.path" value="/opt/local/lib"/>
+            <property name="client.lib.list" value="c++,jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++"/>
+            <property name="server.lib.path" value="/opt/local/lib"/>
+            <property name="server.lib.list" value="c++,jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd"/>
+         </then>
+      <elseif>
+         <isset property="build.host.islinux"/>
+         <then>
+            <echo message="detected a linux host"/>
+            <property name="cxxflag" value="-std=c++14"/>
+            <property name="includepath" value="/usr/include:/usr/local/include:/usr/include/jsoncpp"/> <!--TODO: -->
+            <property name="client.lib.path" value="/usr/local/lib"/>
+            <property name="client.lib.list" value="jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++"/>
+            <property name="server.lib.path" value="/usr/local/lib"/>
+            <property name="server.lib.list" value="jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,stdc++"/>
+         </then>
+      </elseif>
+      <else>
+         <echo message="failed to detect a host I know how to build on"/>
+      </else>
+   </if>
    </target>
 
 
+<!-- Build all (server and client) -->
+   <target name="build.all"
+           depends="clean,prepare,build.server,build.client"
+           description="Clean then build cpp server, cpp client"/>
+
+
+<!-- Generate Client Stub -->
+   <target name="generate.client.stub" depends="prepare">
+      <exec dir="${basedir}" executable="jsonrpcstub">
+         <arg line="${json.file.name} --cpp-client=MediaClientStub"/>
+      </exec>
+      <copy file="MediaClientStub.h"
+            tofile="${src.dir}/cpp/client/MediaClientStub.h"/>
+      <delete file="MediaClientStub.h"/>
+   </target>
+
+
+<!--  Build Client  -->
+   <target name="build.client" depends="generate.client.stub">
+      <cc outtype="executable" subsystem="console"
+          outfile="${dist.dir}/MediaRPCClient"
+          objdir="${obj.dir}/client">
+         <compilerarg value="${cxxflag}"/>
+         <includepath>
+            <pathelement path="${includepath}"/>
+         </includepath>
+         <libset dir="${client.lib.path}" libs="${client.lib.list}"/>
+         <fileset dir="${src.dir}/cpp/client" includes="MediaClientGui.cpp,MediaClient.cpp"/>
+         <fileset dir="${src.dir}/cpp/server" includes="MediaLibrary.cpp"/>  <!-- May need to change -->
+      </cc>
+   </target>
+
+
+<!-- Generate Server Stub -->
+   <target name="generate.server.stub" depends="prepare">
+      <exec dir="${basedir}" executable="jsonrpcstub">
+         <arg line="${json.file.name} --cpp-server=MediaServerStub"/>
+      </exec>
+      <copy file="MediaServerStub.h"
+            tofile="${src.dir}/cpp/server/MediaServerStub.h"/>
+      <delete file="MediaServerStub.h"/>
+   </target>
+
+
+<!-- Build Server -->
+   <target name="build.server" depends="generate.server.stub">
+     <cc outtype="executable" subsystem="console"
+         outfile="${dist.dir}/MediaLibraryRPCServer"
+         objdir="${obj.dir}/server">
+         <compiler name="g++"/>
+         <compilerarg value="${cxxflag}"/>
+         <includepath>
+            <pathelement path="${includepath}"/>
+         </includepath>
+         <libset dir="${server.lib.path}" libs="${server.lib.list}"/>
+         <fileset dir="${src.dir}/cpp/server"
+                  includes="MediaLibrary.cpp, SeriesSesason.cpp, Epsisode.cpp"/>
+      </cc>
+   </target>
+
+
+<!-- Original build from Assign 4 -->
    <target name="build" depends="clean, prepare">
       <cc outtype="executable" subsystem="console"
           outfile="${dist.dir}/mediaPlayer"
@@ -60,11 +194,13 @@
           </includepath>
           <libset dir="/usr/lib" libs="stdc++,fltk,fltk_images,curl,jsoncpp,pthread"/>
           <libset dir="/usr/local/lib" libs="curlpp"/>
-          <fileset dir="${src.cpp.dir}/client/" includes="MediaClient.cpp,MediaClientGui.cpp,MediaLibrary.cpp,SeriesSeason.cpp,Episode.cpp"/>
+          <fileset dir="${src.cpp.dir}/server/" includes="MediaLibrary.cpp,SeriesSeason.cpp,Episode.cpp"/>
+          <fileset dir="${src.cpp.dir}/client/" includes="MediaClient.cpp,MediaClientGui.cpp,"/>
       </cc>
    </target>
 
 
+<!-- Original Execute from Assign 4 -->
    <target name="execute" depends="build">
      <echo message="./bin/mediaPlayer ${userId} ${omdbkey}"/>
      <exec executable="./bin/mediaPlayer">
