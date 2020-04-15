@@ -38,34 +38,6 @@ class MediaLibrary
    private:
 
       map<string, SeriesSeason> libraryMap;       // map to store library objects.
-      
-      /**
-       * Method to add a series and season to the library from the top menu button action.
-       * Method submits api call for series and season information, then passed to parse to 
-       * library series and episode objects. 
-       * @return void.
-       * */
-      void fetchURLAddSeries() ;
-      
-      /**
-       * Method to remove series from the library using top menu Series-Season/Remove button.
-       * @return void
-       * */
-      void actionRemoveSeries();
-
-
-      /**
-       * Method to add episode for a series to the library using top menu Episode/Add button.
-       * @return void.
-       * */
-      void actionAddEpisode();
-
-      /**
-       * Method to remove Episode from a series in the library using the top menu 
-       * Episode/Remove button.
-       * @return void
-       * */
-      void actionRemoveEpisode();
 
    protected:
 
