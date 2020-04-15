@@ -2,7 +2,7 @@
 #include <map>
 #include <vector>
 #include <json/json.h>
-#include "SeriesSeason.hpp"
+#include "SeriesSeason.h"
 
 using namespace std;
 

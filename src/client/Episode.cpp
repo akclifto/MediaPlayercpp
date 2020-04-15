@@ -1,6 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
-#include "Episode.hpp"
+#include "Episode.h"
 
 using namespace std;
 

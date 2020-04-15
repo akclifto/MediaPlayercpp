@@ -1,7 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <algorithm>
-#include "SeriesSeason.hpp"
+#include "SeriesSeason.h"
 
 using namespace std;
 

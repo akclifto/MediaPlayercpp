@@ -1,7 +1,7 @@
 #include <string>
 #include <cmath>
 #include <json/json.h>
-#include "Episode.hpp"
+#include "Episode.h"
 
 using namespace std;
 
