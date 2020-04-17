@@ -1,0 +1,58 @@
+[
+    {
+        "method": "toJsonFile",
+        "params":["fileName"],
+        "returns": true
+    },
+    {
+        "method": "initLibraryFromJsonFile",
+        "params":["fileName"],
+        "returns": true
+    },
+    {
+        "method": "parseURLtoJSON",
+        "params":["seriesInfo, seasonInfo"],
+        "returns": true
+    },
+    {
+        "method": "removeSeries",
+        "params":["seriesName"],
+        "returns": true
+    },
+    {
+        "method": "addEpisode",
+        "params":["seriesName, EpisodeName"],
+        "returns": true
+    },
+    {
+        "method": "removeEpisode",
+        "params":["seriesName, episodeName"],
+        "returns": true
+    },
+    {
+        "method": "getSeries",
+        "params":["seriesName"],
+        "returns": { } 
+    },
+    {
+        "method": "getEpisode",
+        "params":["seriesName, episodeName"],
+        "returns": { }
+    },
+    {
+        "method": "getEpisodeListSize",
+        "params":["seriesName"],
+        "returns": 2
+    },
+    {
+        "method": "getLibraryTitles",
+        "params":[],
+        "returns": [ ]
+    },
+    {
+        "method": "getEpisodeTitles",
+        "params":["seriesName"],
+        "returns": [ ]
+    }
+
+]

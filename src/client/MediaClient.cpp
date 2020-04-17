@@ -17,6 +17,8 @@
 #include <curlpp/Options.hpp>
 #include <curlpp/Easy.hpp>
 #include <curlpp/Exception.hpp>
+#include <jsonrpccpp/client/connectors/httpclient.h>
+
 
 #include "MediaClientGui.cpp"
 #include "../server/MediaLibrary.h"
@@ -613,54 +615,24 @@ public:
 
 int main(int argc, char *argv[])
 {
-   string developer = (argc > 1) ? argv[1] : "Adam.Clifton";
-   string omdbkey = (argc > 2) ? argv[2] : "omdbkey";
-   string windowTitle = developer + "'s SeriesSeason Browser";
-   MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
-   return (Fl::run());
-}
+   try{
+      //connect to server
+      string host = (argc > 1) ? argv[1] : "http://127.0.0.1";
+      string port = (argc > 2) ? argv[2] : "8888";
+      cout << "Connecting to host" << host << ":" << port << endl;
 
-/**
- * Method for testing and debugging. 
- * @return void
- */
-void testCase()
-{
+      string developer = (argc > 1) ? argv[3] : "Adam.Clifton";
+      string omdbkey = (argc > 2) ? argv[4] : "omdbkey";
+      string windowTitle = developer + "'s SeriesSeason Browser";
+      
+      HttpClient client(host + ":" + port);  
+      MediaClientStub stub(client);
 
-   MediaLibrary ml;
-   vector<string> epis = ml.getSeries("The Big Bang Theory - Season 11").getEpisodeTitles();
-   cout << "Epis size " << epis.size() << endl;
+      MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
+      return (Fl::run());
 
-   for (auto i : epis)
-   {
-      cout << i << endl;
+   } catch(JsonRpcException ex){
+      cout << "Exception in client main: " << ex.what() << endl;
    }
-
-   ml.toJsonFile("test.json");
-   ml.initLibraryFromJsonFile("test.json");
-   ml.print();
-
-   //initial debugging
-   SeriesSeason s1("series 1", "12", "10/10", "action", "link.com", "this is details");
-   SeriesSeason s2("series 2", "10", "05/10", "comedy", "website.com", "some plot details");
-   Episode eps1("eps 1", "5.0", "Epi plot");
-   Episode eps2("eps 2", "5.0", "Epi plot second");
-   Episode eps3("Series 2 ep 1", "3.0", "Epi plotting");
-   s1.addEpisode(eps1);
-   s1.addEpisode(eps2);
-   s2.addEpisode(eps3);
-   int size = s1.getEpisodeList().size();
-   size = s1.getEpisodeList().size();
-   cout << "S1 epi size: " << s1.getEpisodeList().size() << endl;
-   MediaLibrary mll;
-   mll.addSeries(s1);
-   mll.addSeries(s2);
-   mll.addSeries(s1);
-
-   cout << mll.toJsonFile("test.json") << endl;
-   mll.initLibraryFromJsonFile("test.json");
-   cout << "size of the libMap: " << mll.getLibrary().size();
-   mll.print();
-   cout << mll.toJsonFile("OUTPUT.json") << endl;
-   return;
 }
+

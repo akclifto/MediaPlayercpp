@@ -21,7 +21,7 @@
 <!-- Targets -->
    <target name="targets">   <!-- TODO: need to remove build and execute when server/client works-->
      <echo message="targets are clean, prepare, build, execute, build.cpp.server, build.cpp.client, build.all, targets"/>
-     <echo message="execute cpp server with: ./bin/MediaLibraryRPCServer ${port.num}"/>
+     <echo message="execute cpp server with: ./bin/MediaRPCServer ${port.num}"/>
      <echo message="execute cpp client with: ./bin/MediaRPCClient http://${host.name}:${port.num}"/>
      <echo message="to run, enter: ant execute -DuserId=${userId} -Domdbkey=${omdbkey}"/>
    </target>
@@ -100,9 +100,9 @@
             <property name="cxxflag" value="-std=c++14"/>
             <property name="includepath" value="/opt/local/include:/usr/local/include:/usr/include/jsoncpp:/usr/lib"/>
             <property name="client.lib.path" value="/opt/local/lib"/>
-            <property name="client.lib.list" value="c++,jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++,fltk,fltk_images,curl,curlpp,jsoncpp,pthread"/>
+            <property name="client.lib.list" value="c++,jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++,fltk,fltk_images,curl,curlpp,pthread"/>
             <property name="server.lib.path" value="/opt/local/lib"/>
-            <property name="server.lib.list" value="c++,jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,fltk,fltk_images,curl,curlpp,jsoncpp,pthread"/>
+            <property name="server.lib.list" value="c++,jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,fltk,fltk_images,curl,curlpp,pthread"/>
          </then>
       <elseif>
          <isset property="build.host.islinux"/>
@@ -111,9 +111,9 @@
             <property name="cxxflag" value="-std=c++14"/>
             <property name="includepath" value="/usr/lib:/usr/include:/usr/local/include:/usr/include/jsoncpp"/> <!--TODO: may need to update-->
             <property name="client.lib.path" value="/usr/local/lib"/>
-            <property name="client.lib.list" value="jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++,fltk,fltk_images,curl,curlpp,jsoncpp,pthread"/>
+            <property name="client.lib.list" value="jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++,fltk,fltk_images,curl,curlpp,pthread"/>
             <property name="server.lib.path" value="/usr/local/lib"/>
-            <property name="server.lib.list" value="jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,stdc++,fltk,fltk_images,curl,curlpp,jsoncpp,pthread"/>
+            <property name="server.lib.list" value="jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,stdc++,fltk,fltk_images,curl,curlpp,pthread"/>
          </then>
       </elseif>
       <else>
@@ -170,7 +170,7 @@
 <!-- Build Server -->
    <target name="build.cpp.server" depends="generate.server.stub">
      <cc outtype="executable" subsystem="console"
-         outfile="${dist.dir}/MediaLibraryRPCServer"
+         outfile="${dist.dir}/MediaRPCServer"
          objdir="${obj.dir}/server">
          <compiler name="g++"/>
          <compilerarg value="${cxxflag}"/>
@@ -179,7 +179,7 @@
          </includepath>
          <libset dir="${server.lib.path}" libs="${server.lib.list}"/>
          <fileset dir="${src.dir}/cpp/server"
-                  includes="MediaLibrary.cpp, SeriesSesason.cpp, Epsisode.cpp"/>  <!-- TODO: include any additional files if created/-->
+                  includes="MediaLibrary.cpp,SeriesSesason.cpp,Epsisode.cpp,MediaLibraryServer.cpp"/>  <!-- TODO: include any additional files if created/-->
       </cc>
    </target>
 
