@@ -46,7 +46,7 @@
 #include <curlpp/Exception.hpp>
 #include <jsonrpccpp/client/connectors/httpclient.h>
 
-//#include "MediaClientStub.h"
+// #include "mediaclientstub.h"
 #include "MediaClientGui.cpp"
 #include "../server/MediaLibrary.h"
 

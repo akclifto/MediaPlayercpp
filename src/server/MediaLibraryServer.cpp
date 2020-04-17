@@ -49,8 +49,26 @@ using namespace std;
 
 class MediaLibraryServer : public mediaserverstub {
 
-    
+     private: 
+        MediaLibrary *library;
+        int portNum;
 
+    protected:
+    public:
+        MediaLibraryServer(AbstractServerConnector &connector, int portNum, string filename);
+        virtual string serviceInfo();
+        virtual bool toJsonFile(const string &filename);
+        virtual bool initLibraryFromJsonFile(const string &filename);
+        virtual bool parseURLtoJSON(const string &seriesInfo, const string &seasonInfo);
+        virtual bool removeSeries(const string &seriesName);
+        virtual bool addEpisode(const string &seriesName, const string &episodeName);
+        virtual bool removeEpisode(const string &seriesName, const string &episodeName);
+        virtual Json::Value getSeries(const string &seriesName);
+        virtual Json::Value getEpisode(const string &seriesName, const string &episodeName);
+        virtual int getEpisodeListSize(const string &seriesName);
+        virtual Json::Value getLibraryTitles();
+        virtual Json::Value getEpisodeTitles(const string &seriesName);
 
+};
 
-}
+//TODO:  implement the above

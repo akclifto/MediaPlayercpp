@@ -36,9 +36,9 @@
       <delete file="log.txt" failonerror="false"/>
       <delete file="logerrors.txt" failonerror="false"/>
       <delete file="logpid.txt" failonerror="false"/>
-      <delete file="${src.dir}/cpp/server/mediaserverstub.h"
+      <delete file="${src.cpp.dir}/cpp/server/mediaserverstub.h"
               failonerror="false"/>
-      <delete file="${src.dir}/cpp/client/mediaclientstub.h"
+      <delete file="${src.cpp.dir}/cpp/client/mediaclientstub.h"
               failonerror="false"/>
    </target>
 
@@ -135,7 +135,7 @@
          <arg line="${json.file.name} --cpp-client=mediaclientstub"/>
       </exec>
       <copy file="mediaclientstub.h"
-            tofile="${src.dir}/cpp/client/mediaclientstub.h"/>
+            tofile="${src.cpp.dir}/cpp/client/mediaclientstub.h"/>
       <delete file="mediaclientstub.h"/>
    </target>
 
@@ -150,8 +150,8 @@
             <pathelement path="${includepath}"/>
          </includepath>
          <libset dir="${client.lib.path}" libs="${client.lib.list}"/>
-         <fileset dir="${src.dir}/cpp/client" includes="MediaClientGui.cpp,MediaClient.cpp"/>
-         <fileset dir="${src.dir}/cpp/server" includes="MediaLibrary.cpp"/>  <!-- TODO: May need to change -->
+         <fileset dir="${src.cpp.dir}/cpp/client" includes="MediaClientGui.cpp,MediaClient.cpp"/>
+         <fileset dir="${src.cpp.dir}/cpp/server" includes="MediaLibrary.cpp"/>  <!-- TODO: May need to change -->
       </cc>
    </target>
 
@@ -162,7 +162,7 @@
          <arg line="${json.file.name} --cpp-server=mediaserverstub"/>
       </exec>
       <copy file="mediaserverstub.h"
-            tofile="${src.dir}/cpp/server/mediaserverstub.h"/>
+            tofile="${src.cpp.dir}/cpp/server/mediaserverstub.h"/>
       <delete file="mediaserverstub.h"/>
    </target>
 
@@ -178,7 +178,7 @@
             <pathelement path="${includepath}"/>
          </includepath>
          <libset dir="${server.lib.path}" libs="${server.lib.list}"/>
-         <fileset dir="${src.dir}/cpp/server"
+         <fileset dir="${src.cpp.dir}/cpp/server"
                   includes="MediaLibrary.cpp,SeriesSesason.cpp,Epsisode.cpp,MediaLibraryServer.cpp"/>  <!-- TODO: include any additional files if created/-->
       </cc>
    </target>
