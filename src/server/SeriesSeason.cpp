@@ -1,10 +1,3 @@
-#include <iostream>
-#include <stdlib.h>
-#include <algorithm>
-#include "SeriesSeason.h"
-
-using namespace std;
-
 /**
  * Copyright 2020 Tim Lindquist, Adam Clifton
  *
@@ -31,6 +24,14 @@ using namespace std;
  * @file SeriesSeason.cpp
  * @version April 2020
  */
+
+#include <iostream>
+#include <stdlib.h>
+#include <algorithm>
+#include "SeriesSeason.h"
+
+using namespace std;
+
 SeriesSeason::SeriesSeason()
 {
    title = "";

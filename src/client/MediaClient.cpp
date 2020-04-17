@@ -1,37 +1,3 @@
-#include <FL/Fl.H>
-#include <FL/Fl_Window.H>
-#include <FL/Fl_Button.H>
-#include <FL/Fl_Output.H>
-#include <FL/Fl_Multiline_Input.H>
-#include <FL/Fl_Check_Browser.H>
-#include <stdio.h>
-#include <iostream>
-#include <fstream>
-#include <chrono>
-#include <ctime>
-#include <stdlib.h>
-#include <sstream>
-#include <thread>
-#include <json/json.h>
-#include <curlpp/cURLpp.hpp>
-#include <curlpp/Options.hpp>
-#include <curlpp/Easy.hpp>
-#include <curlpp/Exception.hpp>
-#include <jsonrpccpp/client/connectors/httpclient.h>
-
-
-#include "MediaClientGui.cpp"
-#include "../server/MediaLibrary.h"
-
-using namespace std;
-
-std::string cmd;
-void run()
-{
-   system(cmd.c_str());
-}
-void testCase(); //for debugging
-
 /**
  * Copyright 2020 Tim Lindquist, Adam Clifton 
  * <p>
@@ -58,6 +24,42 @@ void testCase(); //for debugging
  * @MediaClient.cpp
  * @version April 2020
  */
+
+#include <FL/Fl.H>
+#include <FL/Fl_Window.H>
+#include <FL/Fl_Button.H>
+#include <FL/Fl_Output.H>
+#include <FL/Fl_Multiline_Input.H>
+#include <FL/Fl_Check_Browser.H>
+#include <stdio.h>
+#include <iostream>
+#include <fstream>
+#include <chrono>
+#include <ctime>
+#include <stdlib.h>
+#include <sstream>
+#include <thread>
+#include <json/json.h>
+#include <curlpp/cURLpp.hpp>
+#include <curlpp/Options.hpp>
+#include <curlpp/Easy.hpp>
+#include <curlpp/Exception.hpp>
+#include <jsonrpccpp/client/connectors/httpclient.h>
+
+//#include "MediaClientStub.h"
+#include "MediaClientGui.cpp"
+#include "../server/MediaLibrary.h"
+
+
+using namespace std;
+
+std::string cmd;
+void run()
+{
+   system(cmd.c_str());
+}
+void testCase(); //for debugging
+
 class MediaClient : public MediaClientGui
 {
 
@@ -626,13 +628,13 @@ int main(int argc, char *argv[])
       string windowTitle = developer + "'s SeriesSeason Browser";
       
       HttpClient client(host + ":" + port);  
-      MediaClientStub stub(client);
+      mediaclientstub stub(client);
 
       MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
       return (Fl::run());
 
    } catch(JsonRpcException ex){
-      cout << "Exception in client main: " << ex.what() << endl;
+      cerr << "Exception in client main: " << ex.what() << endl;
    }
 }
 

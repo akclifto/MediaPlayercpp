@@ -1,10 +1,3 @@
-#include <string>
-#include <cmath>
-#include <json/json.h>
-#include "Episode.h"
-
-using namespace std;
-
 /**
  * Copyright 2020 Tim Lindquist, Adam Clifton 
  *
@@ -28,9 +21,20 @@ using namespace std;
  *         Software Engineering, CIDSE, IAFSE, ASU Poly
  * @author Adam Clifton akclifto@asu.edu
  *         Software Engineering, ASU
- * @file SeriesSeason.hpp
+ * @file SeriesSeason.h
  * @version April 2020
  */
+
+#ifndef SERIESSEASON_H
+#define SERIESSEASON_H
+
+#include <string>
+#include <cmath>
+#include <json/json.h>
+#include "Episode.h"
+
+using namespace std;
+
 class SeriesSeason
 {
 private: 
@@ -115,3 +119,5 @@ public:
      **/
     void print();
 };
+
+#endif

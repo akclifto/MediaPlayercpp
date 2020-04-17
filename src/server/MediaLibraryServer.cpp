@@ -25,3 +25,32 @@
  * @version April 2020
  */
 
+#include <jsonrpccpp/server.h>
+#include <jsonrpccpp/server/connectors/httpserver.h>
+// the include below requires that you've built the jsonrpccpp package manually
+// with the switchs as follows:
+// cmake ../ -DTCP_SOCKET_SERVER=YES -DTCP_SOCKET_CLIENT=YES
+// make
+// make doc    // this will build html docs in the build/doc/html directory
+// sudo make install
+//#include <jsonrpccpp/server/connectors/tcpsocketserver.h>
+#include <json/json.h>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <cstdlib>
+#include <csignal>
+
+#include "mediaserverstub.h"
+#include "MediaLibrary.h"
+
+using namespace jsonrpc;
+using namespace std;
+
+class MediaLibraryServer : public mediaserverstub {
+
+    
+
+
+
+}

@@ -1,8 +1,3 @@
-#include <string>
-#include <json/json.h>
-
-using namespace std;
-
 /**
  * Copyright 2020, Adam Clifton
  *
@@ -23,9 +18,18 @@ using namespace std;
  * Ser321 Principles of Distributed Software Systems
  * @author Adam Clifton akclifto@asu.edu
  *         Software Engineering, ASU
- * @file Episode.hpp
+ * @file Episode.h
  * @version April 2020
  */
+
+#ifndef EPISODE_H
+#define EPISODE_H
+
+#include <string>
+#include <json/json.h>
+
+using namespace std;
+
 
 class Episode
 {
@@ -67,3 +71,5 @@ public:
      * */
     void print();
 };
+
+#endif

@@ -36,9 +36,9 @@
       <delete file="log.txt" failonerror="false"/>
       <delete file="logerrors.txt" failonerror="false"/>
       <delete file="logpid.txt" failonerror="false"/>
-      <delete file="${src.dir}/cpp/server/MediaServerStub.h"
+      <delete file="${src.dir}/cpp/server/mediaserverstub.h"
               failonerror="false"/>
-      <delete file="${src.dir}/cpp/client/MediaClientStub.h"
+      <delete file="${src.dir}/cpp/client/mediaclientstub.h"
               failonerror="false"/>
    </target>
 
@@ -100,9 +100,9 @@
             <property name="cxxflag" value="-std=c++14"/>
             <property name="includepath" value="/opt/local/include:/usr/local/include:/usr/include/jsoncpp:/usr/lib"/>
             <property name="client.lib.path" value="/opt/local/lib"/>
-            <property name="client.lib.list" value="c++,jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++,fltk,fltk_images,curl,curlpp,pthread"/>
+            <property name="client.lib.list" value="c++,jsoncpp,jsonrpccpp-client,jsonrpccpp-common,microhttpd,stdc++,fltk,fltk_images,curl,curlpp,jsoncpp,pthread"/>
             <property name="server.lib.path" value="/opt/local/lib"/>
-            <property name="server.lib.list" value="c++,jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,fltk,fltk_images,curl,curlpp,pthread"/>
+            <property name="server.lib.list" value="c++,jsoncpp,jsonrpccpp-server,jsonrpccpp-common,microhttpd,fltk,fltk_images,curl,curlpp,jsoncpp,pthread"/>
          </then>
       <elseif>
          <isset property="build.host.islinux"/>
@@ -132,11 +132,11 @@
 <!-- Generate Client Stub -->
    <target name="generate.client.stub" depends="prepare">
       <exec dir="${basedir}" executable="jsonrpcstub">
-         <arg line="${json.file.name} --cpp-client=MediaClientStub"/>
+         <arg line="${json.file.name} --cpp-client=mediaclientstub"/>
       </exec>
-      <copy file="MediaClientStub.h"
-            tofile="${src.dir}/cpp/client/MediaClientStub.h"/>
-      <delete file="MediaClientStub.h"/>
+      <copy file="mediaclientstub.h"
+            tofile="${src.dir}/cpp/client/mediaclientstub.h"/>
+      <delete file="mediaclientstub.h"/>
    </target>
 
 
@@ -159,11 +159,11 @@
 <!-- Generate Server Stub -->
    <target name="generate.server.stub" depends="prepare">
       <exec dir="${basedir}" executable="jsonrpcstub">
-         <arg line="${json.file.name} --cpp-server=MediaServerStub"/>
+         <arg line="${json.file.name} --cpp-server=mediaserverstub"/>
       </exec>
-      <copy file="MediaServerStub.h"
-            tofile="${src.dir}/cpp/server/MediaServerStub.h"/>
-      <delete file="MediaServerStub.h"/>
+      <copy file="mediaserverstub.h"
+            tofile="${src.dir}/cpp/server/mediaserverstub.h"/>
+      <delete file="mediaserverstub.h"/>
    </target>
 
 

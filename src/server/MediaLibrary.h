@@ -1,11 +1,3 @@
-#include <string>
-#include <map>
-#include <vector>
-#include <json/json.h>
-#include "SeriesSeason.h"
-
-using namespace std;
-
 /**
  * Copyright 2020 Tim Lindquist, Adam Clifton 
  *
@@ -30,9 +22,21 @@ using namespace std;
  *         Software Engineering, CIDSE, IAFSE, ASU Poly
  * @author Adam Clifton akclifto@asu.edu
  *         Software Engineering, ASU
- * @file MediaLibrary.hpp
+ * @file MediaLibrary.h
  * @version April 2020
  */
+
+#ifndef MEDIALIBRARY_H
+#define MEDIALIBRARY_H
+
+#include <string>
+#include <map>
+#include <vector>
+#include <json/json.h>
+#include "SeriesSeason.h"
+
+using namespace std;
+
 class MediaLibrary
 {  
    private:
@@ -124,3 +128,5 @@ class MediaLibrary
       void print();
 
 };
+
+#endif

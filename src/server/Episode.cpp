@@ -1,9 +1,3 @@
-#include <iostream>
-#include <stdlib.h>
-#include "Episode.h"
-
-using namespace std;
-
 /**
  * Copyright 2020 Adam Clifton
  *
@@ -28,6 +22,12 @@ using namespace std;
  * @file Episode.cpp
  * @version April 2020
  */
+
+#include <iostream>
+#include <stdlib.h>
+#include "Episode.h"
+
+using namespace std;
 
 Episode::Episode()
 {

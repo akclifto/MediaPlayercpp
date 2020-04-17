@@ -1,14 +1,3 @@
-#include <iostream>
-#include <stdlib.h>
-#include <cmath>
-#include <stdio.h>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
-#include "MediaLibrary.h"
-
-using namespace std;
 /**
  * Copyright 2020 Tim Lindquist, Adam CLifton
  *
@@ -36,6 +25,18 @@ using namespace std;
  * @file MediaLibrary.cpp
  * @version April 2020
  */
+
+#include <iostream>
+#include <stdlib.h>
+#include <cmath>
+#include <stdio.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <vector>
+#include "MediaLibrary.h"
+
+using namespace std;
 
 MediaLibrary::MediaLibrary()
 {
