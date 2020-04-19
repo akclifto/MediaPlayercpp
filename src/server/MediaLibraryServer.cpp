@@ -55,7 +55,7 @@ class MediaLibraryServer : public mediaserverstub {
 
     protected:
     public:
-        MediaLibraryServer(AbstractServerConnector &connector, int portNum, string filename);
+        MediaLibraryServer(AbstractServerConnector &connector, int portNum);
         virtual string serviceInfo();
         virtual bool toJsonFile(const string &filename);
         virtual bool initLibraryFromJsonFile(const string &filename);
@@ -71,4 +71,105 @@ class MediaLibraryServer : public mediaserverstub {
 
 };
 
-//TODO:  implement the above
+/**
+ * Constructor
+ * */ 
+MediaLibraryServer::MediaLibraryServer(AbstractServerConnector &connector, 
+                int port) : mediaserverstub(connector) {
+    
+    library = new MediaLibrary();
+    portNum = port;
+
+}
+
+/**
+ * Method to provide server service information to the client.  
+ * @return message of server service information.
+ * */ 
+string MediaLibraryServer::serviceInfo() {
+    string msg = "Media Library management server.";
+    stringstream ss;
+    ss << portNum;
+    cout << "serviceInfo called. Returning: " << msg << endl;
+    return msg.append(ss.str());
+} 
+
+/**
+ * Method to save library to file using JsonRPC.
+ * @param filename : name of the file to be saved to the library. 
+ * @return true if file saved successfully, false otherwise.
+ * */
+bool MediaLibraryServer::toJsonFile(const string &filename) {
+    cout << "Saving media library to file: " << filename << endl;;
+    return library->toJsonFile(filename);
+}
+
+/**
+ * Method to restore media library from file usin JsonRPC.
+ * @param filename : name of file/filepath to restore library from file.
+ * @return true if library restored successfully, false otherwise.
+ * */
+bool MediaLibraryServer::initLibraryFromJsonFile(const string &filename) {
+    cout << "Restoring library from file: " << filename << endl;
+    return library->initLibraryFromJsonFile(filename);
+}
+
+/**
+ * Method to add series to library from omdb search results using JsonRPC.
+ * @param seriesInfo : information about the series searched
+ * @param seasonInfo : information about the season searched
+ * @return true if added to library successfully, false otherwise
+ * */
+bool MediaLibraryServer::parseURLtoJSON(const string &seriesInfo, const string &seasonInfo) {
+    cout << "Adding new series to library" << endl;
+    return library->parseURLtoJSON(seriesInfo, seasonInfo);
+}
+
+/**
+ * Method to remove series from library using the GUI top-menu functionality,
+ * with JsonRPC.
+ * @param seriesName : name of the series to remove.
+ * @return true if series is removed  successfully, false otherwise
+ * */
+bool MediaLibraryServer::removeSeries(const string &seriesName) {
+    cout << "Removing " << seriesName << " from the Library.\n";
+    return library->removeSeries(seriesName);
+}
+
+/**
+ * Method to add episode to the library using the GUI to-p-menu functionality, 
+ * with JsonRPC
+ * @param seriesName : name of the series containing episode to add
+ * @param episodeName : name of the episode to add to library.
+ * @return true if episode added correctly, false otherwise.
+ * */
+bool MediaLibraryServer::addEpisode(const string &seriesName, const string &episodeName) {
+    cout << "Adding " << episodeName << " to " << seriesName << endl;
+    return library->getSeries(seriesName).addEpisode(episodeName);
+}
+
+/**
+ * Method to remove episode from series using the GUI top-menu functionality.
+ * @param seriesName : name of the series containing the episode
+ * @param episodeName : name of the episode to remove
+ * @return true if episode removed successfully, false otherwise
+ * */
+bool MediaLibraryServer::removeEpisode(const string &seriesName, const string &episodeName) {
+    cout << "Removing " << episodeName << " from " << seriesName << endl;
+    return library->getSeries(seriesName).removeEpisode(episodeName);
+}
+
+/**
+ * Method to get series info in a Json object using JsonRPC
+ * @param seriesName : name of the series to retrieve information
+ * @return Json object containing series information
+ * */
+Json::Value MediaLibraryServer::getSeries(const string &seriesName) {
+    cout << "Getting series information: " << seriesName << endl;
+    return library->jsonGetSeries(seriesName);
+}
+
+Json::Value getEpisode(const string &seriesName, const string &episodeName);
+int getEpisodeListSize(const string &seriesName);
+Json::Value getLibraryTitles();
+Json::Value getEpisodeTitles(const string &seriesName);

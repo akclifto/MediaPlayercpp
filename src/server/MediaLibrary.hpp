@@ -127,6 +127,13 @@ class MediaLibrary
        **/
       void print();
 
+      /**
+       * Method to get Series information in form of Json object.
+       * @param seriesName : name of the series for information
+       * @return Json object containing series information
+       * */
+      Json::Value jsonGetSeries(string seriesName);
+
 };
 
 #endif

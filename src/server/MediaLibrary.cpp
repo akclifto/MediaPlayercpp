@@ -124,6 +124,17 @@ SeriesSeason MediaLibrary::getSeries(string aTitle)
    return series;
 }
 
+Json::Value MediaLibrary::jsonGetSeries(string seriesName) {
+
+   SeriesSeason series;
+   for(auto &ss : libraryMap){
+      if(ss.second.getTitle() == seriesName){
+         series =  ss.second;
+      }
+   }
+   return series.toJson();
+}
+
 map<string, SeriesSeason> MediaLibrary::getLibrary()
 {
    return libraryMap;
