@@ -11,7 +11,7 @@
     },
     {
         "method": "parseURLtoJSON",
-        "params":["seriesInfo, seasonInfo"],
+        "params":["seriesInfo", "seasonInfo"],
         "returns": true
     },
     {
@@ -21,12 +21,12 @@
     },
     {
         "method": "addEpisode",
-        "params":["seriesName, EpisodeName"],
+        "params":["seriesName", "EpisodeName"],
         "returns": true
     },
     {
         "method": "removeEpisode",
-        "params":["seriesName, episodeName"],
+        "params":["seriesName", "episodeName"],
         "returns": true
     },
     {
@@ -36,7 +36,7 @@
     },
     {
         "method": "getEpisode",
-        "params":["seriesName, episodeName"],
+        "params":["seriesName", "episodeName"],
         "returns": { }
     },
     {

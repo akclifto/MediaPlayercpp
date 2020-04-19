@@ -56,6 +56,7 @@ class MediaLibraryServer : public mediaserverstub {
     protected:
     public:
         MediaLibraryServer(AbstractServerConnector &connector, int portNum);
+        ~MediaLibraryServer();
         virtual string serviceInfo();
         virtual bool toJsonFile(const string &filename);
         virtual bool initLibraryFromJsonFile(const string &filename);
@@ -80,6 +81,13 @@ MediaLibraryServer::MediaLibraryServer(AbstractServerConnector &connector,
     library = new MediaLibrary();
     portNum = port;
 
+}
+
+/**
+ * Destructor
+ * */
+MediaLibraryServer::~MediaLibraryServer() {
+    delete library;   
 }
 
 /**
@@ -210,4 +218,50 @@ Json::Value MediaLibraryServer::getEpisodeTitles(const string &seriesName) {
     cout << "Getting episode titles for: " << seriesName << endl;
     return library->getSeries(seriesName).jsonGetEpisodeTitles();
 
+}
+
+void exiting() {
+    cout << "Server has been terminated.  Exiting normally." << endl;
+}
+
+
+/**
+ * Main method to initialize server.
+ * */
+int main(int argc, char *argv[]) {
+
+       int port = 8888;
+   if(argc > 1){
+      port = atoi(argv[1]);
+   }
+   HttpServer httpserver(port);
+   MediaLibraryServer mls(httpserver, port);
+   // to use tcp sockets instead of http uncomment below (comment above), and the include
+   // for tcpsocketserver.h above. If not running locally, you will need to input ip & port
+   // from command line for both server and client programs.
+   //TcpSocketServer tcpserver("localhost",port);
+   //StudentServer ss(tcpserver, port);
+   std::atexit(exiting);
+   auto ex = [] (int i) {cout << "server terminating with signal " << i << endl;
+                         // ss.StopListening();
+                         exit(0);
+                         //return 0;
+                        };
+   // ^C
+   signal(SIGINT, ex);
+   // abort()
+   signal(SIGABRT, ex);
+   // sent by kill command
+   signal(SIGTERM, ex);
+   // ^Z
+   signal(SIGTSTP, ex);
+   cout << "Media Library Server listening on port " << port
+      //<< " press return/enter to quit." << endl;
+        << " use ps to get pid. To quit: kill -9 pid " << endl;
+   mls.StartListening();
+   while(true){
+   }
+   //int c = getchar();
+   mls.StopListening();
+    return 0;
 }
