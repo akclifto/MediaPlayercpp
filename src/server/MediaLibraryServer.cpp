@@ -42,7 +42,7 @@
 #include <csignal>
 
 #include "mediaserverstub.h"
-#include "MediaLibrary.h"
+#include "MediaLibrary.hpp"
 
 using namespace jsonrpc;
 using namespace std;

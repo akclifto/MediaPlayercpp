@@ -28,7 +28,7 @@
 #include <iostream>
 #include <stdlib.h>
 #include <algorithm>
-#include "SeriesSeason.h"
+#include "SeriesSeason.hpp"
 
 using namespace std;
 

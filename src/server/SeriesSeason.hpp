@@ -31,7 +31,7 @@
 #include <string>
 #include <cmath>
 #include <json/json.h>
-#include "Episode.h"
+#include "Episode.hpp"
 
 using namespace std;
 

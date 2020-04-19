@@ -25,7 +25,7 @@
 
 #include <iostream>
 #include <stdlib.h>
-#include "Episode.h"
+#include "Episode.hpp"
 
 using namespace std;
 

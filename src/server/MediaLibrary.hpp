@@ -33,7 +33,7 @@
 #include <map>
 #include <vector>
 #include <json/json.h>
-#include "SeriesSeason.h"
+#include "SeriesSeason.hpp"
 
 using namespace std;
 
