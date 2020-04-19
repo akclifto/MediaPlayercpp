@@ -219,6 +219,18 @@ Episode SeriesSeason::getEpisode(string name)
 
 }
 
+Json::Value SeriesSeason::jsonGetEpisode(string episodeName) {
+
+   Episode epi;
+
+   for(auto &ep : episodeList){
+      if(ep.second.getName() == episodeName) {
+         epi = ep.second;
+      }
+   }
+   return epi.toJson();
+}
+
 bool SeriesSeason::checkEpisodes()
 {
    return (!episodeList.size() == 0);
@@ -274,6 +286,17 @@ vector<string> SeriesSeason::getEpisodeTitles()
       // cout << iter->first << endl;
    }   
    return epVector;
+}
+
+
+Json::Value SeriesSeason::jsonGetEpisodeTitles() {
+
+   vector<string> epVector = getEpisodeTitles();
+   Json::Value epTitles;
+   for(int i = 0; i < epVector.size(); i++) {
+      epTitles[i] = epVector[i];
+   }
+   return epTitles;
 }
 
 string SeriesSeason::toJsonString()

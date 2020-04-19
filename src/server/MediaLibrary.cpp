@@ -135,6 +135,7 @@ Json::Value MediaLibrary::jsonGetSeries(string seriesName) {
    return series.toJson();
 }
 
+
 map<string, SeriesSeason> MediaLibrary::getLibrary()
 {
    return libraryMap;
@@ -210,6 +211,16 @@ vector<string> MediaLibrary::getTitles()
       myVec.push_back(it->first);
    }
    return myVec;
+}
+
+Json::Value MediaLibrary::jsonGetTitles() {
+
+   vector<string> myVec = getTitles();
+   Json::Value ssTitles;
+   for(int i = 0; i < myVec.size(); i++) {
+      ssTitles[i] = myVec[i];
+   }
+   return ssTitles;
 }
 
 bool MediaLibrary::parseURLtoJSON(string seriesInfo, string seasonInfo)

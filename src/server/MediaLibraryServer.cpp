@@ -165,11 +165,49 @@ bool MediaLibraryServer::removeEpisode(const string &seriesName, const string &e
  * @return Json object containing series information
  * */
 Json::Value MediaLibraryServer::getSeries(const string &seriesName) {
-    cout << "Getting series information: " << seriesName << endl;
+    cout << "Getting series information for: " << seriesName << endl;
     return library->jsonGetSeries(seriesName);
 }
 
-Json::Value getEpisode(const string &seriesName, const string &episodeName);
-int getEpisodeListSize(const string &seriesName);
-Json::Value getLibraryTitles();
-Json::Value getEpisodeTitles(const string &seriesName);
+/**
+ * Method to get Json object of episode information using JsonRPC
+ * @param seriesName : name of the series containing episode
+ * @param episodeName : name of the episode to retrieve
+ * @return Json object containing episode information.
+ * */
+Json::Value MediaLibraryServer::getEpisode(const string &seriesName, const string &episodeName) {
+    cout << "Getting episode information for: " << episodeName << endl;
+    return library->getSeries(seriesName).jsonGetEpisode(episodeName);
+}
+
+/**
+ * Method to get episode list size using JsonRPC
+ * @param seriesName : name of the series to get episode list size
+ * @return int size of episode list.
+ * */
+int MediaLibraryServer::getEpisodeListSize(const string &seriesName) {
+    cout << "Getting episode list size for: " << seriesName << endl;
+    return library->getEpisodeListSize(seriesName); 
+}
+
+/**
+ * Method to get list of series titles in the library in form of Json
+ * object using JsonRPC.
+ * @return Json Object containing list of series titles in library
+ * */
+Json::Value MediaLibraryServer::getLibraryTitles() {
+    cout << "Getting library titles." << endl;
+    return library->jsonGetTitles();
+}
+
+/**
+ * Method to get list of Episode titles for a given series,
+ * using JsonRPC
+ * @param seriesName : name of series to retrieve episode titles.
+ * @return Json object of Episode titles.
+ * */
+Json::Value MediaLibraryServer::getEpisodeTitles(const string &seriesName) {
+    cout << "Getting episode titles for: " << seriesName << endl;
+    return library->getSeries(seriesName).jsonGetEpisodeTitles();
+
+}

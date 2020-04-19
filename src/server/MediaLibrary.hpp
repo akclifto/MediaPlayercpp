@@ -134,6 +134,13 @@ class MediaLibrary
        * */
       Json::Value jsonGetSeries(string seriesName);
 
+      /**
+       * Method to get list of series titles in the library in form of Json
+       * object.
+       * @return Json Object containing list of series titles in library
+       * */
+      Json::Value jsonGetTitles();
+
 };
 
 #endif

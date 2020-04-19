@@ -68,11 +68,25 @@ public:
     vector<string> getEpisodeTitles();
 
     /**
+     * Method to get Episode titles in form of Json object
+     * @return Json object of episode titles for given series.
+     * */
+    Json::Value jsonGetEpisodeTitles();
+
+    /**
      * Method to get episode from the episodeList by name.
      * @param name : name of the episode
      * @return Episode object 
      **/
     Episode getEpisode(string name);
+
+    /**
+    * Method to get Episode information in form of Json object
+    * @param seriesName : name of the series containing episode
+    * @param episodeName : name of the episode for information
+    * @return Json object containing episode information
+    * */
+    Json::Value jsonGetEpisode(string episodeName);
 
     /**
      * Method to add episode to the episodeList for a SeriesSeason object.
