@@ -46,11 +46,11 @@
 #include <curlpp/Exception.hpp>
 #include <jsonrpccpp/client/connectors/httpclient.h>
 
-// #include "mediaclientstub.h"
+#include "mediaclientstub.h"
 #include "MediaClientGui.cpp"
-#include "../server/MediaLibrary.h"
+#include "../server/MediaLibrary.hpp"
 
-
+using namespace jsonrpc;
 using namespace std;
 
 std::string cmd;
@@ -617,7 +617,6 @@ public:
 
 int main(int argc, char *argv[])
 {
-   try{
       //connect to server
       string host = (argc > 1) ? argv[1] : "http://127.0.0.1";
       string port = (argc > 2) ? argv[2] : "8888";
@@ -633,8 +632,5 @@ int main(int argc, char *argv[])
       MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
       return (Fl::run());
 
-   } catch(JsonRpcException ex){
-      cerr << "Exception in client main: " << ex.what() << endl;
-   }
 }
 
