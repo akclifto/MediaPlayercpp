@@ -68,7 +68,7 @@ public:
    string omdbkey;
 
    thread *playThread;
-   MediaLibrary *library;
+   mediaclientstub *library;
 
    /** ClickedX is one of the callbacks for GUI controls.
     * Callbacks need to be static functions. But, static functions
@@ -227,6 +227,7 @@ public:
             if (library)
             {
                cout << "trying to get: " << item->label() << endl;
+
                series = library->getSeries(aTitle);
             }
             else
@@ -279,15 +280,18 @@ public:
 
                Fl_Tree_Item *parent = item->parent();
                string parentLabel = parent->label();
-               Episode epi = library->getSeries(parentLabel).getEpisode(item->label());
+               Episode epi = library->getEpisode(parentLabel, item->label());
                // cout << "parent label: " << parentLabel << "\n\n";
                // cout << "Epi name:  " << epi.getName() << " \n\n" ;
-               string seriesTitle = library->getSeries(parentLabel).getTitle();
+               // string seriesTitle = library->getSeries(parentLabel).getTitle();
+               string seriesTitle = library->getSeriesTitle(parentLabel);
                
-               setImagefromURL(library->getSeries(parentLabel).getPoster());
+               // setImagefromURL(library->getSeries(parentLabel).getPoster());
+               setImagefromURL(library->getSeriesPoster(parentLabel));
 
                seriesSeasonInput->value(seriesTitle.c_str());
-               genreInput->value(library->getSeries(parentLabel).getGenre().c_str());
+               // genreInput->value(library->getSeries(parentLabel).getGenre().c_str());
+               genreInput->value(library->getSeriesGenre(parentLabel).c_str());
                episodeInput->value(epi.getName().c_str());
                ratingInput->value(epi.getImdbRating().c_str());
                summaryMLI->value(epi.getEpSummary().c_str());
@@ -580,7 +584,11 @@ public:
 
    void buildTree()
    {
-      vector<string> result = library->getTitles();
+      Json::Value libTitles = library->getLibraryTitles();
+      vector<string> result;
+      for(const auto &index : libTitles) {
+         result.push_back(index.asString());
+      }
       // cout << "Server has titles: \n";
       tree->clear();
 
@@ -588,10 +596,16 @@ public:
       {
          // cout << res << endl;
          SeriesSeason series = library->getSeries(res);
-         vector<string> epTitle = library->getSeries(res).getEpisodeTitles();
+         // vector<string> epTitle = library->getSeries(res).getEpisodeTitles();
+         Json::Value epTitleRes = library->getEpisodeTitles(res);
+         vector<string> epTitles;
+         for(const auto &index : epTitleRes) {
+            epTitles.push_back(index.asString());
+         }
+
          //  cout << "size of epTitle: " << epTitle.size() << endl;
          string st = "Library/" + series.getTitle() + "/";
-         for (const auto &ep : epTitle)
+         for (const auto &ep : epTitles)
          {
             Episode epi = series.getEpisode(ep);
             string fin = st + epi.getName();
@@ -602,7 +616,7 @@ public:
       tree->redraw();
    }
 
-   MediaClient(const char *name = "Adam", const char *key = "myKey") : MediaClientGui(name)
+   MediaClient(const char *name = "Adam", const char *key = "myKey", mediaclientstub *stub = NULL) : MediaClientGui(name)
    {
       searchButt->callback(SearchCallbackS, (void *)this);
       menubar->callback(Menu_ClickedS, (void *)this);
@@ -610,7 +624,7 @@ public:
       callback(ClickedX);
       omdbkey = key;
       userId = "Adam.Clifton";
-      library = new MediaLibrary();
+      library = stub;
       buildTree();
    }
 };
@@ -629,8 +643,7 @@ int main(int argc, char *argv[])
       HttpClient client(host + ":" + port);  
       mediaclientstub stub(client);
 
-      MediaClient cm(windowTitle.c_str(), omdbkey.c_str());
+      MediaClient cm(windowTitle.c_str(), omdbkey.c_str(), &stub);
       return (Fl::run());
-
 }
 

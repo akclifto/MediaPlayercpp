@@ -63,7 +63,7 @@
 
 
 <!-- Prepare  -->
- <target name="prepare" depends="clean">
+ <target name="prepare">
       <mkdir dir="${dist.dir}" />
       <mkdir dir="log" />
       <mkdir dir="${obj.dir}/client" />

@@ -53,6 +53,26 @@
         "method": "getEpisodeTitles",
         "params":["seriesName"],
         "returns": [ ]
+    },
+    {
+        "method": "getSeriesTitle",
+        "params":["itemLabel"],
+        "returns": "aTitle"
+    },
+    {
+        "method": "getSeriesPoster",
+        "params":["seriesName"],
+        "returns": "posterLink"
+    },
+    {
+        "method": "getSeriesGenre",
+        "params":["seriesName"],
+        "returns": "genreName"
+    },
+    {
+        "method": "checkSeriesExists",
+        "params":["itemLabel"],
+        "returns": true
     }
 
 ]

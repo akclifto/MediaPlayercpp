@@ -69,14 +69,19 @@ class MediaLibraryServer : public mediaserverstub {
         virtual int getEpisodeListSize(const string &seriesName);
         virtual Json::Value getLibraryTitles();
         virtual Json::Value getEpisodeTitles(const string &seriesName);
+        virtual string getSeriesTitle(const string &itemLabel);
+        virtual string getSeriesPoster(const string &seriesName);
+        virtual string getSeriesGenre(const string &seriesName);
+        virtual bool checkSeriesExists(const string &itemLabel);
+
 
 };
 
 /**
  * Constructor
  * */ 
-MediaLibraryServer::MediaLibraryServer(AbstractServerConnector &connector, 
-                int port) : mediaserverstub(connector) {
+MediaLibraryServer::MediaLibraryServer(AbstractServerConnector &connector, int port) : 
+                    mediaserverstub(connector) {
     
     library = new MediaLibrary();
     portNum = port;
@@ -218,6 +223,33 @@ Json::Value MediaLibraryServer::getEpisodeTitles(const string &seriesName) {
     cout << "Getting episode titles for: " << seriesName << endl;
     return library->getSeries(seriesName).jsonGetEpisodeTitles();
 
+}
+
+/**
+ * Method to get series' title using JsonRPC
+ * @param itemLabel : gui label to signify with series title to retrieve
+ * @return string title of series
+ * */
+string MediaLibraryServer::getSeriesTitle(const string &itemLabel) {
+    return library->getSeries(itemLabel).getTitle();
+}
+
+/**
+ * Method to get the post URL using JsonRPC
+ * @param seriesName : name of the series related to the poster URL
+ * @return string of poster URL link.
+ * */
+string MediaLibraryServer::getSeriesPoster(const string &seriesName) {
+    return library->getSeries(seriesName).getPoster();
+}
+
+/**
+ * Method to get series genre using JsonRPC
+ * @param seriesName : name of the series to retrieve genre
+ * @return string of genre(s) for the series.
+ * */
+string MediaLibraryServer::getSeriesGenre(const string &seriesName) {
+    return library->getSeries(seriesName).getGenre();
 }
 
 void exiting() {
