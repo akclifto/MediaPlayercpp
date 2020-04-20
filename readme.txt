@@ -1,3 +1,24 @@
+README:::::ASSIGN5::::::::::::
+
+ - Known Issues:
+	- add/removing episode from top-menu does not work, although (especially) remove should.  
+	Have sent #asktheream question about it to no response.
+	- A bad omdb search will crash the client.  It gets auto-generated into the stub during the 'ant build' process and 
+	I am not able to find the proper place to catch it.  
+		
+ - Can run two clients from same folder or at "distributed" locations :)  Works as intended.
+ - Please let me know if you have any other issues with running the server/client.  I might be able to help troubleshoot.  
+
+Thanks,
+Adam Clifton (akclifto@asu.edu)
+
+
+
+
+
+
+-----------------ORIGINAL READ ME -----------------------------------------------
+
 Author: Tim Lindquist (Tim.Lindquist@asu.edu)
         Software Engineering, CIDSE, IAFSE, Arizona State University Polytechnic
 Version: January 2020
