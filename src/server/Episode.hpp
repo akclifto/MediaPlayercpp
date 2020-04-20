@@ -30,16 +30,14 @@
 
 using namespace std;
 
-
 class Episode
 {
-private: 
+private:
     string name;
     string imdbRating;
     string epSummary;
-    
-protected:
 
+protected:
 public:
     /* All Constructors and Destructor*/
     Episode();

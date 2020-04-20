@@ -187,13 +187,13 @@ public:
 
       imageBox = new Fl_Box(350, 145, 320, 380);
       jpgImage = new Fl_JPEG_Image("default.jpg");
-      imageBox->image(jpgImage); 
+      imageBox->image(jpgImage);
 
       summaryMLI = new Fl_Multiline_Input(665, 180, 300, 300, 0);
       summaryMLI->wrap(1);
       summaryMLI->value("");
       summaryMLI->readonly(1);
-      
+
       end();
       show();
    }

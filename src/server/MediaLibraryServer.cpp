@@ -47,78 +47,80 @@
 using namespace jsonrpc;
 using namespace std;
 
-class MediaLibraryServer : public mediaserverstub {
+class MediaLibraryServer : public mediaserverstub
+{
 
-     private: 
-        MediaLibrary *library;
-        int portNum;
+private:
+    MediaLibrary *library;
+    int portNum;
 
-    protected:
-    public:
-        MediaLibraryServer(AbstractServerConnector &connector, int portNum);
-        ~MediaLibraryServer();
-        virtual string serviceInfo();
-        virtual bool toJsonFile(const string &filename);
-        virtual bool initLibraryFromJsonFile(const string &filename);
-        virtual bool parseURLtoJSON(const string &seriesInfo, const string &seasonInfo);
-        virtual bool removeSeries(const string &seriesName);
-        virtual bool addEpisode(const string &seriesName, const string &episodeName);
-        virtual bool removeEpisode(const string &seriesName, const string &episodeName);
-        virtual Json::Value getSeries(const string &seriesName);
-        virtual Json::Value getEpisode(const string &seriesName, const string &episodeName);
-        virtual int getEpisodeListSize(const string &seriesName);
-        virtual Json::Value getLibraryTitles();
-        virtual Json::Value getEpisodeTitles(const string &seriesName);
-        virtual string getSeriesTitle(const string &itemLabel);
-        virtual string getSeriesPoster(const string &seriesName);
-        virtual string getSeriesGenre(const string &seriesName);
-        virtual bool checkSeriesExists(const string &itemLabel);
-        virtual string getSeriesImdbRating(const string &itemLabel);
-        virtual string getSeriesSummary(const string &itemLabel);
-        virtual string getEpisodeName(const string &seriesName, const string &episodeName);
-        virtual string getEpisodeImdb(const string &seriesName, const string &episodeName);
-        virtual string getEpisodeSummary(const string &seriesName, const string &episodeName);
-
-
+protected:
+public:
+    MediaLibraryServer(AbstractServerConnector &connector, int portNum);
+    ~MediaLibraryServer();
+    virtual string serviceInfo();
+    virtual bool toJsonFile(const string &filename);
+    virtual bool initLibraryFromJsonFile(const string &filename);
+    virtual bool parseURLtoJSON(const string &seriesInfo, const string &seasonInfo);
+    virtual bool removeSeries(const string &seriesName);
+    virtual bool addEpisode(const string &seriesName, const string &episodeName);
+    virtual bool removeEpisode(const string &seriesName, const string &episodeName);
+    virtual Json::Value getSeries(const string &seriesName);
+    virtual Json::Value getEpisode(const string &seriesName, const string &episodeName);
+    virtual int getEpisodeListSize(const string &seriesName);
+    virtual Json::Value getLibraryTitles();
+    virtual Json::Value getEpisodeTitles(const string &seriesName);
+    virtual string getSeriesTitle(const string &itemLabel);
+    virtual string getSeriesPoster(const string &seriesName);
+    virtual string getSeriesGenre(const string &seriesName);
+    virtual bool checkSeriesExists(const string &itemLabel);
+    virtual string getSeriesImdbRating(const string &itemLabel);
+    virtual string getSeriesSummary(const string &itemLabel);
+    virtual string getEpisodeName(const string &seriesName, const string &episodeName);
+    virtual string getEpisodeImdb(const string &seriesName, const string &episodeName);
+    virtual string getEpisodeSummary(const string &seriesName, const string &episodeName);
 };
 
 /**
  * Constructor
- * */ 
-MediaLibraryServer::MediaLibraryServer(AbstractServerConnector &connector, int port) : 
-                    mediaserverstub(connector) {
-    
+ * */
+MediaLibraryServer::MediaLibraryServer(AbstractServerConnector &connector, int port) : mediaserverstub(connector)
+{
+
     library = new MediaLibrary();
     portNum = port;
-
 }
 
 /**
  * Destructor
  * */
-MediaLibraryServer::~MediaLibraryServer() {
-    delete library;   
+MediaLibraryServer::~MediaLibraryServer()
+{
+    delete library;
 }
 
 /**
  * Method to provide server service information to the client.  
  * @return message of server service information.
- * */ 
-string MediaLibraryServer::serviceInfo() {
+ * */
+string MediaLibraryServer::serviceInfo()
+{
     string msg = "Media Library management server.";
     stringstream ss;
     ss << portNum;
     cout << "serviceInfo called. Returning: " << msg << endl;
     return msg.append(ss.str());
-} 
+}
 
 /**
  * Method to save library to file using JsonRPC.
  * @param filename : name of the file to be saved to the library. 
  * @return true if file saved successfully, false otherwise.
  * */
-bool MediaLibraryServer::toJsonFile(const string &filename) {
-    cout << "Saving media library to file: " << filename << endl;;
+bool MediaLibraryServer::toJsonFile(const string &filename)
+{
+    cout << "Saving media library to file: " << filename << endl;
+    ;
     return library->toJsonFile(filename);
 }
 
@@ -127,7 +129,8 @@ bool MediaLibraryServer::toJsonFile(const string &filename) {
  * @param filename : name of file/filepath to restore library from file.
  * @return true if library restored successfully, false otherwise.
  * */
-bool MediaLibraryServer::initLibraryFromJsonFile(const string &filename) {
+bool MediaLibraryServer::initLibraryFromJsonFile(const string &filename)
+{
     cout << "Restoring library from file: " << filename << endl;
     return library->initLibraryFromJsonFile(filename);
 }
@@ -138,7 +141,8 @@ bool MediaLibraryServer::initLibraryFromJsonFile(const string &filename) {
  * @param seasonInfo : information about the season searched
  * @return true if added to library successfully, false otherwise
  * */
-bool MediaLibraryServer::parseURLtoJSON(const string &seriesInfo, const string &seasonInfo) {
+bool MediaLibraryServer::parseURLtoJSON(const string &seriesInfo, const string &seasonInfo)
+{
     cout << "Adding new series to library" << endl;
     return library->parseURLtoJSON(seriesInfo, seasonInfo);
 }
@@ -149,7 +153,8 @@ bool MediaLibraryServer::parseURLtoJSON(const string &seriesInfo, const string &
  * @param seriesName : name of the series to remove.
  * @return true if series is removed  successfully, false otherwise
  * */
-bool MediaLibraryServer::removeSeries(const string &seriesName) {
+bool MediaLibraryServer::removeSeries(const string &seriesName)
+{
     cout << "Removing " << seriesName << " from the Library.\n";
     return library->removeSeries(seriesName);
 }
@@ -161,7 +166,8 @@ bool MediaLibraryServer::removeSeries(const string &seriesName) {
  * @param episodeName : name of the episode to add to library.
  * @return true if episode added correctly, false otherwise.
  * */
-bool MediaLibraryServer::addEpisode(const string &seriesName, const string &episodeName) {
+bool MediaLibraryServer::addEpisode(const string &seriesName, const string &episodeName)
+{
     cout << "Adding " << episodeName << " to " << seriesName << endl;
     return library->getSeries(seriesName).addEpisode(episodeName);
 }
@@ -172,7 +178,8 @@ bool MediaLibraryServer::addEpisode(const string &seriesName, const string &epis
  * @param episodeName : name of the episode to remove
  * @return true if episode removed successfully, false otherwise
  * */
-bool MediaLibraryServer::removeEpisode(const string &seriesName, const string &episodeName) {
+bool MediaLibraryServer::removeEpisode(const string &seriesName, const string &episodeName)
+{
     cout << "Removing " << episodeName << " from " << seriesName << endl;
     return library->getSeries(seriesName).removeEpisode(episodeName);
 }
@@ -182,7 +189,8 @@ bool MediaLibraryServer::removeEpisode(const string &seriesName, const string &e
  * @param seriesName : name of the series to retrieve information
  * @return Json object containing series information
  * */
-Json::Value MediaLibraryServer::getSeries(const string &seriesName) {
+Json::Value MediaLibraryServer::getSeries(const string &seriesName)
+{
     cout << "Getting series information for: " << seriesName << endl;
     return library->jsonGetSeries(seriesName);
 }
@@ -193,7 +201,8 @@ Json::Value MediaLibraryServer::getSeries(const string &seriesName) {
  * @param episodeName : name of the episode to retrieve
  * @return Json object containing episode information.
  * */
-Json::Value MediaLibraryServer::getEpisode(const string &seriesName, const string &episodeName) {
+Json::Value MediaLibraryServer::getEpisode(const string &seriesName, const string &episodeName)
+{
     cout << "Getting episode information for: " << episodeName << endl;
     return library->getSeries(seriesName).jsonGetEpisode(episodeName);
 }
@@ -203,9 +212,10 @@ Json::Value MediaLibraryServer::getEpisode(const string &seriesName, const strin
  * @param seriesName : name of the series to get episode list size
  * @return int size of episode list.
  * */
-int MediaLibraryServer::getEpisodeListSize(const string &seriesName) {
+int MediaLibraryServer::getEpisodeListSize(const string &seriesName)
+{
     cout << "Getting episode list size for: " << seriesName << endl;
-    return library->getEpisodeListSize(seriesName); 
+    return library->getEpisodeListSize(seriesName);
 }
 
 /**
@@ -213,7 +223,8 @@ int MediaLibraryServer::getEpisodeListSize(const string &seriesName) {
  * object using JsonRPC.
  * @return Json Object containing list of series titles in library
  * */
-Json::Value MediaLibraryServer::getLibraryTitles() {
+Json::Value MediaLibraryServer::getLibraryTitles()
+{
     cout << "Getting library titles." << endl;
     return library->jsonGetTitles();
 }
@@ -224,10 +235,10 @@ Json::Value MediaLibraryServer::getLibraryTitles() {
  * @param seriesName : name of series to retrieve episode titles.
  * @return Json object of Episode titles.
  * */
-Json::Value MediaLibraryServer::getEpisodeTitles(const string &seriesName) {
+Json::Value MediaLibraryServer::getEpisodeTitles(const string &seriesName)
+{
     cout << "Getting episode titles for: " << seriesName << endl;
     return library->getSeries(seriesName).jsonGetEpisodeTitles();
-
 }
 
 /**
@@ -235,7 +246,8 @@ Json::Value MediaLibraryServer::getEpisodeTitles(const string &seriesName) {
  * @param itemLabel : gui label to signify with series title to retrieve
  * @return string title of series
  * */
-string MediaLibraryServer::getSeriesTitle(const string &itemLabel) {
+string MediaLibraryServer::getSeriesTitle(const string &itemLabel)
+{
     return library->getSeries(itemLabel).getTitle();
 }
 
@@ -244,7 +256,8 @@ string MediaLibraryServer::getSeriesTitle(const string &itemLabel) {
  * @param seriesName : name of the series related to the poster URL
  * @return string of poster URL link.
  * */
-string MediaLibraryServer::getSeriesPoster(const string &seriesName) {
+string MediaLibraryServer::getSeriesPoster(const string &seriesName)
+{
     return library->getSeries(seriesName).getPoster();
 }
 
@@ -253,7 +266,8 @@ string MediaLibraryServer::getSeriesPoster(const string &seriesName) {
  * @param seriesName : name of the series to retrieve genre
  * @return string of genre(s) for the series.
  * */
-string MediaLibraryServer::getSeriesGenre(const string &seriesName) {
+string MediaLibraryServer::getSeriesGenre(const string &seriesName)
+{
     return library->getSeries(seriesName).getGenre();
 }
 
@@ -262,7 +276,8 @@ string MediaLibraryServer::getSeriesGenre(const string &seriesName) {
  * @param itemLabel : name of the series to check against the library
  * @return true if exists in library, false otherwise
  * */
- bool MediaLibraryServer::checkSeriesExists(const string &itemLabel) {
+bool MediaLibraryServer::checkSeriesExists(const string &itemLabel)
+{
     return library->checkSeries(itemLabel);
 }
 
@@ -271,7 +286,8 @@ string MediaLibraryServer::getSeriesGenre(const string &seriesName) {
  * @param itemLabel : gui label of series name to get imdbRating
  * @return string of imdbRating
  * */
-string MediaLibraryServer::getSeriesImdbRating(const string &itemLabel) {
+string MediaLibraryServer::getSeriesImdbRating(const string &itemLabel)
+{
     return library->getSeries(itemLabel).getImdbRating();
 }
 
@@ -280,7 +296,8 @@ string MediaLibraryServer::getSeriesImdbRating(const string &itemLabel) {
  * @param itemLabel : gui label for series name
  * @return string of series summary information
  * */
-string MediaLibraryServer::getSeriesSummary(const string &itemLabel) {
+string MediaLibraryServer::getSeriesSummary(const string &itemLabel)
+{
     return library->getSeries(itemLabel).getSummary();
 }
 
@@ -290,7 +307,8 @@ string MediaLibraryServer::getSeriesSummary(const string &itemLabel) {
  * @param episodeName : gui label with episode name
  * @return string of episode name
  * */
-string MediaLibraryServer::getEpisodeName(const string &seriesName, const string &episodeName) {
+string MediaLibraryServer::getEpisodeName(const string &seriesName, const string &episodeName)
+{
     return library->getSeries(seriesName).getEpisode(episodeName).getName();
 }
 
@@ -300,7 +318,8 @@ string MediaLibraryServer::getEpisodeName(const string &seriesName, const string
  * @param episodeName : gui label with episode name
  * @return string of episode imdbRating
  * */
-string MediaLibraryServer::getEpisodeImdb(const string &seriesName, const string &episodeName) {
+string MediaLibraryServer::getEpisodeImdb(const string &seriesName, const string &episodeName)
+{
     return library->getSeries(seriesName).getEpisode(episodeName).getImdbRating();
 }
 
@@ -310,51 +329,56 @@ string MediaLibraryServer::getEpisodeImdb(const string &seriesName, const string
  * @param episodeName : gui label with episode name
  * @return string of episode summary
  * */
-string MediaLibraryServer::getEpisodeSummary(const string &seriesName, const string &episodeName){
+string MediaLibraryServer::getEpisodeSummary(const string &seriesName, const string &episodeName)
+{
     return library->getSeries(seriesName).getEpisode(episodeName).getEpSummary();
 }
 
-void exiting() {
+void exiting()
+{
     cout << "Server has been terminated.  Exiting normally." << endl;
 }
-
 
 /**
  * Main method to initialize server.
  * */
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
 
-       int port = 8888;
-   if(argc > 1){
-      port = atoi(argv[1]);
-   }
-   HttpServer httpserver(port);
-   MediaLibraryServer mls(httpserver, port);
-   // to use tcp sockets instead of http uncomment below (comment above), and the include
-   // for tcpsocketserver.h above. If not running locally, you will need to input ip & port
-   // from command line for both server and client programs.
-   //TcpSocketServer tcpserver("localhost",port);
-   //StudentServer ss(tcpserver, port);
-   std::atexit(exiting);
-   auto ex = [] (int i) {cout << "server terminating with signal " << i << endl;
-                         // ss.StopListening();
-                         exit(0);
-                         //return 0;
-                        };
-   // ^C
-   signal(SIGINT, ex);
-   // abort()
-   signal(SIGABRT, ex);
-   // sent by kill command
-   signal(SIGTERM, ex);
-   // ^Z
-   signal(SIGTSTP, ex);
-   cout << "Media Library Server listening on port. " << port << "\nServer Ready." << endl;
+    int port = 8888;
+    if (argc > 1)
+    {
+        port = atoi(argv[1]);
+    }
+    HttpServer httpserver(port);
+    MediaLibraryServer mls(httpserver, port);
+    // to use tcp sockets instead of http uncomment below (comment above), and the include
+    // for tcpsocketserver.h above. If not running locally, you will need to input ip & port
+    // from command line for both server and client programs.
+    //TcpSocketServer tcpserver("localhost",port);
+    //StudentServer ss(tcpserver, port);
+    std::atexit(exiting);
+    auto ex = [](int i) {
+        cout << "server terminating with signal " << i << endl;
+        // ss.StopListening();
+        exit(0);
+        //return 0;
+    };
+    // ^C
+    signal(SIGINT, ex);
+    // abort()
+    signal(SIGABRT, ex);
+    // sent by kill command
+    signal(SIGTERM, ex);
+    // ^Z
+    signal(SIGTSTP, ex);
+    cout << "Media Library Server listening on port. " << port << "\nServer Ready." << endl;
 
-   mls.StartListening();
-   while(true){
-   }
-   //int c = getchar();
-   mls.StopListening();
+    mls.StartListening();
+    while (true)
+    {
+    }
+    //int c = getchar();
+    mls.StopListening();
     return 0;
 }

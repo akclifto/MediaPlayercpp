@@ -145,7 +145,7 @@ SeriesSeason::SeriesSeason(string jsonString)
          }
          else if (*i == "episodes")
          {
-            
+
             for (int j = 0; j < jsonM.size(); j++)
             {
                Episode epi = Episode(jsonM[j]);
@@ -210,21 +210,25 @@ Episode SeriesSeason::getEpisode(string name)
 {
    Episode epi;
 
-   for(auto &ep : episodeList){
-      if(ep.second.getName() == name) {
+   for (auto &ep : episodeList)
+   {
+      if (ep.second.getName() == name)
+      {
          epi = ep.second;
       }
    }
    return epi;
-
 }
 
-Json::Value SeriesSeason::jsonGetEpisode(string episodeName) {
+Json::Value SeriesSeason::jsonGetEpisode(string episodeName)
+{
 
    Episode epi;
 
-   for(auto &ep : episodeList){
-      if(ep.second.getName() == episodeName) {
+   for (auto &ep : episodeList)
+   {
+      if (ep.second.getName() == episodeName)
+      {
          epi = ep.second;
       }
    }
@@ -252,7 +256,6 @@ bool SeriesSeason::addEpisode(Episode epi)
    return true;
 }
 
-
 bool SeriesSeason::removeEpisode(string name)
 {
    // cout << "Epi list size: " << episodeList.size() << endl;
@@ -264,7 +267,8 @@ bool SeriesSeason::removeEpisode(string name)
    }
 
    int remove = episodeList.erase(name);
-   if(remove != 0){
+   if (remove != 0)
+   {
       cout << name << " was removed from the library."
            << "\n\n";
       // cout << "Epi list size: " << episodeList.size() << endl;
@@ -272,28 +276,28 @@ bool SeriesSeason::removeEpisode(string name)
    }
    cout << name << " was not found in the episode list.\n";
    return false;
-
 }
 
 vector<string> SeriesSeason::getEpisodeTitles()
 {
 
    vector<string> epVector;
-   for(map<string, Episode>::const_iterator iter = episodeList.begin(); 
-               iter != episodeList.end(); ++iter)
+   for (map<string, Episode>::const_iterator iter = episodeList.begin();
+        iter != episodeList.end(); ++iter)
    {
       epVector.push_back(iter->first);
       // cout << iter->first << endl;
-   }   
+   }
    return epVector;
 }
 
-
-Json::Value SeriesSeason::jsonGetEpisodeTitles() {
+Json::Value SeriesSeason::jsonGetEpisodeTitles()
+{
 
    vector<string> epVector = getEpisodeTitles();
    Json::Value epTitles;
-   for(int i = 0; i < epVector.size(); i++) {
+   for (int i = 0; i < epVector.size(); i++)
+   {
       epTitles[i] = epVector[i];
    }
    return epTitles;
@@ -350,7 +354,6 @@ void SeriesSeason::setValues(string aTitle, string aSeriesSeason,
    poster = poster;
    plotSummary = plotSummary;
 }
-
 
 void SeriesSeason::print()
 {

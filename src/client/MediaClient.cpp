@@ -115,11 +115,11 @@ public:
          * the rest of the required information. Same as assignment 2.
          */
 
-         // search and fetch for season/episode info 
+         // search and fetch for season/episode info
          url = url + "&t=" + urlEncodedQuery + "&season=" + o->seasonSrchInput->value();
          cout << "sending request url: " << url << endl;
-          ostringstream os;
-          curlpp::Easy myRequest;
+         ostringstream os;
+         curlpp::Easy myRequest;
          myRequest.setOpt(new curlpp::options::WriteStream(&os));
          //curlpp::options::Url myUrl(std::string(url));
          myRequest.setOpt(new curlpp::options::Url(url.c_str()));
@@ -145,7 +145,6 @@ public:
 
          // Get out of static method and parse URL info
          o->searchCallBack(seriesInfo, seasonInfo);
-
       }
       catch (curlpp::LogicError &e)
       {
@@ -155,7 +154,6 @@ public:
       {
          cout << e.what() << endl;
       }
-      
    }
 
    /**
@@ -165,12 +163,16 @@ public:
     * @param seasonInfo : string containing season information in JSON format
     * @return void.
     * */
-   void searchCallBack(string seriesInfo, string seasonInfo){
+   void searchCallBack(string seriesInfo, string seasonInfo)
+   {
 
       bool flag = library->parseURLtoJSON(seriesInfo, seasonInfo);
-      if(flag){
+      if (flag)
+      {
          buildTree();
-      } else {
+      }
+      else
+      {
          cout << "Error parsing URL call back." << endl;
       }
    }
@@ -204,108 +206,101 @@ public:
       string aTitle(item->label());
       switch (tree->callback_reason())
       { // reason callback was invoked
-         case FL_TREE_REASON_NONE:
+      case FL_TREE_REASON_NONE:
+      {
+         aStr = "none";
+         break;
+      }
+      case FL_TREE_REASON_OPENED:
+      {
+         aStr = "opened";
+         break;
+      }
+      case FL_TREE_REASON_CLOSED:
+      {
+         aStr = "closed";
+         break;
+      }
+      case FL_TREE_REASON_SELECTED:
+      {
+
+         aStr = "selected";
+         if (library)
          {
-            aStr = "none";
+            cout << "trying to get: " << item->label() << endl;
+         }
+         else
+         {
+            cout << "library entry not found" << endl;
             break;
          }
-         case FL_TREE_REASON_OPENED:
-         {
-            aStr = "opened";
-            break;
-         }
-         case FL_TREE_REASON_CLOSED:
-         {
-            aStr = "closed";
-            break;
-         }
-         case FL_TREE_REASON_SELECTED:
+         if (item->depth() == 0 || item->depth() == 1)
          {
 
-            aStr = "selected";
-            // SeriesSeason series;
-            if (library)
+            aStr = "Library selected";
+
+            if (item->depth() == 0)
             {
-               cout << "trying to get: " << item->label() << endl;
-               // series = library->getSeries(aTitle);
-               // bool flag = library->checkSeriesExists(aTitle);
-            } else {
-               cout << "library entry not found" << endl;
-               break;
+               item->label(userId.c_str());
             }
-            if (item->depth() == 0 || item->depth() == 1)
-            {
-
-               aStr = "Library selected";
-
-               if (item->depth() == 0)
-               {
-                  item->label(userId.c_str());
-               }
-               seriesSeasonInput->value("Season Number");
-               genreInput->value("Genre");
-               episodeInput->value("Episode Name");
-               ratingInput->value("IMDB Rating");
-               summaryMLI->value("Plot Summary");
-               break;
-            }
-            else if (item->depth() == 2)
-            {
-               string seriesName = library->getSeriesTitle(item->label());
-
-               setImagefromURL(library->getSeriesPoster(seriesName));
-
-
-               int epCount = library->getEpisodeListSize(seriesName);
-               string epInput;
-               if(epCount == 1){
-                  epInput = " " + to_string(epCount) + " Episode in Library";
-                  episodeInput->value(epInput.c_str());
-               } else {
-                  epInput = " " + to_string(epCount) + " Episodes in Library";
-                  episodeInput->value(epInput.c_str());
-               }
-
-               seriesSeasonInput->value(seriesName.c_str());
-               genreInput->value(library->getSeriesGenre(seriesName).c_str());
-               ratingInput->value(library->getSeriesImdbRating(seriesName).c_str());
-               summaryMLI->value(library->getSeriesSummary(seriesName).c_str());
-               break;
-            }
-            else if (item->depth() == 3)
-            {
-
-               Fl_Tree_Item *parent = item->parent();
-               string parentLabel = parent->label();
-               Episode epi = library->getEpisode(parentLabel, item->label());
-               // string seriesTitle = library->getSeries(parentLabel).getTitle();
-               string seriesTitle = library->getSeriesTitle(parentLabel);
-               // string episodeName = library->getEpisodeName(seriesTitle, item->label());
-               
-               // setImagefromURL(library->getSeries(parentLabel).getPoster());
-               setImagefromURL(library->getSeriesPoster(parentLabel));
-
-               seriesSeasonInput->value(seriesTitle.c_str());
-               // genreInput->value(library->getSeries(parentLabel).getGenre().c_str());
-               genreInput->value(library->getSeriesGenre(parentLabel).c_str());
-               // episodeInput->value(epi.getName().c_str());
-               episodeInput->value(epi.getName().c_str());
-               // ratingInput->value(epi.getImdbRating().c_str());
-               ratingInput->value(epi.getImdbRating().c_str());
-               // summaryMLI->value(epi.getEpSummary().c_str());
-               summaryMLI->value(epi.getEpSummary().c_str());
-               break;
-            }
-         }
-         case FL_TREE_REASON_DESELECTED:
-         {
-            aStr = "deselected\n";
+            seriesSeasonInput->value("Season Number");
+            genreInput->value("Genre");
+            episodeInput->value("Episode Name");
+            ratingInput->value("IMDB Rating");
+            summaryMLI->value("Plot Summary");
             break;
          }
-         default:
+         else if (item->depth() == 2)
          {
+            string seriesName = library->getSeriesTitle(item->label());
+
+            setImagefromURL(library->getSeriesPoster(seriesName));
+
+            int epCount = library->getEpisodeListSize(seriesName);
+            string epInput;
+            if (epCount == 1)
+            {
+               epInput = " " + to_string(epCount) + " Episode in Library";
+               episodeInput->value(epInput.c_str());
+            }
+            else
+            {
+               epInput = " " + to_string(epCount) + " Episodes in Library";
+               episodeInput->value(epInput.c_str());
+            }
+
+            seriesSeasonInput->value(seriesName.c_str());
+            genreInput->value(library->getSeriesGenre(seriesName).c_str());
+            ratingInput->value(library->getSeriesImdbRating(seriesName).c_str());
+            summaryMLI->value(library->getSeriesSummary(seriesName).c_str());
             break;
          }
+         else if (item->depth() == 3)
+         {
+
+            Fl_Tree_Item *parent = item->parent();
+            string parentLabel = parent->label();
+            Episode epi = library->getEpisode(parentLabel, item->label());
+            string seriesTitle = library->getSeriesTitle(parentLabel);
+            setImagefromURL(library->getSeriesPoster(parentLabel));
+
+            seriesSeasonInput->value(seriesTitle.c_str());
+            genreInput->value(library->getSeriesGenre(parentLabel).c_str());
+            episodeInput->value(epi.getName().c_str());
+            ratingInput->value(epi.getImdbRating().c_str());
+            summaryMLI->value(epi.getEpSummary().c_str());
+            break;
+         }
+      }
+      case FL_TREE_REASON_DESELECTED:
+      {
+         aStr = "deselected\n";
+         break;
+      }
+      default:
+      {
+         break;
+      }
       }
       cout << "Callback reason: " << aStr.c_str() << endl;
    }
@@ -315,34 +310,38 @@ public:
     * @param urlString : a string of url source for the image.
     * @return void.
     * */
-   void setImagefromURL(string urlString){
+   void setImagefromURL(string urlString)
+   {
       int n = urlString.length();
-      
-      try {
+
+      try
+      {
 
          ostringstream stream;
          curlpp::Easy request;
- 
+
          request.setOpt(new curlpp::options::WriteStream(&stream));
          request.setOpt(new curlpp::options::Url(urlString.c_str()));
          request.perform();
          string strOut = stream.str();
-         
+
          std::ofstream imgstream;
          imgstream.open("seriesImage.jpg");
          imgstream << strOut;
          imgstream.close();
          jpgImage = new Fl_JPEG_Image("seriesImage.jpg");
-         
+
          imageBox->image(jpgImage);
          imageBox->redraw();
-
-      } catch (curlpp::LogicError & e){
-         cout << e.what() << endl;
-      } catch(curlpp::RuntimeError & e){
+      }
+      catch (curlpp::LogicError &e)
+      {
          cout << e.what() << endl;
       }
-
+      catch (curlpp::RuntimeError &e)
+      {
+         cout << e.what() << endl;
+      }
    }
 
    // Static menu callback method
@@ -401,18 +400,15 @@ public:
       {
 
          fetchURLAddSeries();
-
       }
       else if (selectPath.compare("Series-Season/Remove") == 0)
       {
          actionRemoveSeries();
-
       }
       else if (selectPath.compare("Episode/Add") == 0)
       {
 
          actionAddEpisode();
-
       }
       else if (selectPath.compare("Episode/Remove") == 0)
       {
@@ -420,7 +416,6 @@ public:
          actionRemoveEpisode();
       }
    }
-
 
    void actionRemoveSeries()
    {
@@ -434,7 +429,6 @@ public:
          cout << "Error removing series from library." << endl;
       }
    }
-
 
    void actionAddEpisode()
    {
@@ -451,7 +445,6 @@ public:
       }
    }
 
-
    void actionRemoveEpisode()
    {
       //TODO: episode not removing, changes not holding.
@@ -467,8 +460,8 @@ public:
       }
    }
 
-
-   void fetchURLAddSeries() {
+   void fetchURLAddSeries()
+   {
 
       cout << "Search Clicked. You asked for a OMDb search of Season: "
            << seasonSrchInput->value() << " Series: "
@@ -584,7 +577,8 @@ public:
    {
       Json::Value libTitles = library->getLibraryTitles();
       vector<string> seriesTitles;
-      for(const auto &index : libTitles) {
+      for (const auto &index : libTitles)
+      {
          seriesTitles.push_back(index.asString());
       }
       // cout << "Server has titles: \n";
@@ -596,7 +590,8 @@ public:
          string series = library->getSeriesTitle(res);
          Json::Value epTitleRes = library->getEpisodeTitles(res);
          vector<string> epTitles;
-         for(const auto &index : epTitleRes) {
+         for (const auto &index : epTitleRes)
+         {
             epTitles.push_back(index.asString());
          }
 
@@ -626,19 +621,18 @@ public:
 
 int main(int argc, char *argv[])
 {
-      //connect to server
-      string host = (argc > 1) ? argv[1] : "http://127.0.0.1";
-      string port = (argc > 2) ? argv[2] : "8888";
-      cout << "Connecting to host" << host << ":" << port << endl;
+   //connect to server
+   string host = (argc > 1) ? argv[1] : "http://127.0.0.1";
+   string port = (argc > 2) ? argv[2] : "8888";
+   cout << "Connecting to host" << host << ":" << port << endl;
 
-      string developer = (argc > 1) ? argv[3] : "Adam.Clifton";
-      string omdbkey = (argc > 2) ? argv[4] : "omdbkey";
-      string windowTitle = developer + "'s SeriesSeason Browser";
-      
-      HttpClient client(host + ":" + port);  
-      mediaclientstub stub(client);
+   string developer = (argc > 1) ? argv[3] : "Adam.Clifton";
+   string omdbkey = (argc > 2) ? argv[4] : "omdbkey";
+   string windowTitle = developer + "'s SeriesSeason Browser";
 
-      MediaClient cm(windowTitle.c_str(), omdbkey.c_str(), &stub);
-      return (Fl::run());
+   HttpClient client(host + ":" + port);
+   mediaclientstub stub(client);
+
+   MediaClient cm(windowTitle.c_str(), omdbkey.c_str(), &stub);
+   return (Fl::run());
 }
-
