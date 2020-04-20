@@ -21,7 +21,7 @@
     },
     {
         "method": "addEpisode",
-        "params":["seriesName", "EpisodeName"],
+        "params":["seriesName", "episodeName"],
         "returns": true
     },
     {
@@ -73,6 +73,32 @@
         "method": "checkSeriesExists",
         "params":["itemLabel"],
         "returns": true
+    },
+    {
+        "method": "getSeriesImdbRating",
+        "params":["itemLabel"],
+        "returns": "aRating"
+    },
+    {
+        "method": "getSeriesSummary",
+        "params":["itemLabel"],
+        "returns": "aSummary"
+    },
+    {
+        "method": "getEpisodeName",
+        "params":["seriesName", "episodeName"],
+        "returns": "aName"
+    },
+    {
+        "method": "getEpisodeImdb",
+        "params":["seriesName", "episodeName"],
+        "returns": "aRating"
+    },
+    {
+        "method": "getEpisodeSummary",
+        "params":["seriesName", "episodeName"],
+        "returns": "aSummary"
     }
+
 
 ]

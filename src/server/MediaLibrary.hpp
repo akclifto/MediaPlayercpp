@@ -141,6 +141,13 @@ class MediaLibrary
        * */
       Json::Value jsonGetTitles();
 
+      /**
+       * Method to check to make sure series exists in the library.
+       * @param seriesName : name of the series to check against the library map
+       * @return true if it does exist, false otherwise.
+       * */
+      bool checkSeries(string seriesName);
+
 };
 
 #endif

@@ -213,6 +213,17 @@ vector<string> MediaLibrary::getTitles()
    return myVec;
 }
 
+bool MediaLibrary::checkSeries(string seriesName) {
+   
+   for(auto &series: libraryMap){
+      if(series.second.getTitle() == seriesName){
+         return true;
+      }
+   }
+   return false;
+
+}
+
 Json::Value MediaLibrary::jsonGetTitles() {
 
    vector<string> myVec = getTitles();

@@ -73,6 +73,11 @@ class MediaLibraryServer : public mediaserverstub {
         virtual string getSeriesPoster(const string &seriesName);
         virtual string getSeriesGenre(const string &seriesName);
         virtual bool checkSeriesExists(const string &itemLabel);
+        virtual string getSeriesImdbRating(const string &itemLabel);
+        virtual string getSeriesSummary(const string &itemLabel);
+        virtual string getEpisodeName(const string &seriesName, const string &episodeName);
+        virtual string getEpisodeImdb(const string &seriesName, const string &episodeName);
+        virtual string getEpisodeSummary(const string &seriesName, const string &episodeName);
 
 
 };
@@ -173,7 +178,7 @@ bool MediaLibraryServer::removeEpisode(const string &seriesName, const string &e
 }
 
 /**
- * Method to get series info in a Json object using JsonRPC
+ * Method to get series info in a Json object using JsonRPC.
  * @param seriesName : name of the series to retrieve information
  * @return Json object containing series information
  * */
@@ -183,7 +188,7 @@ Json::Value MediaLibraryServer::getSeries(const string &seriesName) {
 }
 
 /**
- * Method to get Json object of episode information using JsonRPC
+ * Method to get Json object of episode information using JsonRPC.
  * @param seriesName : name of the series containing episode
  * @param episodeName : name of the episode to retrieve
  * @return Json object containing episode information.
@@ -194,7 +199,7 @@ Json::Value MediaLibraryServer::getEpisode(const string &seriesName, const strin
 }
 
 /**
- * Method to get episode list size using JsonRPC
+ * Method to get episode list size using JsonRPC.
  * @param seriesName : name of the series to get episode list size
  * @return int size of episode list.
  * */
@@ -215,7 +220,7 @@ Json::Value MediaLibraryServer::getLibraryTitles() {
 
 /**
  * Method to get list of Episode titles for a given series,
- * using JsonRPC
+ * using JsonRPC.
  * @param seriesName : name of series to retrieve episode titles.
  * @return Json object of Episode titles.
  * */
@@ -226,7 +231,7 @@ Json::Value MediaLibraryServer::getEpisodeTitles(const string &seriesName) {
 }
 
 /**
- * Method to get series' title using JsonRPC
+ * Method to get series' title using JsonRPC.
  * @param itemLabel : gui label to signify with series title to retrieve
  * @return string title of series
  * */
@@ -235,7 +240,7 @@ string MediaLibraryServer::getSeriesTitle(const string &itemLabel) {
 }
 
 /**
- * Method to get the post URL using JsonRPC
+ * Method to get the post URL using JsonRPC.
  * @param seriesName : name of the series related to the poster URL
  * @return string of poster URL link.
  * */
@@ -244,12 +249,69 @@ string MediaLibraryServer::getSeriesPoster(const string &seriesName) {
 }
 
 /**
- * Method to get series genre using JsonRPC
+ * Method to get series genre using JsonRPC.
  * @param seriesName : name of the series to retrieve genre
  * @return string of genre(s) for the series.
  * */
 string MediaLibraryServer::getSeriesGenre(const string &seriesName) {
     return library->getSeries(seriesName).getGenre();
+}
+
+/**
+ * Method to check if series is present in library using JsonRPC.
+ * @param itemLabel : name of the series to check against the library
+ * @return true if exists in library, false otherwise
+ * */
+ bool MediaLibraryServer::checkSeriesExists(const string &itemLabel) {
+    return library->checkSeries(itemLabel);
+}
+
+/**
+ * Method to get imdbRating for a series using JsonRPC.
+ * @param itemLabel : gui label of series name to get imdbRating
+ * @return string of imdbRating
+ * */
+string MediaLibraryServer::getSeriesImdbRating(const string &itemLabel) {
+    return library->getSeries(itemLabel).getImdbRating();
+}
+
+/**
+ * Method to get Series Summary using JsonRPC.
+ * @param itemLabel : gui label for series name
+ * @return string of series summary information
+ * */
+string MediaLibraryServer::getSeriesSummary(const string &itemLabel) {
+    return library->getSeries(itemLabel).getSummary();
+}
+
+/**
+ * Method to get Episode name using JsonRPC.
+ * @param seriesName : name of the series containing Episode
+ * @param episodeName : gui label with episode name
+ * @return string of episode name
+ * */
+string MediaLibraryServer::getEpisodeName(const string &seriesName, const string &episodeName) {
+    return library->getSeries(seriesName).getEpisode(episodeName).getName();
+}
+
+/**
+ * Method to get Episode imdbRating using JsonRPC.
+ * @param seriesName : name of the series containing Episode
+ * @param episodeName : gui label with episode name
+ * @return string of episode imdbRating
+ * */
+string MediaLibraryServer::getEpisodeImdb(const string &seriesName, const string &episodeName) {
+    return library->getSeries(seriesName).getEpisode(episodeName).getImdbRating();
+}
+
+/**
+ * Method to get Episode summary using JsonRPC.
+ * @param seriesName : name of the series containing Episode
+ * @param episodeName : gui label with episode name
+ * @return string of episode summary
+ * */
+string MediaLibraryServer::getEpisodeSummary(const string &seriesName, const string &episodeName){
+    return library->getSeries(seriesName).getEpisode(episodeName).getEpSummary();
 }
 
 void exiting() {
