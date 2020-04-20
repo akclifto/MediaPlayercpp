@@ -171,8 +171,10 @@
          <libset dir="/usr/lib" libs="stdc++,fltk,fltk_images,curl,jsoncpp,pthread"/>
          <libset dir="/usr/local/lib" libs="curlpp"/>
          <libset dir="${client.lib.path}" libs="${client.lib.list}"/>
-         <fileset dir="${src.dir}/client" includes="MediaClientGui.cpp,MediaClient.cpp"/>
-         <fileset dir="${src.dir}/server" includes="MediaLibrary.cpp"/>  <!-- TODO: May need to change -->
+         <fileset dir="${src.dir}/client" 
+                  includes="MediaClientGui.cpp,MediaClient.cpp"/>
+         <fileset dir="${src.dir}/server" 
+                  includes="SeriesSeason.cpp,Episode.cpp,MediaLibrary.cpp"/>  
       </cc>
    </target>
 

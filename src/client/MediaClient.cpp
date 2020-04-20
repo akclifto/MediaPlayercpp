@@ -603,8 +603,8 @@ public:
       for (const auto &res : seriesTitles)
       {
          // cout << res << endl;
-         SeriesSeason series = library->getSeries(res);
-
+         // SeriesSeason series = library->getSeries(res);
+         string series = library->getSeriesTitle(res);
          // vector<string> epTitle = library->getSeries(res).getEpisodeTitles();
          Json::Value epTitleRes = library->getEpisodeTitles(res);
          vector<string> epTitles;
@@ -613,12 +613,14 @@ public:
          }
 
          //  cout << "size of epTitle: " << epTitle.size() << endl;
-         string st = "Library/" + series.getTitle() + "/";
+         // string st = "Library/" + series.getTitle() + "/";
+         string st = "Library/" + series + "/";
          for (const auto &ep : epTitles)
          {
-            Episode epi = series.getEpisode(ep);
-            string fin = st + epi.getName();
-            string fin = st + library->getEpisodeName();
+            // Episode epi = series.getEpisode(ep);
+            // string epName = library->getEpisodeName(series, ep);
+            // string fin = st + epName;
+            string fin = st + library->getEpisodeName(series, ep);
             tree->add(fin.c_str());
          }
       }
