@@ -228,12 +228,10 @@ public:
             {
                cout << "trying to get: " << item->label() << endl;
                // series = library->getSeries(aTitle);
-               bool flag = library->checkSeriesExists(aTitle);
-
-               if(!flag){
-                  cout << "library entry not found" << endl;
-                  break;
-               }
+               // bool flag = library->checkSeriesExists(aTitle);
+            } else {
+               cout << "library entry not found" << endl;
+               break;
             }
             if (item->depth() == 0 || item->depth() == 1)
             {
@@ -254,13 +252,10 @@ public:
             else if (item->depth() == 2)
             {
                string seriesName = library->getSeriesTitle(item->label());
-               // series.print();
-               // cout << endl;
-               //set poster somehow here and persis through episodes
-               // setImagefromURL(series.getPoster());
+
                setImagefromURL(library->getSeriesPoster(seriesName));
 
-               // int epCount = library->getEpisodeListSize(series.getTitle());
+
                int epCount = library->getEpisodeListSize(seriesName);
                string epInput;
                if(epCount == 1){
@@ -270,12 +265,10 @@ public:
                   epInput = " " + to_string(epCount) + " Episodes in Library";
                   episodeInput->value(epInput.c_str());
                }
-               // seriesSeasonInput->value(series.getTitle().c_str());
+
                seriesSeasonInput->value(seriesName.c_str());
                genreInput->value(library->getSeriesGenre(seriesName).c_str());
-               // ratingInput->value(series.getImdbRating().c_str());
                ratingInput->value(library->getSeriesImdbRating(seriesName).c_str());
-               // summaryMLI->value(series.getSummary().c_str());
                summaryMLI->value(library->getSeriesSummary(seriesName).c_str());
                break;
             }
@@ -284,12 +277,10 @@ public:
 
                Fl_Tree_Item *parent = item->parent();
                string parentLabel = parent->label();
-               // Episode epi = library->getEpisode(parentLabel, item->label());
-               // cout << "parent label: " << parentLabel << "\n\n";
-               // cout << "Epi name:  " << epi.getName() << " \n\n" ;
+               Episode epi = library->getEpisode(parentLabel, item->label());
                // string seriesTitle = library->getSeries(parentLabel).getTitle();
                string seriesTitle = library->getSeriesTitle(parentLabel);
-               string episodeName = library->getEpisodeName(seriesTitle, item->label());
+               // string episodeName = library->getEpisodeName(seriesTitle, item->label());
                
                // setImagefromURL(library->getSeries(parentLabel).getPoster());
                setImagefromURL(library->getSeriesPoster(parentLabel));
@@ -298,11 +289,11 @@ public:
                // genreInput->value(library->getSeries(parentLabel).getGenre().c_str());
                genreInput->value(library->getSeriesGenre(parentLabel).c_str());
                // episodeInput->value(epi.getName().c_str());
-               episodeInput->value(episodeName.c_str());
+               episodeInput->value(epi.getName().c_str());
                // ratingInput->value(epi.getImdbRating().c_str());
-               ratingInput->value(library->getEpisodeImdb(seriesTitle, episodeName).c_str());
+               ratingInput->value(epi.getImdbRating().c_str());
                // summaryMLI->value(epi.getEpSummary().c_str());
-               summaryMLI->value(library->getEpisodeSummary(seriesTitle, episodeName).c_str());
+               summaryMLI->value(epi.getEpSummary().c_str());
                break;
             }
          }
@@ -449,7 +440,6 @@ public:
    {
       //TODO
       bool flag = true;
-      //flag = library->getSeries(seriesSeasonInput->value()).addEpisode(episodeInput->value());
       if (flag)
       {
          buildTree();
@@ -602,24 +592,17 @@ public:
 
       for (const auto &res : seriesTitles)
       {
-         // cout << res << endl;
-         // SeriesSeason series = library->getSeries(res);
+
          string series = library->getSeriesTitle(res);
-         // vector<string> epTitle = library->getSeries(res).getEpisodeTitles();
          Json::Value epTitleRes = library->getEpisodeTitles(res);
          vector<string> epTitles;
          for(const auto &index : epTitleRes) {
             epTitles.push_back(index.asString());
          }
 
-         //  cout << "size of epTitle: " << epTitle.size() << endl;
-         // string st = "Library/" + series.getTitle() + "/";
          string st = "Library/" + series + "/";
          for (const auto &ep : epTitles)
          {
-            // Episode epi = series.getEpisode(ep);
-            // string epName = library->getEpisodeName(series, ep);
-            // string fin = st + epName;
             string fin = st + library->getEpisodeName(series, ep);
             tree->add(fin.c_str());
          }

@@ -41,7 +41,6 @@ using namespace std;
 MediaLibrary::MediaLibrary()
 {
    initLibraryFromJsonFile("series.json");
-
 }
 
 MediaLibrary::~MediaLibrary()
@@ -73,9 +72,9 @@ bool MediaLibrary::initLibraryFromJsonFile(string jsonFileName)
             for (Json::Value::const_iterator input = (*series).begin();
                  input != (*series).end(); input++)
             {
-               
-               cout << *input << endl;
-              
+
+               // cout << *input << endl;
+
                SeriesSeason ss(*input);
                addSeries(ss);
             }
@@ -116,33 +115,37 @@ bool MediaLibrary::toJsonFile(string jsonFileName)
 SeriesSeason MediaLibrary::getSeries(string aTitle)
 {
    SeriesSeason series;
-   for(auto &ss : libraryMap){
-      if(ss.second.getTitle() == aTitle){
-         series =  ss.second;
+   for (auto &ss : libraryMap)
+   {
+      if (ss.second.getTitle() == aTitle)
+      {
+         series = ss.second;
       }
    }
    return series;
 }
 
-Json::Value MediaLibrary::jsonGetSeries(string seriesName) {
+Json::Value MediaLibrary::jsonGetSeries(string seriesName)
+{
 
    SeriesSeason series;
-   for(auto &ss : libraryMap){
-      if(ss.second.getTitle() == seriesName){
-         series =  ss.second;
+   for (auto &ss : libraryMap)
+   {
+      if (ss.second.getTitle() == seriesName)
+      {
+         series = ss.second;
       }
    }
    return series.toJson();
 }
-
 
 map<string, SeriesSeason> MediaLibrary::getLibrary()
 {
    return libraryMap;
 }
 
-
-int MediaLibrary::getEpisodeListSize(string title){
+int MediaLibrary::getEpisodeListSize(string title)
+{
 
    return getSeries(title).getEpisodeList().size();
 }
@@ -183,7 +186,8 @@ bool MediaLibrary::removeSeries(string title)
 
    int remove = libraryMap.erase(title);
    // cout << to_string(remove) << endl;
-   if(remove != 0){
+   if (remove != 0)
+   {
       cout << title << " was removed from the library."
            << "\n\n";
       return true;
@@ -193,9 +197,9 @@ bool MediaLibrary::removeSeries(string title)
    return false;
 }
 
+bool MediaLibrary::removeEpisode(string series, string episode)
+{
 
-bool MediaLibrary::removeEpisode(string series, string episode) {
-   
    return getSeries(series).removeEpisode(episode);
 }
 
@@ -213,22 +217,26 @@ vector<string> MediaLibrary::getTitles()
    return myVec;
 }
 
-bool MediaLibrary::checkSeries(string seriesName) {
-   
-   for(auto &series: libraryMap){
-      if(series.second.getTitle() == seriesName){
+bool MediaLibrary::checkSeries(string seriesName)
+{
+
+   for (auto &series : libraryMap)
+   {
+      if (series.second.getTitle() == seriesName)
+      {
          return true;
       }
    }
    return false;
-
 }
 
-Json::Value MediaLibrary::jsonGetTitles() {
+Json::Value MediaLibrary::jsonGetTitles()
+{
 
    vector<string> myVec = getTitles();
    Json::Value ssTitles;
-   for(int i = 0; i < myVec.size(); i++) {
+   for (int i = 0; i < myVec.size(); i++)
+   {
       ssTitles[i] = myVec[i];
    }
    return ssTitles;
@@ -236,7 +244,7 @@ Json::Value MediaLibrary::jsonGetTitles() {
 
 bool MediaLibrary::parseURLtoJSON(string seriesInfo, string seasonInfo)
 {
-   
+
    Json::Reader reader;
    Json::Value root;
 
@@ -350,7 +358,7 @@ void MediaLibrary::print()
    for (map<string, SeriesSeason>::const_iterator iter = libraryMap.begin();
         iter != libraryMap.end(); iter++)
    {
-      
+
       SeriesSeason ss = iter->second;
       cout << ss.getTitle() << ": \n";
       cout << ss.toJsonString() << endl;

@@ -349,9 +349,8 @@ int main(int argc, char *argv[]) {
    signal(SIGTERM, ex);
    // ^Z
    signal(SIGTSTP, ex);
-   cout << "Media Library Server listening on port " << port
-      //<< " press return/enter to quit." << endl;
-        << " use ps to get pid. To quit: kill -9 pid " << endl;
+   cout << "Media Library Server listening on port. " << port << "\nServer Ready." << endl;
+
    mls.StartListening();
    while(true){
    }

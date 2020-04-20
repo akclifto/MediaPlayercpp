@@ -14,8 +14,8 @@
    <property name="port.num" value="8888"/>
    <property name="json.file.name" value="MediaLibraryMethods.json"/>
    <property name="omdbkey" value="myomdbkey"/>
-   <property name="userId" value="${env.USER}"/>
    <property environment="env"/>
+   <property name="userId" value="${env.USER}"/>
 
       <!--Set the ostype property: <property name="ostype" value="${env.OSTYPE}"/>-->
     <condition property="ostype" value="${env.OSTYPE}">
@@ -39,10 +39,10 @@
 
 
 <!-- Targets -->
-   <target name="targets">   <!-- TODO: need to remove build and execute when server/client works-->
-     <echo message="targets are clean, prepare, build, execute, build.cpp.server, build.cpp.client, build.all, targets"/>
+   <target name="targets"> 
+     <echo message="targets are clean, prepare, build.cpp.server, build.cpp.client, build.all, targets"/>
      <echo message="execute cpp server with: ./bin/MediaRPCServer ${port.num}"/>
-     <echo message="execute cpp client with: ./bin/MediaRPCClient http://${host.name}:${port.num}"/>
+     <echo message="execute cpp client with: ./bin/MediaRPCClient ${host.name} ${port.num} ${userId} ${omdbkey}"/>
      <echo message="to run, enter: ant execute -DuserId=${userId} -Domdbkey=${omdbkey}"/>
    </target>
 
@@ -208,7 +208,7 @@
    </target>
 
 
-<!-- Original build from Assign 4 -->
+<!-- Original build from Assign 4 TODO: remove this-->
    <target name="build" depends="clean, prepare">
       <cc outtype="executable" subsystem="console"
           outfile="${dist.dir}/mediaPlayer"
@@ -224,7 +224,7 @@
    </target>
 
 
-<!-- Original Execute from Assign 4 -->
+<!-- Original Execute from Assign 4 TODO:remove this-->
    <target name="execute" depends="build">
      <echo message="./bin/mediaPlayer ${userId} ${omdbkey}"/>
      <exec executable="./bin/mediaPlayer">
