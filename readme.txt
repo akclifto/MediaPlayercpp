@@ -9,6 +9,8 @@ README:::::ASSIGN5::::::::::::
  - Can run two clients from same folder or at "distributed" locations :)  Works as intended.
  - Please let me know if you have any other issues with running the server/client.  I might be able to help troubleshoot.  
 
+ - SCREENSHOTS are in the Screenshots folder.  
+
 Thanks,
 Adam Clifton (akclifto@asu.edu)
 
