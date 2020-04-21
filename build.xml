@@ -16,6 +16,7 @@
    <property name="omdbkey" value="myomdbkey"/>
    <property environment="env"/>
    <property name="userId" value="${env.USER}"/>
+   <property name="imagefile" value="seriesImage.jpg"/>
 
       <!--Set the ostype property: <property name="ostype" value="${env.OSTYPE}"/>-->
     <condition property="ostype" value="${env.OSTYPE}">
@@ -59,6 +60,7 @@
               failonerror="false"/>
       <delete file="${src.dir}/client/mediaclientstub.h"
               failonerror="false"/>
+      <delete file="${imagefile}" failonerror="false"/>
    </target>
 
 

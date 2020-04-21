@@ -211,7 +211,7 @@ vector<string> MediaLibrary::getTitles()
    for (map<string, SeriesSeason>::const_iterator it = libraryMap.begin();
         it != libraryMap.end(); ++it)
    {
-      cout << "iter output: " << it->first << endl;
+      // cout << "iter output: " << it->first << endl;
       myVec.push_back(it->first);
    }
    return myVec;

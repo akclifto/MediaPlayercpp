@@ -378,7 +378,7 @@ int main(int argc, char *argv[])
     while (true)
     {
     }
-    //int c = getchar();
-    mls.StopListening();
-    return 0;
+        //int c = getchar();
+        mls.StopListening();
+        return 0;
 }
