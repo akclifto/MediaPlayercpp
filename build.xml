@@ -207,29 +207,4 @@
       </cc>
    </target>
 
-
-<!-- Original build from Assign 4 TODO: remove this-->
-   <target name="build" depends="clean, prepare">
-      <cc outtype="executable" subsystem="console"
-          outfile="${dist.dir}/mediaPlayer"
-          objdir="${obj.dir}">
-	  <compilerarg value="${cxxflag}"/>
-          <includepath>
-             <pathelement path="${includepath}"/>
-          </includepath>
-          <libset dir="${server.lib.path}" libs="${server.lib.list}"/>
-          <fileset dir="${src.dir}/server/" includes="MediaLibrary.cpp,SeriesSeason.cpp,Episode.cpp"/>
-          <fileset dir="${src.dir}/client/" includes="MediaClient.cpp,MediaClientGui.cpp,"/>
-      </cc>
-   </target>
-
-
-<!-- Original Execute from Assign 4 TODO:remove this-->
-   <target name="execute" depends="build">
-     <echo message="./bin/mediaPlayer ${userId} ${omdbkey}"/>
-     <exec executable="./bin/mediaPlayer">
-       <arg line= "${userId} ${omdbkey}"/>
-     </exec>
-   </target>
-
 </project>
