@@ -10,8 +10,8 @@
    <property name="lib" value="./lib" />
    <property name="dist.dir" value="bin"/>
    <property name="obj.dir" value="obj"/>
-   <property name="host.name" value="localhost"/>
-   <property name="port.num" value="8888"/>
+   <property name="host" value="localhost"/>
+   <property name="port" value="8888"/>
    <property name="json.file.name" value="MediaLibraryMethods.json"/>
    <property name="omdbkey" value="myomdbkey"/>
    <property environment="env"/>
@@ -41,10 +41,10 @@
 
 <!-- Targets -->
    <target name="targets"> 
-     <echo message="targets are clean, prepare, build.cpp.server, build.cpp.client, build.all, targets"/>
-     <echo message="execute cpp server with: ./bin/MediaRPCServer ${port.num}"/>
-     <echo message="execute cpp client with: ./bin/MediaRPCClient ${host.name} ${port.num} ${userId} ${omdbkey}"/>
-     <echo message="to run, enter: ant execute -DuserId=${userId} -Domdbkey=${omdbkey}"/>
+     <echo message="targets are clean, prepare, build.cpp.server, build.cpp.client, build.all, server, client, targets"/>
+     <echo message="execute cpp server: ant server -Dport=${port}"/>
+     <echo message="execute cpp client: ant client -Dhost=${host} -Dport=${port} -DuserId=${userId} -Domdbkey=${omdbkey}"/>
+
    </target>
 
 
@@ -207,6 +207,24 @@
          <fileset dir="${src.dir}/server"
                   includes="Episode.cpp,SeriesSeason.cpp,MediaLibrary.cpp,MediaLibraryServer.cpp"/> 
       </cc>
+   </target>
+
+
+<!-- Run Client  -->
+   <target name="client" depends ="build.cpp.client">
+	   <echo message="./bin/MediaRPCClient ${host} ${port} ${userId} ${omdbkey}"/>
+     	<exec executable="./bin/MediaRPCClient">
+       <arg line= " ${host} ${port} ${userId} ${omdbkey} "/>
+     </exec>
+   </target>
+
+
+<!-- Run Server  -->
+   <target name="server" depends ="build.cpp.server">
+	   <echo message="./bin/MediaRPCServer ${port}"/>
+     	<exec executable="./bin/MediaRPCServer">
+       <arg line= " ${port}"/>
+     </exec>
    </target>
 
 </project>
