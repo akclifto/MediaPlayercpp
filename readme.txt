@@ -2,7 +2,7 @@ README:::::ASSIGN5::::::::::::
 
  - Known Issues:
 	- add/removing episode from top-menu does not work, although (especially) remove should.  
-	Have sent #asktheream question about it to no response.
+	Have sent #asktheteam question about it to no response.
 	- A bad omdb search will crash the client.  It gets auto-generated into the stub during the 'ant build' process and 
 	I am not able to find the proper place to catch it.  
 		
